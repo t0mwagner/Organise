@@ -1,0 +1,89 @@
+/*GLOBALS*/
+@font-face {
+    font-family: "Pacifico";
+    src: url("./fonts/Pacifico.ttf") format('truetype')
+}
+body{
+    margin:0px;
+}
+.app{
+    display:flex;
+    flex-direction:column;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+/*HEADER*/
+.header{
+    background-color: #40A5B9;
+}
+.header img{
+    height: 25px;
+    margin: 0px 10px;
+}
+.header nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title h1{
+    font-family: 'Pacifico', cursive;
+    color: white;
+    font-weight:normal;
+    margin: 0px;
+}
+.login a{
+    text-decoration: none;
+    color: white;
+}
+
+/*CONTENT*/
+/*general frame*/
+.content{
+    flex-grow:1;
+    background-color: #F1F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+/*header*/
+.content_header{
+    margin:15px 0px;
+    margin-left:40vw;
+}
+.content_header #input_task{
+    margin-right: 10px;
+}
+/*content main*/
+#content_main{
+    display: flex;
+    justify-content: stretch;
+}
+/*list*/
+#task_list{
+    flex: 2 1 70%;
+}
+/*sidebar*/
+#sidebar{
+    flex: 1 0 40vw;
+    border-right: 1px solid black;
+    text-align: right;
+}
+#sidebar ul{
+    list-style-type: none;
+    margin-right: 15px;
+}
+#sidebar li{
+    margin: 5px 0px;
+}
+
+/*FOOTER*/
+.footer{
+    background-color: #40A5B9;
+    color:white;
+    display: flex;
+    justify-content: center;
+}
+.footer p{
+    margin: 5px 0px;
+}
