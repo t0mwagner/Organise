@@ -6,9 +6,20 @@
 }
 #task_list h2{
     margin: 10px 0px 10px 10px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 100;
+}
+.checkbox{
+    margin-right:5px;
 }
 .checkbox:hover{
     cursor: pointer;
+}
+#task_list li{
+    display:flex;
+}
+.noTasks{
+    font-size: 0.8em;
+    margin-left: 25px;
+    color: darkgray;
 }

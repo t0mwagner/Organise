@@ -5,8 +5,13 @@
 }
 #sidebar ul{
     list-style-type: none;
-    margin-right: 15px;
+    margin: 10px 15px 0px 0px;
 }
 #sidebar li{
     margin: 5px 0px;
+    font-size: 1.2em;
+}
+.menu_item:hover{
+    cursor: pointer;
+    color:#40A5B9;
 }
