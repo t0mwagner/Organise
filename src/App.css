@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Pacifico";
+    src: url("/fonts/Pacifico.ttf") format('truetype')
+}
+body{
+    margin:0px;
+}
+.app{
+    display:flex;
+    flex-direction:column;
+    align-items: stretch;
+    min-height: 100vh;
+}

@@ -1,0 +1,22 @@
+.header{
+    background-color: #40A5B9;
+}
+.header img{
+    height: 25px;
+    margin: 0px 10px;
+}
+.header nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title h1{
+    font-family: 'Pacifico', cursive;
+    color: white;
+    font-weight:normal;
+    margin: 0px;
+}
+.login a{
+    text-decoration: none;
+    color: white;
+}

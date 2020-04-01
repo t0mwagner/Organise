@@ -1,12 +1,13 @@
 import React from 'react'
-import { Header } from './components/layout/Header'
-import { Content } from './components/layout/Content'
-import { Footer } from './components/layout/Footer'
+import { Header } from './components/Header'
+import { TaskContainer } from './components/TaskContainer'
+import { Footer } from './components/Footer'
+import "./App.css"
 
 export const App = () => (
   <div className="app">
     <Header />
-    <Content />
+    <TaskContainer />
     <Footer />
   </div>
 )

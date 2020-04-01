@@ -1,0 +1,9 @@
+.footer{
+    background-color: #40A5B9;
+    color:white;
+    display: flex;
+    justify-content: center;
+}
+.footer p{
+    margin: 5px 0px;
+}

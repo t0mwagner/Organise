@@ -1,0 +1,12 @@
+#sidebar{
+    flex: 1 0 40vw;
+    border-right: 1px solid black;
+    text-align: right;
+}
+#sidebar ul{
+    list-style-type: none;
+    margin-right: 15px;
+}
+#sidebar li{
+    margin: 5px 0px;
+}

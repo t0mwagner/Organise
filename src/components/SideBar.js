@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import "./SideBar.css"
 
 export const SideBar = () => (
     <div id="sidebar">
