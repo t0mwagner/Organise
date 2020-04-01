@@ -1,3 +1,14 @@
 #task_list{
     flex: 2 1 60vw;
 }
+#task_list ul{
+    list-style-type: none;
+}
+#task_list h2{
+    margin: 10px 0px 10px 10px;
+    font-size: 1.3em;
+    font-weight: 100;
+}
+.checkbox:hover{
+    cursor: pointer;
+}
