@@ -19,7 +19,7 @@ export const TaskContainer = () => {
             <AddForm addTask={addTask} />
             <div id="content_main">
                 <SideBar />
-                <TaskList />
+                <TaskList taskList={tasks} />
             </div>
         </div>
     )
