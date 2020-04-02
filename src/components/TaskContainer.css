@@ -1,6 +1,7 @@
 #content_main{
     display: flex;
     justify-content: stretch;
+    margin-top: 20px;
 }
 .content{
     flex-grow:1;

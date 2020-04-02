@@ -1,9 +1,6 @@
 .add_form{
-    margin:15px 0px;
-    margin-left:40vw;
-}
-.add_form #input_task{
-    margin-right: 10px;
+    padding:15px 0px 15px 40vw;
+    background-color:white;
 }
 .add_form button{
     background-color: #40A5B9;
@@ -19,4 +16,25 @@
 }
 .add_form button:focus{
     outline: none;
+}
+.add_form select:focus{
+    outline: none;
+}
+.add_form input:focus{
+    outline: none;
+}
+.add_form input{
+    padding: 0px 2px;
+    height: 2em;
+    border:none;
+    border-bottom:1px solid black;
+    background: none;
+}
+.add_form select{
+    margin:0px 15px;
+    height: 2em;
+    max-width: 110px;
+    border:none;
+    border-bottom:1px solid black;
+    background: none;
 }

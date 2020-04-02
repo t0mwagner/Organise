@@ -1,5 +1,6 @@
 import React from 'react'
 import "./TaskList.css"
+import { TimeLeft } from './TimeLeft'
 import { FaRegSquare, FaCheck } from 'react-icons/fa'
 
 export const TaskList = (props) => {
@@ -7,8 +8,8 @@ export const TaskList = (props) => {
     return (
         <div id="task_list">
             {
-                props.status.map(status => (
-                    <section>
+                props.status.map((status, index) => (
+                    <section key={index}>
                         <h2>{status.charAt(0).toUpperCase() + status.slice(1)} tasks</h2>
                         {
                             props.taskList.filter(task => task.status === status).length === 0
@@ -27,7 +28,10 @@ export const TaskList = (props) => {
                                             :
                                                 <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>
                                         }
-                                        <span className={(status==='closed')&&'crossed'}>{task.label}</span>
+                                        <span className={(status==='closed')?'crossed':''}>{task.label}</span>
+                                        {
+                                            (status === 'opened')&&<TimeLeft date={task.date} />
+                                        }
                                     </li>
                                 :null
                             ))

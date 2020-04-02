@@ -16,6 +16,7 @@ export const TaskContainer = () => {
             {
                 id:uuidv4(),
                 status:'opened',
+                date:document.getElementById('date_select').value,
                 label:document.getElementById('input_task').value
             }
         ])
@@ -23,15 +24,21 @@ export const TaskContainer = () => {
     }
 
     const checkTask = (e) => {
-        setTasks(tasks.map(task => 
-            (task.id === e.target.id)?{id:task.id,status:'closed',label:task.label}:task
-        ))   
+        setTasks(tasks.map(task => {
+            if (task.id === e.target.id){
+                task.status='closed'
+            }
+            return task
+        }))  
     }
 
     const uncheckTask = (e) => {
-        setTasks(tasks.map(task => 
-            (task.id === e.target.id)?{id:task.id,status:'opened',label:task.label}:task
-        ))   
+        setTasks(tasks.map(task => {
+            if (task.id === e.target.id){
+                task.status='opened' 
+            }
+            return task
+        })) 
     }
 
     const changeMenu = (e) => {
