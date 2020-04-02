@@ -1,6 +1,6 @@
 import React from 'react'
 import "./TaskList.css"
-import { FaRegSquare, FaRegCheckSquare } from 'react-icons/fa'
+import { FaRegSquare, FaCheck } from 'react-icons/fa'
 
 export const TaskList = (props) => {
 
@@ -20,14 +20,14 @@ export const TaskList = (props) => {
                                 (task.status === status)                    
                                 ?
                                     <li key={index}>
-                                        <span className="checkbox">
                                         {
                                             (status === 'opened')
-                                            ?<FaRegSquare id={task.id} onClick={props.checkTask}/>
-                                            :<FaRegCheckSquare id={task.id} onClick={props.uncheckTask}/>
+                                            ?
+                                                <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>
+                                            :
+                                                <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>
                                         }
-                                        </span>
-                                        <span>{task.label}</span>
+                                        <span className={(status==='closed')&&'crossed'}>{task.label}</span>
                                     </li>
                                 :null
                             ))

@@ -5,3 +5,18 @@
 .add_form #input_task{
     margin-right: 10px;
 }
+.add_form button{
+    background-color: #40A5B9;
+    color:white;
+    border-radius: 5px;
+    border:none;
+    padding: 3px 10px;
+    opacity:0.8;
+}
+.add_form button:hover{
+    cursor: pointer;
+    opacity:1;
+}
+.add_form button:focus{
+    outline: none;
+}

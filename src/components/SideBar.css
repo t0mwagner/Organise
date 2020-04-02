@@ -1,17 +1,21 @@
 #sidebar{
     flex: 1 0 40vw;
     border-right: 1px solid black;
-    text-align: right;
+    display:flex;
+    justify-content: flex-end;
 }
 #sidebar ul{
     list-style-type: none;
     margin: 10px 15px 0px 0px;
 }
 #sidebar li{
-    margin: 5px 0px;
-    font-size: 1.2em;
+    margin-bottom: 5px;
+    display:flex;
 }
-.menu_item:hover{
+.menu_item{
+    margin-left:5px;
+}
+#sidebar li:hover{
     cursor: pointer;
     color:#40A5B9;
 }
