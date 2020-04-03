@@ -7,7 +7,7 @@ export const TimeLeft = (props) => {
     const date = new Date(props.date)
     const diff = (date.getTime() - now.getTime()) / (1000*60*60*24)
     const diffRound = Math.round(diff)
-    let message = ''
+    let message
 
     if (diffRound > 30)
     {
@@ -26,7 +26,7 @@ export const TimeLeft = (props) => {
     }  
     return (
         <span className='time_left'>
-            {message} left
+            - {message} left
         </span>
     )
 }

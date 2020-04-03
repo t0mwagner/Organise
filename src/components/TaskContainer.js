@@ -8,7 +8,7 @@ import "./TaskContainer.css"
 export const TaskContainer = () => {
 
     const [tasks, setTasks] = useState([])
-    const [menu, setMenu] = useState(['opened','closed'])
+    const [filter, setFilter] = useState({})
 
     const addTask = (e) => {
         e.preventDefault()
@@ -41,16 +41,16 @@ export const TaskContainer = () => {
         })) 
     }
 
-    const changeMenu = (e) => {
-        setMenu(e)
+    const changeFilter = (filter) => {
+        setFilter(filter)
     }
 
     return (
         <div className="content">
             <AddForm addTask={addTask} />
             <div id="content_main">
-                <SideBar changeMenu={changeMenu}/>
-                <TaskList status={menu} taskList={tasks} checkTask={checkTask} uncheckTask={uncheckTask}/>
+                <SideBar changeFilter={changeFilter}/>
+                <TaskList filter={filter} taskList={tasks} checkTask={checkTask} uncheckTask={uncheckTask}/>
             </div>
         </div>
     )

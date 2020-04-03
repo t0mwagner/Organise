@@ -5,40 +5,82 @@ import { FaRegSquare, FaCheck } from 'react-icons/fa'
 
 export const TaskList = (props) => {
 
+    const filteredTasks = props.taskList.filter(task=>{
+        const dateTask = new Date(task.date)
+        let taskOk = true
+        for (let [key, value] of Object.entries(props.filter)) {
+            if (key === 'date'){
+                const dateKey = new Date(value)
+                if (dateTask > dateKey){
+                    taskOk = false
+                }
+            } 
+            else if (task[key] !== value) {
+                taskOk = false
+            }
+            
+        }
+        return taskOk
+    })
     return (
         <div id="task_list">
-            {
-                props.status.map((status, index) => (
-                    <section key={index}>
-                        <h2>{status.charAt(0).toUpperCase() + status.slice(1)} tasks</h2>
+            <section>
+                <h2>Tasks</h2>
+                <ul>
+                {
+                    filteredTasks
+                    .sort((a,b)=>{
+                        const datea = new Date(a.date)
+                        const dateb = new Date(b.date)
+                        return (datea<dateb)?-1:1
+                    })
+                    .map((task,index) => {
+                        if (task.status === 'opened')
                         {
-                            props.taskList.filter(task => task.status === status).length === 0
-                            && <p className='noTasks'>You have no {status} tasks</p>
+                            return (
+                                <li key={index}>
+                                    <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>      
+                                    <span>{task.label}</span>
+                                    <TimeLeft date={task.date} />
+                                </li> 
+                            )
                         }
+                        return ''
+                    })
+                }
+                </ul>
+            </section>
+            
+            {
+                (!props.filter.hasOwnProperty('status'))
+                ?
+                    <section>
+                        <h2>Closed tasks</h2>
                         <ul>
                         {
-                            props.taskList.map((task,index) => (
-                                (task.status === status)                    
-                                ?
-                                    <li key={index}>
-                                        {
-                                            (status === 'opened')
-                                            ?
-                                                <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>
-                                            :
-                                                <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>
-                                        }
-                                        <span className={(status==='closed')?'crossed':''}>{task.label}</span>
-                                        {
-                                            (status === 'opened')&&<TimeLeft date={task.date} />
-                                        }
-                                    </li>
-                                :null
-                            ))
+                            filteredTasks
+                            .sort((a,b)=>{
+                                const datea = new Date(a.date)
+                                const dateb = new Date(b.date)
+                                return (datea<dateb)?-1:1
+                            })
+                            .map((task,index) => {
+                                if (task.status === 'closed')
+                                {
+                                    return (
+                                        <li key={index}>
+                                            <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>      
+                                            <span className='crossed'>{task.label}</span>
+                                        </li> 
+                                    )
+                                }
+                                return ''
+                            })
                         }
                         </ul>
                     </section>
-                ))
+                :
+                    null
             }
         </div>
     )
