@@ -9,7 +9,7 @@ import "./TaskContainer.css"
 export const TaskContainer = () => {
 
     const [tasks, setTasks] = useState([])
-    const [page, setPage] = useState({})
+    const [page, setPage] = useState({title:'All tasks'})
     const [filter, setFilter] = useState([])
     const [number, setNumber] = useState(0)
 

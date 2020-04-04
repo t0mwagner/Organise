@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./TaskList.css"
 import { TimeLeft } from './TimeLeft'
-import { FaRegSquare, FaCheck, FaTrashAlt, FaRedoAlt } from 'react-icons/fa'
+import { FaRegSquare, FaCheck, FaTrashAlt } from 'react-icons/fa'
 
 export const TaskList = (props) => {
+
+    const [done, setDone] = useState(false)
+
+    const handleDone = () => {
+        setDone(!done)
+    }
 
     const filteredTasks = props.taskList.filter(task=>{
         const dateTask = new Date(task.date)
@@ -27,7 +33,18 @@ export const TaskList = (props) => {
     return (
         <div id="task_list">
             <section>
-                <h2>Tasks</h2>
+                <div className='list_header'>
+                    <span className='list_title'>Tasks</span>
+                    <span className='list_button' onClick={handleDone}>
+                    {
+                        (done)
+                        ?
+                            'hide done tasks'
+                        :
+                            'display done tasks'
+                    }    
+                    </span>
+                </div>
                 <ul>
                 {
                     filteredTasks
@@ -37,56 +54,31 @@ export const TaskList = (props) => {
                         return (datea<dateb)?-1:1
                     })
                     .map((task,index) => {
-                        if (task.status === 'opened')
-                        {
-                            return (
+                        return (
+                            (task.status === 'opened' || (task.status === 'closed' && done === true))
+                            ?
                                 <li key={index}>
-                                    <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>      
-                                    <span>{task.label}</span>
+                                    {
+                                        (task.status === 'opened')
+                                        ?
+                                            <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>
+                                        :
+                                            ((task.status === 'closed') && (done === true))
+                                            ?
+                                                <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>
+                                            :
+                                                ''
+                                    }
+                                    <span className={task.status==='closed'?'crossed':''}>{task.label}</span>
                                     <TimeLeft date={task.date} />
                                     <FaTrashAlt className="delete_icon" onClick={()=>props.deleteTask(task.id)} />
-                                    <FaRedoAlt className="postpone_icon" />
-                                </li> 
-                            )
-                        }
-                        return ''
-                    })
+                                </li>
+                            :
+                                ''
+                        )})
                 }
                 </ul>
             </section> 
-            {
-                (!props.filter.hasOwnProperty('status'))
-                ?
-                    <section>
-                        <h2>Closed tasks</h2>
-                        <ul>
-                        {
-                            filteredTasks
-                            .sort((a,b)=>{
-                                const datea = new Date(a.date)
-                                const dateb = new Date(b.date)
-                                return (datea<dateb)?-1:1
-                            })
-                            .map((task,index) => {
-                                if (task.status === 'closed')
-                                {
-                                    return (
-                                        <li key={index}>
-                                            <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>      
-                                            <span className='crossed'>{task.label}</span>
-                                            <FaTrashAlt className="delete_icon" onClick={()=>props.deleteTask(task.id)} />
-                                            <FaRedoAlt className="postpone_icon" />
-                                        </li> 
-                                    )
-                                }
-                                return ''
-                            })
-                        }
-                        </ul>
-                    </section>
-                :
-                    null
-            }
         </div>
     )
 }

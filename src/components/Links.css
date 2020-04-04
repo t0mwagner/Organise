@@ -15,6 +15,9 @@
 .menu_item{
     margin-left:5px;
     color:#40A5B9;
+    text-decoration: none;
+}
+.menu_item:hover{
     text-decoration: underline;
 }
 #links li:hover{

@@ -2,11 +2,15 @@
     background-color: #40A5B9;
     align-self: stretch;
 }
+.header_content{
+    display: flex;
+    justify-content: center;
+}
 .header img{
     height: 25px;
-    margin: 0px 10px;
 }
 .header nav{
+    width: 700px;
     display: flex;
     align-items: center;
     justify-content: space-between;
