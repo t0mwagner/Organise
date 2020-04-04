@@ -1,28 +1,36 @@
 #task_list{
-    flex: 2 1 60vw;
+    margin-top:20px;
 }
 #task_list ul{
     list-style-type: none;
+    padding:0px;
+    margin: 0px 0px 40px 0px;
 }
 #task_list h2{
-    margin: 10px 0px 10px 10px;
-    font-size:1em;
-    font-weight: 100;
+    margin: 10px 0px 0px 0px;
+    padding-bottom:5px;
+    font-size:0.9em;
+    color:#40A5B9;
+    font-weight: 600;
+    border-bottom: 1px solid black;
 }
 .checkbox{
     margin-right:5px;
 }
-.checkbox:hover{
+.checkbox:hover, .delete_icon:hover, .postpone_icon:hover{
     cursor: pointer;
 }
 #task_list li{
-    display:flex;
-}
-.noTasks{
-    font-size: 0.9em;
-    margin-left: 25px;
-    color: darkgray;
+    display:grid;
+    grid-template-columns: 30px 1fr 150px repeat(2, 20px);
+    border-bottom: 1px solid darkgray;
+    padding:8px 0px;
 }
 .crossed{
     text-decoration: line-through;
+}
+.delete_icon, .postpone_icon{
+    margin-left:5px;
+    color:darkgray;
+    align-items: flex-end;
 }

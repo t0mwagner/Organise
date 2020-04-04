@@ -1,7 +1,7 @@
 import React from 'react'
 import "./TaskList.css"
 import { TimeLeft } from './TimeLeft'
-import { FaRegSquare, FaCheck } from 'react-icons/fa'
+import { FaRegSquare, FaCheck, FaTrashAlt, FaRedoAlt } from 'react-icons/fa'
 
 export const TaskList = (props) => {
 
@@ -22,6 +22,8 @@ export const TaskList = (props) => {
         }
         return taskOk
     })
+    props.changeNumber(filteredTasks.length)
+
     return (
         <div id="task_list">
             <section>
@@ -42,6 +44,8 @@ export const TaskList = (props) => {
                                     <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>      
                                     <span>{task.label}</span>
                                     <TimeLeft date={task.date} />
+                                    <FaTrashAlt className="delete_icon" onClick={()=>props.deleteTask(task.id)} />
+                                    <FaRedoAlt className="postpone_icon" />
                                 </li> 
                             )
                         }
@@ -49,8 +53,7 @@ export const TaskList = (props) => {
                     })
                 }
                 </ul>
-            </section>
-            
+            </section> 
             {
                 (!props.filter.hasOwnProperty('status'))
                 ?
@@ -71,6 +74,8 @@ export const TaskList = (props) => {
                                         <li key={index}>
                                             <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>      
                                             <span className='crossed'>{task.label}</span>
+                                            <FaTrashAlt className="delete_icon" onClick={()=>props.deleteTask(task.id)} />
+                                            <FaRedoAlt className="postpone_icon" />
                                         </li> 
                                     )
                                 }

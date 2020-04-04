@@ -1,0 +1,23 @@
+#links{
+    margin-top: 20px;
+}
+#links ul{
+    display:flex;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+#links li{
+    margin-left: 5px;
+    font-size: 0.9em;
+    display:flex;
+}
+.menu_item{
+    margin-left:5px;
+    color:#40A5B9;
+    text-decoration: underline;
+}
+#links li:hover{
+    cursor: pointer;
+    color:#40A5B9;
+}

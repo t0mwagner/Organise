@@ -26,7 +26,7 @@ export const TimeLeft = (props) => {
     }  
     return (
         <span className='time_left'>
-            - {message} left
+            {message} left
         </span>
     )
 }

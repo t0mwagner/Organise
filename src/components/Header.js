@@ -7,7 +7,7 @@ export const Header = () => (
             <div className="logo">
                 <img src={process.env.PUBLIC_URL + '/img/logo.svg'} alt="todo logo" />
             </div>
-            <div className="title">
+            <div className="app_title">
                 <h1>Todo List</h1>
             </div>
             <div className="login">
