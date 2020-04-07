@@ -45,9 +45,10 @@ export const TaskList = (props) => {
                 </div>
                 <ul>
                 {
-                    (filteredTasks.length === 0)
+                    (filteredTasks.length === 0 
+                    || (filteredTasks.length !== 0 && filteredTasks.filter(task=>!task.done).length === 0 && !displayDone))
                     ? 
-                        <p className='no_task'>No task here !</p>
+                        <p className='no_task'>No active task here !</p>
                     :
                         filteredTasks
                         .sort((a,b)=>(new Date(a.date)<new Date(b.date))?-1:1)
