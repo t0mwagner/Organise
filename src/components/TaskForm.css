@@ -1,3 +1,6 @@
+.task_btns{
+    justify-self: center;
+}
 .add_task_btn{
     background-color: #40A5B9;
     color:white;
@@ -11,18 +14,14 @@
     cursor: pointer;
     opacity:0.9;
 }
-.add_task_btn:focus, .modal_add:focus{
-    outline: none;
-}
-.edit_icon{
+.edit_icon, .delete_icon{
     color:darkgray;
-    justify-self: center;
 }
-.edit_icon:hover{
+.edit_icon:hover, .delete_icon:hover{
     cursor: pointer;
     color:black;
 }
-.modal_add{
+.modal{
     position: absolute;
     top: 30%;
     left: 50%;
@@ -34,7 +33,7 @@
     width:400px;
     border-radius: 5px;
 }
-.modal_add_overlay{
+.modal_overlay{
     position: fixed;
     top:0;
     left:0;
@@ -62,27 +61,28 @@
     cursor: pointer;
     opacity:1;
 }
-.modal_add form{
+.modal form{
     display:flex;
     flex-direction: column;
 }
-.modal_add label{
+.task_fields{
+    display:flex;
+    flex-direction: column;
+}
+.modal label{
     font-size:0.8em;
     margin:10px 0px 0px 20px;
 }
-.modal_add input{
+.modal input{
     margin:3px 20px 0px 20px;
     padding: 5px;
     border: 0.5px solid darkgrey;
 }
-.modal_add input[type='time']{
+.modal input[type='time']{
     font-size: 0.9em;
 }
-.modal_add select{
+.modal select{
     margin:3px 20px 0px 20px;
-}
-.modal_add input:focus, .modal_add select:focus, .modal_add button:focus{
-    outline: none;
 }
 #submit_btn{
     background-color: #40A5B9;
@@ -98,4 +98,10 @@
 #submit_btn:hover{
     cursor: pointer;
     opacity:0.9;
+}
+.delete_alert{
+    margin:25px 0px 0px 0px;
+    font-size: 0.9em;
+    align-self: center;
+    text-align: center;
 }

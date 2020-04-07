@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TimeLeft } from './TimeLeft'
 import { TaskForm } from './TaskForm'
-import { FaRegSquare, FaCheck, FaTrashAlt } from 'react-icons/fa'
+import { FaRegSquare, FaCheck } from 'react-icons/fa'
 
 import "./TaskList.css"
 
@@ -45,37 +45,45 @@ export const TaskList = (props) => {
                 </div>
                 <ul>
                 {
-                    filteredTasks
-                    .sort((a,b)=>(new Date(a.date)<new Date(b.date))?-1:1)
-                    .map((task,index) => (
-                        (!task.done || (task.done && displayDone === true))
-                        ?
-                            <li key={index}>
-                                {
-                                    (!task.done)
-                                    ?
-                                        <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>
-                                    :
-                                        <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>
-                                }
-                                <span className={task.done?'crossed':''}>{task.label}</span>
-                                {
-                                    (!task.done)
-                                    ?
-                                        <TimeLeft date={task.date} />
-                                    :
-                                        <span className="done">done</span>
-                                }
-                                <TaskForm 
-                                    mode='edit'
-                                    task={task}
-                                    editTask={props.editTask} 
-                                />
-                                <FaTrashAlt className='delete_icon' onClick={()=>props.deleteTask(task.id)} />
-                            </li>
-                        :
-                            ''
-                    ))
+                    (filteredTasks.length === 0)
+                    ? 
+                        <p className='no_task'>No task here !</p>
+                    :
+                        filteredTasks
+                        .sort((a,b)=>(new Date(a.date)<new Date(b.date))?-1:1)
+                        .map((task,index) => (
+                            (!task.done || (task.done && displayDone === true))
+                            ?
+                                <li key={index}>
+                                    {
+                                        (!task.done)
+                                        ?
+                                            <FaRegSquare id={task.id} onClick={props.checkTask} className="checkbox"/>
+                                        :
+                                            <FaCheck id={task.id} onClick={props.uncheckTask} className="checkbox"/>
+                                    }
+                                    <span className={task.done?'crossed':''}>{task.label}</span>
+                                    {
+                                        (!task.done)
+                                        ?
+                                            <TimeLeft date={task.date} />
+                                        :
+                                            <span className="done">done</span>
+                                    }
+                                    <TaskForm 
+                                        mode='edit'
+                                        task={task}
+                                        editTask={props.editTask} 
+                                    />
+                                    <TaskForm
+                                        mode='delete'
+                                        task={task}
+                                        deleteTask={props.deleteTask}
+                                    />
+                                </li>
+                            :
+                                ''
+                        ))
                 }
                 </ul>
             </section> 

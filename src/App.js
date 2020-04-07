@@ -36,7 +36,6 @@ export const App = () => {
             }
             return task
         })
-        const date = new Date(document.getElementById('date_select').value)
         setTasks(tasksEdited)
     }
 

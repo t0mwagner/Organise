@@ -10,7 +10,7 @@
 .checkbox{
     margin-right:5px;
 }
-.checkbox:hover, .delete_icon:hover{
+.checkbox:hover{
     cursor: pointer;
     color:black;
 }
@@ -24,10 +24,6 @@
 .crossed{
     text-decoration: line-through;
     color: darkgray;
-}
-.delete_icon{
-    color:darkgray;
-    justify-self: center;
 }
 .list_header{
     display:flex;
@@ -51,4 +47,9 @@
     color: darkgray;
     font-size: 0.9em;
     margin-left: 5px;
+}
+.no_task{
+    color: darkgray;
+    margin:30px 0px;
+    text-align: center;
 }
