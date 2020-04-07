@@ -1,0 +1,101 @@
+.add_task_btn{
+    background-color: #40A5B9;
+    color:white;
+    border-radius: 5px;
+    border:none;
+    padding: 5px 10px;
+    opacity:1;
+    margin:0px 0px 20px 0px;
+}
+.add_task_btn:hover{
+    cursor: pointer;
+    opacity:0.9;
+}
+.add_task_btn:focus, .modal_add:focus{
+    outline: none;
+}
+.edit_icon{
+    color:darkgray;
+    justify-self: center;
+}
+.edit_icon:hover{
+    cursor: pointer;
+    color:black;
+}
+.modal_add{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width:400px;
+    border-radius: 5px;
+}
+.modal_add_overlay{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(50, 50, 50, 0.5);
+}
+.modal_title{
+    background-color: #F8F8F8;
+    padding:15px;
+    border-bottom:1px solid darkgrey;
+    display:flex;
+    justify-content: space-between;
+    border-radius: 5px 5px 0px 0px;
+}
+.modal_title h2{
+    margin:0;
+    font-weight: 100;
+    font-size: 1.2em;
+}
+.modal_close_icon{
+    opacity:0.8;
+}
+.modal_close_icon:hover{
+    cursor: pointer;
+    opacity:1;
+}
+.modal_add form{
+    display:flex;
+    flex-direction: column;
+}
+.modal_add label{
+    font-size:0.8em;
+    margin:10px 0px 0px 20px;
+}
+.modal_add input{
+    margin:3px 20px 0px 20px;
+    padding: 5px;
+    border: 0.5px solid darkgrey;
+}
+.modal_add input[type='time']{
+    font-size: 0.9em;
+}
+.modal_add select{
+    margin:3px 20px 0px 20px;
+}
+.modal_add input:focus, .modal_add select:focus, .modal_add button:focus{
+    outline: none;
+}
+#submit_btn{
+    background-color: #40A5B9;
+    color:white;
+    border-radius: 5px;
+    border:none;
+    padding: 5px 10px;
+    margin:30px 20px 20px 20px;
+    opacity:1;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+#submit_btn:hover{
+    cursor: pointer;
+    opacity:0.9;
+}

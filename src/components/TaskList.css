@@ -10,22 +10,24 @@
 .checkbox{
     margin-right:5px;
 }
-.checkbox:hover, .delete_icon:hover, .postpone_icon:hover{
+.checkbox:hover, .delete_icon:hover{
     cursor: pointer;
+    color:black;
 }
 #task_list li{
     display:grid;
-    grid-template-columns: 30px 1fr 150px 20px;
+    grid-template-columns: 30px 1fr 150px 30px 30px;
     border-bottom: 1px solid darkgray;
     padding:8px 5px;
+    justify-items: start;
 }
 .crossed{
     text-decoration: line-through;
+    color: darkgray;
 }
-.delete_icon, .postpone_icon{
-    margin-left:5px;
+.delete_icon{
     color:darkgray;
-    align-items: flex-end;
+    justify-self: center;
 }
 .list_header{
     display:flex;
@@ -44,4 +46,9 @@
 }
 .list_button:hover{
     cursor: pointer;
+}
+.done{
+    color: darkgray;
+    font-size: 0.9em;
+    margin-left: 5px;
 }
