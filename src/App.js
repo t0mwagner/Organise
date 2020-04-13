@@ -93,6 +93,12 @@ export const App = () => {
         setCategories(categoriesEdited)
     }
     const deleteCategory = (id) => {
+        tasks.map(task=>{
+            if (task.categoryId === id)
+            {
+                task.categoryId = categories[0].id
+            }
+        })
         setCategories(categories.filter(category=>category.id !== id))
     }
 
