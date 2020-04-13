@@ -1,6 +1,6 @@
 .footer{
-    background-color: #40A5B9;
-    color:white;
+    background-color: var(--site-brand-color);
+    color:var(--site-title-color);
     display: flex;
     justify-content: center;
     align-self: stretch;

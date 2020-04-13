@@ -12,9 +12,9 @@ export const Header = () => (
                     <h1>Todo List</h1>
                 </div>
                 <div className="login">
-                    <a href="#">
+                    <span>
                         <img src={process.env.PUBLIC_URL + '/img/login_btn.svg'} alt="login button" />
-                    </a>
+                    </span>
                 </div>
             </nav>
         </div>

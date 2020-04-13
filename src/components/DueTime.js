@@ -1,13 +1,14 @@
 import React from 'react'
-import "./TimeLeft.css"
+import "./DueTime.css"
 
-export const TimeLeft = (props) => {
+export const DueTime = (props) => {
  
     const now = new Date()
     const date = new Date(props.date)
     const diff = (date.getTime() - now.getTime()) / (1000*60*60*24)
     const diffRound = Math.round(diff)
     let message
+
 
     if (diffRound > 30)
     {
@@ -25,7 +26,7 @@ export const TimeLeft = (props) => {
         }
     }  
     return (
-        <span className='time_left'>
+        <span className='due_time'>
             {message} left
         </span>
     )

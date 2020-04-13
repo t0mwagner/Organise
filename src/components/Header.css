@@ -1,5 +1,5 @@
 .header{
-    background-color: #40A5B9;
+    background-color: var(--site-brand-color);
     align-self: stretch;
 }
 .header_content{
@@ -10,18 +10,20 @@
     height: 25px;
 }
 .header nav{
-    width: 700px;
+    width: 750px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .app_title h1{
     font-family: 'Pacifico', cursive;
-    color: white;
+    color: var(--site-title-color);
     font-weight:normal;
     margin: 0px;
 }
 .login a{
     text-decoration: none;
-    color: white;
+}
+img{
+    filter: hue-rotate();
 }

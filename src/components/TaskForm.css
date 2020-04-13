@@ -1,107 +1,42 @@
-.task_btns{
-    justify-self: center;
+#select_category{
+    display:none;
 }
-.add_task_btn{
-    background-color: #40A5B9;
-    color:white;
-    border-radius: 5px;
-    border:none;
+#category_list{
+    list-style-type: none;
+    height: 30px;
+    width: 150px;
+    margin-left:20px;
+    padding:0px;
+    font-size: 0.9em;
+    border: 0.5px darkgrey solid;
+}
+#category_list li{
+    width: 130px;
+    display:flex;
     padding: 5px 10px;
-    opacity:1;
-    margin:0px 0px 20px 0px;
-}
-.add_task_btn:hover{
-    cursor: pointer;
-    opacity:0.9;
-}
-.edit_icon, .delete_icon{
-    color:darkgray;
-}
-.edit_icon:hover, .delete_icon:hover{
-    cursor: pointer;
-    color:black;
-}
-.modal{
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    align-items: center;
     background-color: white;
-    width:400px;
-    border-radius: 5px;
+    border-left:0.5px solid darkgray;
+    border-right:0.5px solid darkgray;
 }
-.modal_overlay{
-    position: fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-color:rgba(50, 50, 50, 0.5);
+#category_list .square{
+    font-size: 1.4em;
+    margin-right: 5px;
 }
-.modal_title{
-    background-color: #F8F8F8;
-    padding:15px;
-    border-bottom:1px solid darkgrey;
-    display:flex;
-    justify-content: space-between;
-    border-radius: 5px 5px 0px 0px;
+#category_list li.disabled{
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0);
 }
-.modal_title h2{
-    margin:0;
-    font-weight: 100;
-    font-size: 1.2em;
+#category_list li:not(.display){ 
+    display: none;
 }
-.modal_close_icon{
-    opacity:0.8;
+#category_list li.selected:not(.neutral){
+    background-color: var(--main-bg-color);
 }
-.modal_close_icon:hover{
+#category_list li.display:not(.disabled){
     cursor: pointer;
-    opacity:1;
 }
-.modal form{
-    display:flex;
-    flex-direction: column;
-}
-.task_fields{
-    display:flex;
-    flex-direction: column;
-}
-.modal label{
-    font-size:0.8em;
-    margin:10px 0px 0px 20px;
-}
-.modal input{
-    margin:3px 20px 0px 20px;
-    padding: 5px;
-    border: 0.5px solid darkgrey;
-}
-.modal input[type='time']{
-    font-size: 0.9em;
-}
-.modal select{
-    margin:3px 20px 0px 20px;
-}
-#submit_btn{
-    background-color: #40A5B9;
+#category_list li.display:not(.disabled):not(.neutral):hover{
+    background-color: var(--link-color);
     color:white;
-    border-radius: 5px;
-    border:none;
-    padding: 5px 10px;
-    margin:30px 20px 20px 20px;
-    opacity:1;
-    align-self: flex-end;
-    justify-self: flex-end;
-}
-#submit_btn:hover{
-    cursor: pointer;
-    opacity:0.9;
-}
-.delete_alert{
-    margin:25px 0px 0px 0px;
-    font-size: 0.9em;
-    align-self: center;
-    text-align: center;
 }
