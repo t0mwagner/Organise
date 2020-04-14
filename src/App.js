@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { Header } from './components/Header'
-import { Footer } from './components/Footer'
-import { Title } from './components/Title'
-import { Links } from './components/Links'
+import { Header } from './components/layout/Header'
+import { Footer } from './components/layout/Footer'
+import { Title } from './components/layout/Title'
+import { Links } from './components/layout/Links'
+import { DueTime } from './components/columns/DueTime'
+import { Category } from './components/columns/Category'
+import { CategoryColor } from './components/columns/CategoryColor'
+import { TaskNumber } from './components/columns/TaskNumber'
 import { List } from './components/List'
-import { DueTime } from './components/DueTime'
 import { FaRegSquare, FaCheck, FaFolder } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -93,14 +96,25 @@ export const App = () => {
         setCategories(categoriesEdited)
     }
     const deleteCategory = (id) => {
-        tasks.map(task=>{
+        for (let task of tasks)
+        {
             if (task.categoryId === id)
             {
                 task.categoryId = categories[0].id
             }
-        })
+        }
         setCategories(categories.filter(category=>category.id !== id))
     }
+
+    /* Columns handlers */
+    const columnDueTime = (attr) => <DueTime date={attr} />
+
+    const columnCategory = (attr) => <Category id={attr} categories={categories} />
+
+    const columnCategoryColor = (attr) => <CategoryColor color={attr} />
+
+    const columnTaskNumber = (attr) => <TaskNumber id={attr} tasks={tasks}/>
+
 
     /* Page and filter */
     const handlePage = (page) => {
@@ -136,7 +150,17 @@ export const App = () => {
                                     icon2:<FaCheck className='click_icon' onClick={uncheckTask}/>
                                 }}
                                 displaySwitcher='done'
-                                columns={['label','category',<DueTime />]}
+                                columns={[
+                                    'label',
+                                    {
+                                        columnHandler:columnCategory,
+                                        columnProp:'categoryId'
+                                    },
+                                    {
+                                        columnHandler:columnDueTime,
+                                        columnProp:'date'
+                                    }
+                                ]}
                                 grid={{gridTemplateColumns: '30px 1fr 100px 150px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addTask}
@@ -153,8 +177,18 @@ export const App = () => {
                                     icon1:<FaFolder className='icon' />
                                 }}
                                 displaySwitcher=''
-                                columns={['label','color','taskNumber']}
-                                grid={{gridTemplateColumns: '30px 1fr 100px 150px 30px 30px'}}
+                                columns={[
+                                    {
+                                        columnHandler:columnCategoryColor,
+                                        columnProp:'color'
+                                    },
+                                    'label',
+                                    {
+                                        columnHandler:columnTaskNumber,
+                                        columnProp:'id'
+                                    }
+                                ]}
+                                grid={{gridTemplateColumns: '30px 27px 1fr 150px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addCategory}
                                 editHandler={editCategory}

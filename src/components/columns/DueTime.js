@@ -26,7 +26,7 @@ export const DueTime = (props) => {
         }
     }  
     return (
-        <span className='due_time'>
+        <span className='column'>
             {message} left
         </span>
     )

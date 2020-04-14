@@ -3,15 +3,16 @@
 }
 #category_list{
     list-style-type: none;
-    height: 30px;
-    width: 150px;
-    margin-left:20px;
+    height: 25px;
+    width: 180px;
+    margin:8px 0px 0px 20px;
     padding:0px;
     font-size: 0.9em;
     border: 0.5px darkgrey solid;
 }
 #category_list li{
-    width: 130px;
+    width: 160px;
+    height: 14px;
     display:flex;
     padding: 5px 10px;
     align-items: center;
@@ -19,12 +20,15 @@
     border-left:0.5px solid darkgray;
     border-right:0.5px solid darkgray;
 }
+#category_list li:nth-last-child(1){
+    border-bottom: 0.5px darkgrey solid;
+}
 #category_list .square{
-    font-size: 1.4em;
+    font-size: 1em;
     margin-right: 5px;
 }
 #category_list li.disabled{
-    height: 25px;
+    height: 15px;
     background-color: rgba(0, 0, 0, 0);
 }
 #category_list li:not(.display){ 

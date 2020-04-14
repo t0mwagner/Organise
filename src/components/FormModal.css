@@ -1,5 +1,7 @@
 .list_buttons{
+    display: flex;
     justify-self: center;
+    align-items: center;
 }
 .add_btn{
     background-color: var(--button-color);

@@ -89,7 +89,7 @@ export const List = (props) => {
                                     props.columns.map((column, index) => (
                                         (typeof column === "object")
                                         ?
-                                            column
+                                            column.columnHandler(item[column.columnProp])
                                         :
                                             <span key={index}>{item[column]}</span>
                                     ))
