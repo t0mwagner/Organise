@@ -53,7 +53,7 @@ export const List = (props) => {
                         &&
                             <span className='list_button' onClick={()=>setDisplayAlt(!displayAlt)}>
                                 {
-                                    (displayAlt)
+                                    (!displayAlt)
                                     ?
                                         'Afficher les ' + props.label[1] + ' ' + props.displaySwitcher[1]                                 :
                                         'Masquer les ' + props.label[1] + ' ' + props.displaySwitcher[1]

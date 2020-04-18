@@ -6,3 +6,6 @@
 .done_crossed{
     text-decoration: line-through;
 }
+.late_task{
+    color: var(--link-color);
+}

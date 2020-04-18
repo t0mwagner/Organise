@@ -160,7 +160,7 @@ export const App = () => {
                                         columnProp:['date','doneDate']
                                     }
                                 ]}
-                                grid={{gridTemplateColumns: '30px 1fr 100px 150px 30px 30px'}}
+                                grid={{gridTemplateColumns: '30px 1fr 150px 160px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addTask}
                                 editHandler={editTask}

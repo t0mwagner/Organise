@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaCalendarCheck, FaClock } from 'react-icons/fa'
+import { FaCalendarCheck, FaClock, FaExclamationCircle } from 'react-icons/fa'
 import "./DueTime.css"
 
 export const DueTime = (props) => {
@@ -27,11 +27,21 @@ export const DueTime = (props) => {
         <span className='column due_time'>
             {
                 (props.doneDate)
-                ? <FaCalendarCheck className='date_icon' />
-                : <FaClock className='date_icon' />
+                ?<FaCalendarCheck className='date_icon' />
+                :(date < now)
+                ?<FaExclamationCircle className='date_icon' />
+                :<FaClock className='date_icon' />
             }
             {
-                <span className={(props.doneDate)?'done_crossed':''}>{' ' + result}</span>
+                <span className={
+                    (props.doneDate)
+                    ?'done_crossed'
+                    :(date < now)
+                    ?'late_task'
+                    :''
+                }>
+                    {' ' + result}
+                </span>
             }
         </span>
     )

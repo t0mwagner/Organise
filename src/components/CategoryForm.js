@@ -9,7 +9,7 @@ export const CategoryForm = (props) => {
     return (
         <span className="fields">
             <label htmlFor="input_category_name">* Titre</label>
-            <input type="text" id="input_category_name" maxLength='25' required defaultValue=
+            <input type="text" id="input_category_name" maxLength='20' required defaultValue=
             {
                 (props.item)&&props.item.label
             }
