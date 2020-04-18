@@ -1,27 +1,45 @@
 import React from 'react'
 import "./Links.css"
 
-export const Links = (props) => (
-    <div id="links">
-        <ul>
-            <li>
-                <span className='menu_item' onClick={()=>{
-                    props.changePage({title:'All tasks', type:['task','tasks']})
-                    props.changeFilter({})
-                }}>All tasks</span>
-            </li>
-            <li>
-                <span className='menu_item' onClick={()=>{
-                    props.changePage({title:props.today[1], type:['task','tasks']})
-                    props.changeFilter({date:props.today[0]})
-                }}>Today</span>
-            </li>
-            <li>
-                <span className='menu_item' onClick={()=>{
-                    props.changePage({title:'Categories', type:['category','categories']})
-                    props.changeFilter({})
-                }}>Categories</span>
-            </li>
-        </ul>
-    </div>
-)
+export const Links = (props) => {
+
+    const now = new Date()
+    const today = new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
+
+    return (
+        <div id="links">
+            <ul>
+                <li>
+                    <span className='menu_item' onClick={(e)=>{
+                        props.changePage({title:'Toutes les tâches', type:['tâche','tâches']})
+                        props.changeFilter({})
+                        e.target.parentNode.parentNode.childNodes.forEach(element => {
+                            element.childNodes[0].classList.remove('selected_link')
+                        })
+                        e.target.classList.add('selected_link')
+                    }}>Toutes les tâches</span>
+                </li>
+                <li>
+                    <span className='menu_item' onClick={(e)=>{
+                        props.changePage({title:now.toLocaleString([],{weekday:'long'})[0].toUpperCase() + now.toLocaleString([],{weekday:'long'}).slice(1) + ' ' + now.toLocaleString([],{day:'numeric',month:'long'}), type:['tâche','tâches']})
+                        props.changeFilter({date:today})
+                        e.target.parentNode.parentNode.childNodes.forEach(element => {
+                            element.childNodes[0].classList.remove('selected_link')
+                        })
+                        e.target.classList.add('selected_link')
+                    }}>Aujourd'hui</span>
+                </li>
+                <li>
+                    <span className='menu_item' onClick={(e)=>{
+                        props.changePage({title:'Catégories', type:['catégorie','catégories']})
+                        props.changeFilter({})
+                        e.target.parentNode.parentNode.childNodes.forEach(element => {
+                            element.childNodes[0].classList.remove('selected_link')
+                        })
+                        e.target.classList.add('selected_link')
+                    }}>Catégories</span>
+                </li>
+            </ul>
+        </div>
+    )
+}

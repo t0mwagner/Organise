@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
 import { FormModal } from './FormModal'
 
 import "./List.css"
@@ -39,7 +40,7 @@ export const List = (props) => {
     return (
         <div className="list">
             <FormModal
-                mode='add'
+                mode='ajouter'
                 label={props.label[0]}
                 categories={(props.categories)?props.categories:''}
                 addHandler={props.addHandler}  
@@ -54,9 +55,8 @@ export const List = (props) => {
                                 {
                                     (displayAlt)
                                     ?
-                                        'hide ' + props.displaySwitcher + ' ' + props.label[1]
-                                    :
-                                        'display ' + props.displaySwitcher + ' ' + props.label[1]
+                                        'Afficher les ' + props.label[1] + ' ' + props.displaySwitcher[1]                                 :
+                                        'Cacher les ' + props.label[1] + ' ' + props.displaySwitcher[1]
                                 }
                             </span>
                     }
@@ -66,18 +66,18 @@ export const List = (props) => {
                 {
                     (filteredCollection.length === 0)
                     ?
-                        <p className='no_item'>No {props.label[0]} here !</p>
+                        <p className='no_item'>Aucune {props.label[0]} !</p>
                     :
                         filteredCollection
                         .sort(props.sortFunction)
                         .map((item,index) => (
-                            (!item[props.displaySwitcher] || displayAlt)
+                            (!item[props.displaySwitcher[0]] || displayAlt)
                             &&
-                            <li key={index} id={item.id} style={props.grid} className={(item[props.displaySwitcher])?'alt_li':''}>
+                            <li key={index} id={item.id} style={props.grid} className={(item[props.displaySwitcher[0]])?'alt_li':''}>
                                 {
                                     (props.displaySwitcher)
                                     ?
-                                        (item[props.displaySwitcher])
+                                        (item[props.displaySwitcher[0]])
                                         ?
                                             props.icons.icon2
                                         :
@@ -95,19 +95,28 @@ export const List = (props) => {
                                     ))
                                 }
                                 <FormModal 
-                                    mode='edit'
+                                    mode='modifier'
                                     label={props.label[0]}
                                     categories={(props.categories)?props.categories:''}
                                     item={item}
                                     editHandler={props.editHandler}  
                                 />
-                                <FormModal
-                                    mode='delete'
-                                    label={props.label[0]}
-                                    categories={(props.categories)?props.categories:''}
-                                    item={item}
-                                    deleteHandler={props.deleteHandler}  
-                                />
+                                {
+                                    (filteredCollection.length === 1)
+                                    ?
+                                    <span class='btn_disabled'>
+                                        <FaTrashAlt className='delete_btn_disabled' />
+                                    </span>
+                                    :
+                                        <FormModal
+                                            mode='supprimer'
+                                            label={props.label[0]}
+                                            categories={(props.categories)?props.categories:''}
+                                            item={item}
+                                            deleteHandler={props.deleteHandler}  
+                                        />
+                                }
+                                
                             </li>
                         ))
                 }

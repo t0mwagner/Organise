@@ -15,18 +15,11 @@ import "./App.css"
 
 export const App = () => {
 
-    /* Dates */
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-    const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    const now = new Date()
-    const today = new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
-    const today_textual = days[today.getDay()] + ", " + today.getDate() + " " + months[today.getMonth()]
-
     /* Hooks */
     const [tasks, setTasks] = useState([])
     const [categories, setCategories] = useState([{id:uuidv4(),color:'#F2D2F2',label:'General'}])
-    const [page, setPage] = useState({title:today_textual, type:['task','tasks']})
-    const [filter, setFilter] = useState({date:today})
+    const [page, setPage] = useState({title:new Date().toLocaleString([],{weekday:'long'})[0].toUpperCase() + new Date().toLocaleString([],{weekday:'long'}).slice(1) + ' ' + new Date().toLocaleString([],{day:'numeric',month:'long'}), type:['tâche','tâches']})
+    const [filter, setFilter] = useState({date:new Date()})
     const [number, setNumber] = useState(0)
 
     /* Tasks operations */
@@ -38,6 +31,7 @@ export const App = () => {
                 done:false,
                 date:date,
                 label:document.getElementById('input_task_name').value,
+                description:document.getElementById('input_task_description').value,
                 categoryId:document.getElementById('select_category').value
             }
         ])
@@ -48,6 +42,7 @@ export const App = () => {
             {
                 task.date = new Date(document.getElementById('select_task_date').value)
                 task.label = document.getElementById('input_task_name').value
+                task.description = document.getElementById('input_task_description').value
                 task.categoryId=document.getElementById('select_category').value
             }
             return task
@@ -133,14 +128,14 @@ export const App = () => {
             <div id="content">
                 <div id="content_header">
                     <Title title={page.title} number={number} type={page.type}/>
-                    <Links changePage={handlePage} changeFilter={handleFilter} today={[today,today_textual]}/>
+                    <Links changePage={handlePage} changeFilter={handleFilter}/>
                 </div>
                 <div id="content_main">
                     {
-                        (page.type[0]==='task')
+                        (page.type[0]==='tâche')
                         ?
                             <List
-                                label={['task','tasks']}
+                                label={['tâche','tâches']}
                                 collection={tasks}
                                 categories={categories}
                                 filter={filter}
@@ -149,7 +144,7 @@ export const App = () => {
                                     icon1:<FaRegSquare className='click_icon' onClick={checkTask}/>,
                                     icon2:<FaCheck className='click_icon' onClick={uncheckTask}/>
                                 }}
-                                displaySwitcher='done'
+                                displaySwitcher={['done','terminées']}
                                 columns={[
                                     'label',
                                     {
@@ -169,7 +164,7 @@ export const App = () => {
                             />
                         :
                             <List
-                                label={['category','categories']}
+                                label={['catégorie','catégories']}
                                 collection={categories}
                                 filter={filter}
                                 sortFunction={(a,b) => a.label > b.label}

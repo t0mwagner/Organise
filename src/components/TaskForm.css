@@ -44,3 +44,10 @@
     background-color: var(--link-color);
     color:white;
 }
+#input_task_description{
+    resize: none;
+    height: 100px;
+    width: 347px;
+    margin: 5px 20px;
+    padding: 5px;
+}

@@ -8,13 +8,13 @@ export const CategoryForm = (props) => {
 
     return (
         <span className="fields">
-            <label htmlFor="input_category_name">* Title</label>
+            <label htmlFor="input_category_name">* Titre</label>
             <input type="text" id="input_category_name" maxLength='25' required defaultValue=
             {
                 (props.item)&&props.item.label
             }
             />
-            <p className='label'>* Pick a color</p>
+            <p className='label'>* Sélectionnez une couleur</p>
             <ul className="color_list">
                 {
                     colors.map((color,index)=>(

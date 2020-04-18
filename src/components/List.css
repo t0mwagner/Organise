@@ -53,3 +53,12 @@
     align-content: center;
     font-size: 0.9em;
 }
+.btn_disabled{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+.delete_btn_disabled{
+    color:var(--text-color);
+    opacity: 0.2;
+}

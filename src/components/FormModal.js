@@ -15,7 +15,7 @@ export const FormModal = (props) => {
     const [modalIsOpen,setIsOpen] = useState(false)
 
     const openModal = (mode) => {
-        if (mode === 'edit')
+        if (mode === 'modifier')
         {
             setDate(new Date(props.item.date))
         } else {
@@ -48,12 +48,12 @@ export const FormModal = (props) => {
     return (
         <div className='list_buttons'>
             {
-                (props.mode === 'add') 
-                ?<button className='add_btn' onClick={() => openModal('add')}>add {props.label}</button>
-                :(props.mode === 'edit')
-                ?<FaEdit className='edit_btn' onClick={() => openModal('edit')} />
-                :(props.mode === 'delete')
-                ?<FaTrashAlt className='delete_btn' onClick={()=> openModal('delete')} />
+                (props.mode === 'ajouter') 
+                ?<button className='add_btn' onClick={() => openModal('ajouter')}>Nouvelle {props.label}</button>
+                :(props.mode === 'modifier')
+                ?<FaEdit className='edit_btn' onClick={() => openModal('modifier')} />
+                :(props.mode === 'supprimer')
+                ?<FaTrashAlt className='delete_btn' onClick={()=> openModal('supprimer')} />
                 :''
             }
             <Modal 
@@ -72,32 +72,32 @@ export const FormModal = (props) => {
                         <FaTimes className='modal_close_icon' onClick={closeModal}/>
                     </span>
                     {
-                        (props.mode==='delete')
+                        (props.mode==='supprimer')
                         ?
                             <p className='delete_alert'>
-                                You are about to delete :<br/><br/>
+                                Vous allez supprimer :<br/><br/>
                                 <strong>{props.item.label}</strong>
                             </p>
                         :
-                            (props.label==='task')
+                            (props.label==='tâche')
                             ? <TaskForm item={props.item} date={date} categories={props.categories} changeDate={handleChangeDate} />
                             : <CategoryForm item={props.item} />
                     }
                     <button id="submit_btn" type="submit" onClick={(e)=>
                     {
                         e.preventDefault()
-                        if (props.mode==='delete'){
+                        if (props.mode==='supprimer'){
                             props.deleteHandler(props.item.id)
                             closeModal()
                         } 
                         else  if (checkRequired(e))
                         {
-                            (props.mode === 'add')?props.addHandler():props.editHandler(props.item.id)
+                            (props.mode === 'ajouter')?props.addHandler():props.editHandler(props.item.id)
                             closeModal()
                         }
                     }}>
                     {
-                        props.mode.charAt(0).toUpperCase() + props.mode.slice(1) + ' ' + props.label
+                        props.mode.charAt(0).toUpperCase() + props.mode.slice(1)
                     }
                     </button>
                 </form>

@@ -10,13 +10,19 @@ export const TaskForm = (props) => {
 
     return (
         <span className="fields">
-            <label htmlFor="input_task_name">* Title</label>
+            <label htmlFor="input_task_name">* Titre</label>
             <input type="text" id="input_task_name" maxLength='50' required defaultValue=
             {
                 (props.item)&&props.item.label
             }
             />
-            <label htmlFor="select_task_date">* Due date</label>
+            <label htmlFor="input_task_description">Description</label>
+            <textarea id="input_task_description" name="input_task_description" rows="5" cols="20">
+            {
+                (props.item)&&props.item.description
+            }
+            </textarea>
+            <label htmlFor="select_task_date">* Date de fin</label>
             <DatePicker 
                 id="select_task_date"
                 selected={props.date}
@@ -27,7 +33,7 @@ export const TaskForm = (props) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 required  
             />
-            <label htmlFor="select_category">Category</label>
+            <label htmlFor="select_category">Categorie</label>
             <ul id='category_list'>
                 <li className='disabled'></li>
                 {

@@ -7,8 +7,8 @@ export const Title = (props) => (
         <p>
             {
                 (props.number > 1)
-                ? props.number + ' active ' + props.type[1]
-                : props.number + ' active ' + props.type[0]
+                ? props.number + ' ' + props.type[1] + ' actives'
+                : props.number + ' ' + props.type[0] + ' active'
             }
         </p>
     </div>

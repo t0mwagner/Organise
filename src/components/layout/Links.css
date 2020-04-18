@@ -21,3 +21,8 @@
     cursor: pointer;
     color:var(--link-hover-color);
 }
+.selected_link{
+    font-weight: bold;
+    color:var(--button-color);
+    font-size: 1.1em;
+}
