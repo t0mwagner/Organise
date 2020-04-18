@@ -12,7 +12,7 @@
     margin: 10px 0px 0px 0px;
     padding-bottom:5px;
     color:var(--main-title-color);
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--site-brand-color);
 }
 .list_title{
     font-size:0.9em;
@@ -33,13 +33,14 @@
 }
 .list li{
     display:grid;
-    border-bottom: 1px solid darkgray;
+    border-bottom: 1px solid var(--main-bg-color);
     padding:8px 5px;
     justify-items: start;
     align-items: center;
 }
 .list .alt_li{
     background-color: var(--main-bg-color);
+    border-bottom: 1px solid white;
 }
 .icon, .click_icon{
     color:var(--button-color);
@@ -50,7 +51,7 @@
 }
 .list .column{
     display:flex;
-    align-content: center;
+    align-items: center;
     font-size: 0.9em;
 }
 .btn_disabled{
@@ -59,6 +60,5 @@
     align-items: center;
 }
 .delete_btn_disabled{
-    color:var(--text-color);
-    opacity: 0.2;
+    color:var(--main-bg-color);
 }

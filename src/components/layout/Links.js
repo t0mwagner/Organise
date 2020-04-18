@@ -4,7 +4,7 @@ import "./Links.css"
 export const Links = (props) => {
 
     const now = new Date()
-    const today = new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
+    const today = new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59)
 
     return (
         <div id="links">
@@ -20,7 +20,7 @@ export const Links = (props) => {
                     }}>Toutes les tâches</span>
                 </li>
                 <li>
-                    <span className='menu_item' onClick={(e)=>{
+                    <span className='menu_item selected_link' onClick={(e)=>{
                         props.changePage({title:now.toLocaleString([],{weekday:'long'})[0].toUpperCase() + now.toLocaleString([],{weekday:'long'}).slice(1) + ' ' + now.toLocaleString([],{day:'numeric',month:'long'}), type:['tâche','tâches']})
                         props.changeFilter({date:today})
                         e.target.parentNode.parentNode.childNodes.forEach(element => {

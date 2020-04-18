@@ -56,7 +56,7 @@ export const List = (props) => {
                                     (displayAlt)
                                     ?
                                         'Afficher les ' + props.label[1] + ' ' + props.displaySwitcher[1]                                 :
-                                        'Cacher les ' + props.label[1] + ' ' + props.displaySwitcher[1]
+                                        'Masquer les ' + props.label[1] + ' ' + props.displaySwitcher[1]
                                 }
                             </span>
                     }
@@ -89,9 +89,9 @@ export const List = (props) => {
                                     props.columns.map((column, index) => (
                                         (typeof column === "object")
                                         ?
-                                            column.columnHandler(item[column.columnProp])
+                                            column.columnHandler(column.columnProp.map(attr=>item[attr]))
                                         :
-                                            <span key={index}>{item[column]}</span>
+                                            <span className='column' key={index}>{item[column]}</span>
                                     ))
                                 }
                                 <FormModal 
@@ -102,7 +102,7 @@ export const List = (props) => {
                                     editHandler={props.editHandler}  
                                 />
                                 {
-                                    (filteredCollection.length === 1)
+                                    (filteredCollection.length === 1 && props.noEmpty === true)
                                     ?
                                     <span class='btn_disabled'>
                                         <FaTrashAlt className='delete_btn_disabled' />

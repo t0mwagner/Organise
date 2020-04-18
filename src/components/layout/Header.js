@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaTasks, FaUserAlt } from 'react-icons/fa'
 import "./Header.css"
 
 export const Header = () => (
@@ -6,15 +7,13 @@ export const Header = () => (
        <div className='header_content'>
             <nav>
                 <div className="logo">
-                    <img src={process.env.PUBLIC_URL + '/img/logo.svg'} alt="todo logo" />
+                    <FaTasks />
                 </div>
                 <div className="app_title">
                     <h1>Todo List</h1>
                 </div>
                 <div className="login">
-                    <span>
-                        <img src={process.env.PUBLIC_URL + '/img/login_btn.svg'} alt="login button" />
-                    </span>
+                    <FaUserAlt />
                 </div>
             </nav>
         </div>

@@ -8,7 +8,7 @@ import { Category } from './components/columns/Category'
 import { CategoryColor } from './components/columns/CategoryColor'
 import { TaskNumber } from './components/columns/TaskNumber'
 import { List } from './components/List'
-import { FaRegSquare, FaCheck, FaFolder } from 'react-icons/fa'
+import { FaRegSquare, FaCheckSquare, FaFolder } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
 
 import "./App.css"
@@ -29,6 +29,7 @@ export const App = () => {
             {
                 id:uuidv4(),
                 done:false,
+                doneDate:null,
                 date:date,
                 label:document.getElementById('input_task_name').value,
                 description:document.getElementById('input_task_description').value,
@@ -56,6 +57,7 @@ export const App = () => {
         setTasks(tasks.map(task => {
             if (task.id === e.target.parentNode.id){
                 task.done=true
+                task.doneDate=new Date()
             }
             return task
         }))  
@@ -64,6 +66,7 @@ export const App = () => {
         setTasks(tasks.map(task => {
             if (task.id === e.target.parentNode.id){
                 task.done=false 
+                task.doneDate = null
             }
             return task
         })) 
@@ -102,13 +105,13 @@ export const App = () => {
     }
 
     /* Columns handlers */
-    const columnDueTime = (attr) => <DueTime date={attr} />
+    const columnDueTime = (attr) => <DueTime date={attr[0]} doneDate={attr[1]} />
 
-    const columnCategory = (attr) => <Category id={attr} categories={categories} />
+    const columnCategory = (attr) => <Category id={attr[0]} categories={categories} />
 
-    const columnCategoryColor = (attr) => <CategoryColor color={attr} />
+    const columnCategoryColor = (attr) => <CategoryColor color={attr[0]} />
 
-    const columnTaskNumber = (attr) => <TaskNumber id={attr} tasks={tasks}/>
+    const columnTaskNumber = (attr) => <TaskNumber id={attr[0]} tasks={tasks}/>
 
 
     /* Page and filter */
@@ -137,23 +140,24 @@ export const App = () => {
                             <List
                                 label={['tâche','tâches']}
                                 collection={tasks}
+                                noEmpty={false}
                                 categories={categories}
                                 filter={filter}
                                 sortFunction={(a,b) => (new Date(a.date)<new Date(b.date)?-1:1)}
                                 icons={{
                                     icon1:<FaRegSquare className='click_icon' onClick={checkTask}/>,
-                                    icon2:<FaCheck className='click_icon' onClick={uncheckTask}/>
+                                    icon2:<FaCheckSquare className='click_icon' onClick={uncheckTask}/>
                                 }}
                                 displaySwitcher={['done','terminées']}
                                 columns={[
                                     'label',
                                     {
                                         columnHandler:columnCategory,
-                                        columnProp:'categoryId'
+                                        columnProp:['categoryId']
                                     },
                                     {
                                         columnHandler:columnDueTime,
-                                        columnProp:'date'
+                                        columnProp:['date','doneDate']
                                     }
                                 ]}
                                 grid={{gridTemplateColumns: '30px 1fr 100px 150px 30px 30px'}}
@@ -166,6 +170,7 @@ export const App = () => {
                             <List
                                 label={['catégorie','catégories']}
                                 collection={categories}
+                                noEmpty={true}
                                 filter={filter}
                                 sortFunction={(a,b) => a.label > b.label}
                                 icons={{
@@ -175,12 +180,12 @@ export const App = () => {
                                 columns={[
                                     {
                                         columnHandler:columnCategoryColor,
-                                        columnProp:'color'
+                                        columnProp:['color']
                                     },
                                     'label',
                                     {
                                         columnHandler:columnTaskNumber,
-                                        columnProp:'id'
+                                        columnProp:['id']
                                     }
                                 ]}
                                 grid={{gridTemplateColumns: '30px 27px 1fr 150px 30px 30px'}}

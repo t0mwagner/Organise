@@ -48,7 +48,7 @@
     background-color: var(--site-brand-color);
     color:var(--site-title-color);
     padding:15px;
-    border-bottom:1px solid darkgrey;
+    border-bottom:1px solid var(--main-bg-color);
     display:flex;
     justify-content: space-between;
     border-radius: 5px 5px 0px 0px;

@@ -1,10 +1,11 @@
 import React from 'react'
+import { FaCalendarCheck, FaClock } from 'react-icons/fa'
 import "./DueTime.css"
 
 export const DueTime = (props) => {
  
     const now = new Date()
-    const date = new Date(props.date)
+    const date = (props.doneDate)?new Date (props.doneDate):new Date(props.date)
     const diff = (date.getTime() - now.getTime()) / (1000*60*60*24)
     const diffRound = Math.round(diff)
     let result
@@ -23,8 +24,15 @@ export const DueTime = (props) => {
     }
 
     return (
-        <span className='column'>
-            {result}
+        <span className='column due_time'>
+            {
+                (props.doneDate)
+                ? <FaCalendarCheck className='date_icon' />
+                : <FaClock className='date_icon' />
+            }
+            {
+                <span className={(props.doneDate)?'done_crossed':''}>{' ' + result}</span>
+            }
         </span>
     )
 }

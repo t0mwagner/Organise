@@ -1,5 +1,8 @@
-.due_time{
-    color: var(--alt-text-color);
-    font-size: 0.9em;
-    margin-left: 5px;
+.date_icon{
+    color: var(--link-color);
+    font-size: 1em;
+    margin-right: 5px;
+}
+.done_crossed{
+    text-decoration: line-through;
 }
