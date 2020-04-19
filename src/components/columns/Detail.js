@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
-import "./Detail.css"
+import "./Detail.scss"
 
 export const CategoryColor = (props) => {
     

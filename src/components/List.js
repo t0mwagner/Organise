@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { FormModal } from './FormModal'
 
-import "./List.css"
+import "./List.scss"
 
 export const List = (props) => {
 

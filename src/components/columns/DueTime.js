@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaCalendarCheck, FaClock, FaExclamationCircle } from 'react-icons/fa'
-import "./DueTime.css"
+import "./DueTime.scss"
 
 export const DueTime = (props) => {
  

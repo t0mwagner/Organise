@@ -1,6 +1,6 @@
 import React from 'react'
 
-import "./TaskNumber.css"
+import "./TaskNumber.scss"
 
 export const TaskNumber = (props) => {
     const filtered = props.tasks.filter(task=>(props.id===task.categoryId && !task.done))

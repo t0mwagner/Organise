@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Title.css"
+import "./Title.scss"
 
 export const Title = (props) => (
     <div className='page_title'>

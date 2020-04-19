@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import { FaSquare } from 'react-icons/fa'
 
-import './TaskForm.css'
+import './TaskForm.scss'
 
 export const TaskForm = (props) => {
     

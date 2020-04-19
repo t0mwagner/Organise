@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Links.css"
+import "./Links.scss"
 
 export const Links = (props) => {
 

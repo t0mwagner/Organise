@@ -11,7 +11,7 @@ import { List } from './components/List'
 import { FaFolder } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
 
-import "./App.css"
+import "./App.scss"
 
 export const App = () => {
 

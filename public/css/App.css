@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "Pacifico";
+  src: url("/fonts/Pacifico.ttf") format("truetype");
+}
+
+:root {
+  --site-brand-color:#252526;
+  --site-title-color:white;
+  --main-bg-color:#F2F2F2;
+  --alt-bg-color:white;
+  --main-title-color:#F24C27;
+  --text-color:#252526;
+  --alt-text-color:#252526;
+  --link-color:#F24C27;
+  --link-hover-color:#252526;
+  --button-color:#F23827;
+  --button-hover-color:#252526;
+}
+
+body {
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-color);
+}
+
+*:focus {
+  outline: none;
+}
+
+.app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
+  background-color: var(--main-bg-color);
+}
+
+#content_main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#content {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  width: 700px;
+  padding: 0px 30px;
+  background-color: var(--alt-bg-color);
+}
+
+#content_header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/*# sourceMappingURL=App.css.map */

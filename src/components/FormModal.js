@@ -5,7 +5,7 @@ import { CategoryForm } from './CategoryForm'
 import { FaTimes, FaEdit, FaTrashAlt } from "react-icons/fa"
 
 import "react-datepicker/dist/react-datepicker.css"
-import "./FormModal.css"
+import "./FormModal.scss"
 
 Modal.setAppElement('#root')
 

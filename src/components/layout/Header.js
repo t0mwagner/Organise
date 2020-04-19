@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaTasks, FaUserAlt } from 'react-icons/fa'
-import "./Header.css"
+import "./Header.scss"
 
 export const Header = () => (
     <header className="header">

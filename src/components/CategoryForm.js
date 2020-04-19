@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './CategoryForm.css'
+import './CategoryForm.scss'
 
 export const CategoryForm = (props) => {
     
