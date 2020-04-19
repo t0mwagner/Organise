@@ -1,9 +1,10 @@
 #input_category_color{
     width: 120px;
     padding: 5px 0px 5px 5px;
-}
-#input_category_color option{
-    font-size:1em;
+
+    option{
+        font-size:1em;
+    }
 }
 .label{
     font-size:0.8em;
@@ -13,10 +14,11 @@
     list-style: none;
     padding: 0;
     margin:3px 20px 0px 20px;
-}
-.color_list li{
-    display: inline-block;
-    margin: 3px;
+
+    li{
+        display: inline-block;
+        margin: 3px;
+    }
 }
 .color{
     height: 30px;
@@ -24,13 +26,15 @@
     border-radius: 10px;
     background-color: attr(data-color);
     transition: transform 0.3s;
-}
-.color:not(.active):hover{
-    cursor: pointer;
-    transform: scale(1.2);
-}
-.color.active {
-    border: 4px solid #ddd;
-    width: 21px;
-    height: 21px;
+
+    :not(.active):hover{
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+
+    .active {
+        border: 4px solid #ddd;
+        width: 21px;
+        height: 21px;
+    }
 }

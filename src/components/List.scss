@@ -1,10 +1,39 @@
 .list{
     margin-top:20px;
+
+    ul{
+        list-style-type: none;
+        padding:0px;
+        margin: 0px 0px 40px 0px;
+    }
+
+    li{
+        display:grid;
+        border-bottom: 1px solid var(--main-bg-color);
+        padding:8px 5px;
+        justify-items: start;
+        align-items: center;
+    }
+
+    .alt_li{
+        background-color: var(--main-bg-color);
+        border-bottom: 1px solid white;
+    }
+
+    .column{
+        display:flex;
+        align-items: center;
+        font-size: 0.9em;
+    }
 }
-.list ul{
-    list-style-type: none;
-    padding:0px;
-    margin: 0px 0px 40px 0px;
+.list_button{
+    font-size:0.8em;
+    color:var(--link-color);
+
+    :hover{
+        cursor: pointer;
+        color:var(--link-hover-color);
+    }
 }
 .list_header{
     display:flex;
@@ -18,41 +47,18 @@
     font-size:0.9em;
     font-weight: 600;
 }
-.list_button{
-    font-size:0.8em;
-    color:var(--link-color);
-}
-.list_button:hover{
-    cursor: pointer;
-    color:var(--link-hover-color);
-}
 .no_item{
     color: var(--alt-text-color);
     margin:30px 0px;
     text-align: center;
 }
-.list li{
-    display:grid;
-    border-bottom: 1px solid var(--main-bg-color);
-    padding:8px 5px;
-    justify-items: start;
-    align-items: center;
-}
-.list .alt_li{
-    background-color: var(--main-bg-color);
-    border-bottom: 1px solid white;
-}
 .icon, .click_icon{
     color:var(--button-color);
-}
-.click_icon:hover{
-    cursor: pointer;
-    color:var(--button-hover-color);
-}
-.list .column{
-    display:flex;
-    align-items: center;
-    font-size: 0.9em;
+
+    :hover{
+        cursor: pointer;
+        color:var(--button-hover-color);
+    }
 }
 .btn_disabled{
     display: flex;

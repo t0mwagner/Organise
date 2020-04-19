@@ -12,17 +12,20 @@
     opacity:1;
     margin:0px 0px 20px 0px;
 }
-.add_btn:hover, .edit_btn:hover, .delete_btn:hover{
-    cursor: pointer;
+.add_btn, .edit_btn, .delete_btn{
+    :hover{
+        cursor: pointer;
+    }
 }
 .add_btn:hover{
     background-color: var(--button-hover-color);
 }
 .edit_btn, .delete_btn{
     color:var(--button-color);
-}
-.edit_btn:hover, .delete_btn:hover{
-   color:var(--button-hover-color)
+
+    :hover{
+        color:var(--button-hover-color)
+     }
 }
 .modal{
     position: absolute;
@@ -35,6 +38,11 @@
     background-color: white;
     width:400px;
     border-radius: 5px;
+
+    form{
+        display:flex;
+        flex-direction: column;
+    }
 }
 .modal_overlay{
     position: fixed;
@@ -52,44 +60,43 @@
     display:flex;
     justify-content: space-between;
     border-radius: 5px 5px 0px 0px;
-}
-.modal_title h2{
-    margin:0;
-    font-weight: 100;
-    font-size: 1.2em;
+
+    h2{
+        margin:0;
+        font-weight: 100;
+        font-size: 1.2em;
+    }
 }
 .modal_close_icon{
     opacity:0.8;
-}
-.modal_close_icon:hover{
-    cursor: pointer;
-    opacity:1;
-}
-.modal form{
-    display:flex;
-    flex-direction: column;
+
+    :hover{
+        cursor: pointer;
+        opacity:1;
+    }
 }
 .fields{
     display:flex;
     flex-direction: column;
-}
-.fields label{
-    font-size:0.8em;
-    margin:10px 0px 0px 20px;
-}
-.fields input{
-    margin:3px 20px 0px 20px;
-    padding: 5px;
-    border: 0.5px solid darkgrey;
-}
-.fields input[type='time']{
-    font-size: 0.9em;
-}
-.fields select{
-    margin:3px 20px 0px 20px;
-    appearance: none;
-    background:white;
-    border: 0.5px solid darkgrey;
+
+    label{
+        font-size:0.8em;
+        margin:10px 0px 0px 20px;
+    }
+
+    input{
+        margin:3px 20px 0px 20px;
+        padding: 5px;
+        border: 0.5px solid darkgrey;
+        font-size: 0.9em;
+    }
+
+    select{
+        margin:3px 20px 0px 20px;
+        appearance: none;
+        background:white;
+        border: 0.5px solid darkgrey;
+    }
 }
 #submit_btn{
     background-color: var(--button-color);
@@ -101,10 +108,11 @@
     opacity:1;
     align-self: flex-end;
     justify-self: flex-end;
-}
-#submit_btn:hover{
-    cursor: pointer;
-    background-color: var(--button-hover-color);
+
+    :hover{
+        cursor: pointer;
+        background-color: var(--button-hover-color);
+    }
 }
 .delete_alert{
     margin:25px 0px 0px 0px;
