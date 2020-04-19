@@ -8,7 +8,7 @@ import { Category } from './components/columns/Category'
 import { CategoryColor } from './components/columns/CategoryColor'
 import { TaskNumber } from './components/columns/TaskNumber'
 import { List } from './components/List'
-import { FaRegSquare, FaCheckSquare, FaFolder } from 'react-icons/fa'
+import { FaFolder } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
 
 import "./App.css"
@@ -145,8 +145,8 @@ export const App = () => {
                                 filter={filter}
                                 sortFunction={(a,b) => (new Date(a.date)<new Date(b.date)?-1:1)}
                                 icons={{
-                                    icon1:<FaRegSquare className='click_icon' onClick={checkTask}/>,
-                                    icon2:<FaCheckSquare className='click_icon' onClick={uncheckTask}/>
+                                    icon1:<i className="far fa-square click_icon" onClick={checkTask}></i>,
+                                    icon2:<i className="fas fa-check-square click_icon" onClick={uncheckTask}></i>
                                 }}
                                 displaySwitcher={['done','terminées']}
                                 columns={[
