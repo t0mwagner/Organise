@@ -15,12 +15,12 @@
         align-items: center;
     }
 
-    &.alt_li{
+    .alt_li{
         background-color: var(--main-bg-color);
         border-bottom: 1px solid white;
     }
 
-    &.column{
+    .column{
         display:flex;
         align-items: center;
         font-size: 0.9em;

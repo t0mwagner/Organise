@@ -8,7 +8,6 @@ import { Category } from './components/columns/Category'
 import { CategoryColor } from './components/columns/CategoryColor'
 import { TaskNumber } from './components/columns/TaskNumber'
 import { List } from './components/List'
-import { FaFolder } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
 
 import "./App.scss"
@@ -174,7 +173,7 @@ export const App = () => {
                                 filter={filter}
                                 sortFunction={(a,b) => a.label > b.label}
                                 icons={{
-                                    icon1:<FaFolder className='icon' />
+                                    icon1:null /*<FaFolder className='icon' />*/
                                 }}
                                 displaySwitcher=''
                                 columns={[
@@ -188,7 +187,7 @@ export const App = () => {
                                         columnProp:['id']
                                     }
                                 ]}
-                                grid={{gridTemplateColumns: '30px 27px 1fr 150px 30px 30px'}}
+                                grid={{gridTemplateColumns: '30px 1fr 150px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addCategory}
                                 editHandler={editCategory}
