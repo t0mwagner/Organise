@@ -13,7 +13,7 @@
     margin:0px 0px 20px 0px;
 }
 .add_btn, .edit_btn, .delete_btn{
-    :hover{
+    &:hover{
         cursor: pointer;
     }
 }
@@ -23,7 +23,7 @@
 .edit_btn, .delete_btn{
     color:var(--button-color);
 
-    :hover{
+    &:hover{
         color:var(--button-hover-color)
      }
 }
@@ -70,7 +70,7 @@
 .modal_close_icon{
     opacity:0.8;
 
-    :hover{
+    &:hover{
         cursor: pointer;
         opacity:1;
     }
@@ -109,7 +109,7 @@
     align-self: flex-end;
     justify-self: flex-end;
 
-    :hover{
+    &:hover{
         cursor: pointer;
         background-color: var(--button-hover-color);
     }

@@ -27,12 +27,12 @@
     background-color: attr(data-color);
     transition: transform 0.3s;
 
-    :not(.active):hover{
+    &:not(.active):hover{
         cursor: pointer;
         transform: scale(1.2);
     }
 
-    .active {
+    &.active {
         border: 4px solid #ddd;
         width: 21px;
         height: 21px;
