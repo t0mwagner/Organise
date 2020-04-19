@@ -102,7 +102,7 @@ export const List = (props) => {
                                     editHandler={props.editHandler}  
                                 />
                                 {
-                                    (filteredCollection.length === 1 && props.noEmpty === true)
+                                    (props.noEmpty === true && item.id === filteredCollection[0].id)
                                     ?
                                     <span class='btn_disabled'>
                                         <FaTrashAlt className='delete_btn_disabled' />

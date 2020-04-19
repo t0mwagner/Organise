@@ -16,7 +16,7 @@ export const App = () => {
 
     /* Hooks */
     const [tasks, setTasks] = useState([])
-    const [categories, setCategories] = useState([{id:uuidv4(),color:'#F2D2F2',label:'General'}])
+    const [categories, setCategories] = useState([{id:uuidv4(),color:'#F2D2F2',label:'Général'}])
     const [page, setPage] = useState({title:new Date().toLocaleString([],{weekday:'long'})[0].toUpperCase() + new Date().toLocaleString([],{weekday:'long'}).slice(1) + ' ' + new Date().toLocaleString([],{day:'numeric',month:'long'}), type:['tâche','tâches']})
     const [filter, setFilter] = useState({date:new Date()})
     const [number, setNumber] = useState(0)
