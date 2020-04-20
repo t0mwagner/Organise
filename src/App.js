@@ -8,7 +8,6 @@ import { Category } from './components/columns/Category'
 import { CategoryColor } from './components/columns/CategoryColor'
 import { TaskNumber } from './components/columns/TaskNumber'
 import { List } from './components/List'
-import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 
 import "./App.scss"
@@ -160,7 +159,7 @@ export const App = () => {
                                         columnProp:['date','doneDate']
                                     }
                                 ]}
-                                grid={{gridTemplateColumns: '30px 1fr 150px 160px 30px 30px'}}
+                                grid={{gridTemplateColumns: '30px 1fr 130px 200px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addTask}
                                 editHandler={editTask}
