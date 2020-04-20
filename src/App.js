@@ -8,7 +8,8 @@ import { Category } from './components/columns/Category'
 import { CategoryColor } from './components/columns/CategoryColor'
 import { TaskNumber } from './components/columns/TaskNumber'
 import { List } from './components/List'
-import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment'
+import { v4 as uuidv4 } from 'uuid'
 
 import "./App.scss"
 
