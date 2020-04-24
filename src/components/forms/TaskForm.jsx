@@ -1,13 +1,17 @@
 import React from 'react'
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
+import en from "date-fns/locale/en-GB"
 import { FaSquare } from 'react-icons/fa'
 
 import './TaskForm.scss'
+
+registerLocale("en", en)
 
 export const TaskForm = (props) => {
     
     let categoryDisplay = false
 
+    
     return (
         <span className="fields">
             <label htmlFor="input_task_name">* Titre</label>
@@ -31,6 +35,7 @@ export const TaskForm = (props) => {
                 timeFormat="HH:mm"
                 onChange={props.changeDate}
                 dateFormat="dd MMM yyyy HH:mm"
+                locale="en"
                 required  
             />
             <label htmlFor="select_category">Categorie</label>

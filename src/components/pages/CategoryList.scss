@@ -1,0 +1,8 @@
+.list{
+    li{
+        grid-template-columns: '30px 1fr 150px 30px 30px';
+    }
+}
+.delete_btn_disabled{
+    color:var(--main-bg-color);
+}

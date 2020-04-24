@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import 'moment/locale/fr';
+import 'moment/locale/fr'
 
 import { FaCalendarCheck, FaClock, FaExclamationCircle } from 'react-icons/fa'
 import "./DueTime.scss"

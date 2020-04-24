@@ -1,16 +1,7 @@
 import React, { useState } from 'react'
-import { Header } from './components/layout/Header'
-import { Footer } from './components/layout/Footer'
-import { Title } from './components/layout/Title'
-import { Links } from './components/layout/Links'
-import { DueTime } from './components/columns/DueTime'
-import { Category } from './components/columns/Category'
-import { CategoryColor } from './components/columns/CategoryColor'
-import { TaskNumber } from './components/columns/TaskNumber'
-import { List } from './components/List'
-import { v4 as uuidv4 } from 'uuid'
+import { Header, Footer, Title, Links, TaskList, CategoryList} from '../components/'
 
-import "./App.scss"
+import "./app.scss"
 
 export const App = () => {
 
@@ -103,16 +94,6 @@ export const App = () => {
         setCategories(categories.filter(category=>category.id !== id))
     }
 
-    /* Columns handlers */
-    const columnDueTime = (attr) => <DueTime date={attr[0]} doneDate={attr[1]} />
-
-    const columnCategory = (attr) => <Category id={attr[0]} categories={categories} />
-
-    const columnCategoryColor = (attr) => <CategoryColor color={attr[0]} />
-
-    const columnTaskNumber = (attr) => <TaskNumber id={attr[0]} tasks={tasks}/>
-
-
     /* Page and filter */
     const handlePage = (page) => {
         setPage(page)
@@ -136,58 +117,21 @@ export const App = () => {
                     {
                         (page.type[0]==='tâche')
                         ?
-                            <List
-                                label={['tâche','tâches']}
+                            <TaskList
                                 collection={tasks}
-                                noEmpty={false}
                                 categories={categories}
                                 filter={filter}
-                                sortFunction={(a,b) => (new Date(a.date)<new Date(b.date)?-1:1)}
-                                icons={{
-                                    icon1:<i className="far fa-square click_icon" onClick={checkTask}></i>,
-                                    icon2:<i className="fas fa-check-square click_icon" onClick={uncheckTask}></i>
-                                }}
-                                displaySwitcher={['done','terminées']}
-                                columns={[
-                                    'label',
-                                    {
-                                        columnHandler:columnCategory,
-                                        columnProp:['categoryId']
-                                    },
-                                    {
-                                        columnHandler:columnDueTime,
-                                        columnProp:['date','doneDate']
-                                    }
-                                ]}
-                                grid={{gridTemplateColumns: '30px 1fr 130px 200px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addTask}
                                 editHandler={editTask}
-                                deleteHandler={deleteTask}  
+                                deleteHandler={deleteTask}
+                                checkHandler={checkTask}
+                                uncheckHandler={uncheckTask} 
                             />
                         :
-                            <List
-                                label={['catégorie','catégories']}
+                            <CategoryList
                                 collection={categories}
-                                noEmpty={true}
                                 filter={filter}
-                                sortFunction={(a,b) => a.label > b.label}
-                                icons={{
-                                    icon1:null /*<FaFolder className='icon' />*/
-                                }}
-                                displaySwitcher=''
-                                columns={[
-                                    {
-                                        columnHandler:columnCategoryColor,
-                                        columnProp:['color']
-                                    },
-                                    'label',
-                                    {
-                                        columnHandler:columnTaskNumber,
-                                        columnProp:['id']
-                                    }
-                                ]}
-                                grid={{gridTemplateColumns: '30px 1fr 150px 30px 30px'}}
                                 numberHandler={handleNumber}
                                 addHandler={addCategory}
                                 editHandler={editCategory}

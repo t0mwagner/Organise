@@ -15,11 +15,6 @@
         align-items: center;
     }
 
-    .alt_li{
-        background-color: var(--main-bg-color);
-        border-bottom: 1px solid white;
-    }
-
     .column{
         display:flex;
         align-items: center;
@@ -47,11 +42,6 @@
     font-size:0.9em;
     font-weight: 600;
 }
-.no_item{
-    color: var(--alt-text-color);
-    margin:30px 0px;
-    text-align: center;
-}
 .icon, .click_icon{
     color:var(--button-color);
 
@@ -64,7 +54,4 @@
     display: flex;
     justify-self: center;
     align-items: center;
-}
-.delete_btn_disabled{
-    color:var(--main-bg-color);
 }
