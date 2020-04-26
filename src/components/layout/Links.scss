@@ -1,28 +1,14 @@
 #links{
     margin-top: 20px;
-}
-#links ul{
     display:flex;
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
 }
-#links li{
+#links a{
     margin-left: 5px;
     font-size: 0.9em;
     color:var(--link-color);
-    display:flex;
-}
-.menu_item{
-    margin-left:5px;
     text-decoration: none;
-}
-#links li:hover{
-    cursor: pointer;
-    color:var(--link-hover-color);
 }
 .selected_link{
     font-weight: bold;
     color:var(--button-color);
-    font-size: 1.1em;
 }

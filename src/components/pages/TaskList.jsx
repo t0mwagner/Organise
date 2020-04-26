@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormModal, Category, DueTime } from '../components'
+import { FormModal, Category, DueTime } from '../../components'
 
 import "./List.scss"
 import "./TaskList.scss"

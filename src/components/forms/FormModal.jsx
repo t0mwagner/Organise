@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
-import { TaskForm, CategoryForm } from '../components'
+import { TaskForm, CategoryForm } from '../../components'
 import { FaTimes, FaEdit, FaTrashAlt } from "react-icons/fa"
 
 import "react-datepicker/dist/react-datepicker.css"

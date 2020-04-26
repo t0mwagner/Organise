@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { Header, Footer, Title, Links, TaskList, CategoryList} from '../components/'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import moment from 'moment'
+import 'moment/locale/fr'
 
 import "./app.scss"
+
+moment.locale('fr')
 
 export const App = () => {
 
     /* Hooks */
     const [tasks, setTasks] = useState([])
-    const [categories, setCategories] = useState([{id:uuidv4(),color:'#F2D2F2',label:'Général'}])
-    const [page, setPage] = useState({title:new Date().toLocaleString([],{weekday:'long'})[0].toUpperCase() + new Date().toLocaleString([],{weekday:'long'}).slice(1) + ' ' + new Date().toLocaleString([],{day:'numeric',month:'long'}), type:['tâche','tâches']})
-    const [filter, setFilter] = useState({date:new Date()})
+    const [categories, setCategories] = useState([{color:'#F2D2F2',label:'Général'}])
     const [number, setNumber] = useState(0)
 
     /* Tasks operations */
@@ -17,7 +20,6 @@ export const App = () => {
         const date = new Date(document.getElementById('select_task_date').value)
         setTasks([...tasks,
             {
-                id:uuidv4(),
                 done:false,
                 doneDate:null,
                 date:date,
@@ -66,9 +68,8 @@ export const App = () => {
     const addCategory = () => {
         setCategories([...categories,
             {
-                id:uuidv4(),
                 color:document.getElementById('input_category_color').value,
-                label:document.getElementById('input_category_name').value,
+                label:document.getElementById('input_category_name').value
             }
         ])
     }
@@ -94,33 +95,34 @@ export const App = () => {
         setCategories(categories.filter(category=>category.id !== id))
     }
 
-    /* Page and filter */
-    const handlePage = (page) => {
-        setPage(page)
-    }
+    /* list number */
     const handleNumber = (number) => {
         setNumber(number)
     }
-    const handleFilter = (filter) => {
-        setFilter(filter)
-    }  
 
     return (
         <div className="app">
-            <Header />
-            <div id="content">
-                <div id="content_header">
-                    <Title title={page.title} number={number} type={page.type}/>
-                    <Links changePage={handlePage} changeFilter={handleFilter}/>
-                </div>
-                <div id="content_main">
-                    {
-                        (page.type[0]==='tâche')
-                        ?
+            <Router>
+                <Header />
+                <div id="content">
+                    <div id="content_header">
+                        <Route exact path='/task/all'>
+                            <Title title='Toutes les tâches' number={number} type={['tâche','tâches']}/>
+                        </Route>
+                        <Route exact path={['/','/task/today']}>
+                            <Title title={moment().format('dddd D MMMM YYYY')} number={number} type={['tâche','tâches']}/>
+                        </Route>
+                        <Route exact path='/category/all'>
+                            <Title title='Toutes les catégories' number={number} type={['catégorie','catégories']}/>
+                        </Route>
+                        <Links/>
+                    </div>
+                    <div id="content_main">
+                        <Route exact path='/task/all'>
                             <TaskList
                                 collection={tasks}
                                 categories={categories}
-                                filter={filter}
+                                filter={{}}
                                 numberHandler={handleNumber}
                                 addHandler={addTask}
                                 editHandler={editTask}
@@ -128,19 +130,34 @@ export const App = () => {
                                 checkHandler={checkTask}
                                 uncheckHandler={uncheckTask} 
                             />
-                        :
+                        </Route>
+                        <Route exact path={['/','/task/today']}>
+                            <TaskList
+                                collection={tasks}
+                                categories={categories}
+                                filter={{date:new Date()}}
+                                numberHandler={handleNumber}
+                                addHandler={addTask}
+                                editHandler={editTask}
+                                deleteHandler={deleteTask}
+                                checkHandler={checkTask}
+                                uncheckHandler={uncheckTask} 
+                            />
+                        </Route>
+                        <Route exact path='/category/all'>
                             <CategoryList
                                 collection={categories}
-                                filter={filter}
+                                tasks={tasks}
                                 numberHandler={handleNumber}
                                 addHandler={addCategory}
                                 editHandler={editCategory}
                                 deleteHandler={deleteCategory}  
                             />
-                    }
+                        </Route>
+                    </div>
                 </div>
-              </div>
-            <Footer />
+                <Footer />
+            </Router>
         </div>
     )
 }
