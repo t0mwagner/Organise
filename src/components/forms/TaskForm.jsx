@@ -49,7 +49,7 @@ export const TaskForm = (props) => {
                                 key={index}
                                 className={
                                     (props.item)
-                                    ? (props.item.categoryId === category.id)
+                                    ? (props.item.categoryId === category._id)
                                         && 'display neutral'
                                     : (index===0)
                                         && 'display neutral'
@@ -78,7 +78,7 @@ export const TaskForm = (props) => {
                                         }
                                         categoryDisplay = !categoryDisplay
                                     }
-                                    document.getElementById('select_category').value=category.id
+                                    document.getElementById('select_category').value=category._id
                                 }}
                             >
                                 <FaSquare className='square' style={{color:category.color}}/> {category.label}
@@ -89,7 +89,7 @@ export const TaskForm = (props) => {
             <input type="text" id="select_category" defaultValue={
                 (props.item)
                 ? props.item.categoryId
-                : props.categories[0].id
+                : props.categories[0]._id
             }/>
         </span>
     )

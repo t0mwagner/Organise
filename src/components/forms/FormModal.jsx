@@ -86,12 +86,12 @@ export const FormModal = (props) => {
                     {
                         e.preventDefault()
                         if (props.mode==='supprimer'){
-                            props.deleteHandler(props.item.id)
+                            props.deleteHandler(props.item._id)
                             closeModal()
                         } 
                         else  if (checkRequired(e))
                         {
-                            (props.mode === 'ajouter')?props.addHandler():props.editHandler(props.item.id)
+                            (props.mode === 'ajouter')?props.addHandler():props.editHandler(props.item._id)
                             closeModal()
                         }
                     }}>

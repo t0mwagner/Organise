@@ -45,7 +45,7 @@ export const TaskList = (props) => {
             <FormModal
                 mode='ajouter'
                 label='tâche'
-                categories={props.categories}
+                categories={props.categories.categories}
                 addHandler={props.addHandler}  
             />
             <section>
@@ -64,11 +64,11 @@ export const TaskList = (props) => {
                         .map((item,index) => (
                             (!item.done || displayAlt)
                             &&
-                            <li key={index} id={item.id} className={item.done?'alt_li':''}>
+                            <li key={index} id={item._id} className={item.done?'alt_li':''} style={{gridTemplateColumns: '30px 1fr 130px 200px 30px 30px'}}>
                                 {
                                     item.done
-                                    ? <i className="fas fa-check-square click_icon" onClick={props.checkHandler}></i>
-                                    : <i className="far fa-square click_icon" onClick={props.uncheckHandler}></i>
+                                    ? <i className="fas fa-check-square click_icon" onClick={props.uncheckHandler}></i>
+                                    : <i className="far fa-square click_icon" onClick={props.checkHandler}></i>
                                 }
                                 <span className='column'>{item.label}</span>
                                 <Category id={item.categoryId} categories={props.categories} />
@@ -76,14 +76,13 @@ export const TaskList = (props) => {
                                 <FormModal 
                                     mode='modifier'
                                     label='tâche'
-                                    categories={props.categories}
+                                    categories={props.categories.categories}
                                     item={item}
                                     editHandler={props.editHandler}  
                                 />
                                 <FormModal
                                     mode='supprimer'
                                     label='tâche'
-                                    categories={props.categories}
                                     item={item}
                                     deleteHandler={props.deleteHandler}  
                                 />

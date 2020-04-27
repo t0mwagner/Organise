@@ -37,10 +37,10 @@ export const CategoryList = (props) => {
                     props.collection
                     .sort((a,b) => a.label > b.label)
                     .map((item,index) => (
-                        <li key={index} id={item.id}>
+                        <li key={index} id={item._id} style={{gridTemplateColumns: '30px 1fr 150px 30px 30px'}}>
                             <CategoryColor color={item.color} />
                             <span className='column'>{item.label}</span>
-                            <TaskNumber id={item.id} tasks={props.tasks}/>
+                            <TaskNumber id={item._id} tasks={props.tasks}/>
                             <FormModal 
                                 mode='modifier'
                                 label='catégorie'
@@ -48,7 +48,7 @@ export const CategoryList = (props) => {
                                 editHandler={props.editHandler}  
                             />
                             {
-                                item.id === props.collection[0].id
+                                item._id === props.collection[0]._id
                                 ?
                                     <span className='btn_disabled'>
                                         <FaTrashAlt className='delete_btn_disabled' />

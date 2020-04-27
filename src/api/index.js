@@ -5,14 +5,14 @@ const api = axios.create({
 })
 
 export const insertTask = payload => api.post(`/task`, payload)
-export const getAllTasks = () => api.get(`/tasks`)
+export const getAllTasks = () => api.get(`/task/all`)
 export const updateTaskById = (id, payload) => api.put(`/task/${id}`, payload)
 export const deleteTaskById = id => api.delete(`/task/${id}`)
 export const getTaskById = id => api.get(`/task/${id}`)
 export const getTaskByCategoryId = id => api.get(`/task/category/${id}`)
 
 export const insertCategory = payload => api.post(`/category`, payload)
-export const getAllCategories = () => api.get(`/categories`)
+export const getAllCategories = () => api.get(`/category/all`)
 export const updateCategoryById = (id, payload) => api.put(`/category/${id}`, payload)
 export const deleteCategoryById = id => api.delete(`/category/${id}`)
 export const getCategoryById = id => api.get(`/category/${id}`)
