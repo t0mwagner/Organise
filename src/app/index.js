@@ -12,52 +12,72 @@ moment.locale('fr')
 export const App = () => {
 
     /* Hooks */
-    const [tasks, setTasks] = useState({isLoading: true, tasks:[]})
-    const [categories, setCategories] = useState({isLoading:true, categories:[]})
+    const [tasks, setTasks] = useState({isLoading: true, isError: false, tasks:[]})
+    const [categories, setCategories] = useState({isLoading:true, isError: false, categories:[]})
     const [number, setNumber] = useState(0)
-  
+    const [reloadTasks,setReloadTasks] = useState(false)
+    const [reloadCategories,setReloadCategories] = useState(false)
+    
     /* fetch tasks */
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
             setTasks({ isLoading: true })
-            await api.getAllTasks().then(tasks => {
-                setTasks({
-                    tasks: tasks.data.data,
-                    isLoading: false
+            await api.getAllTasks()
+                .then(tasks => {
+                    setTasks({
+                        isLoading: false,
+                        isError: false,
+                        tasks: tasks.data.data
+                    })
                 })
-            })
+                .catch(error => {
+                    setTasks({
+                        isLoading: false,
+                        isError: true,
+                        tasks: []
+                    })
+                })
         }
         fetchData()
-    }, [])
+    },[reloadTasks])
 
     /* fetch categories */
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
             setCategories({ isLoading: true })
-            await api.getAllCategories().then(categories => {
-                setCategories({
-                    categories: categories.data.data,
-                    isLoading: false
+            await api.getAllCategories()
+                .then(categories => {
+                    setCategories({
+                        isLoading: false,
+                        categories: categories.data.data
+                    })
                 })
-            })
+                .catch(error => {
+                    setCategories({
+                        isLoading: false,
+                        isError: true,
+                        categories: []
+                    })
+                })
         }
         fetchData()
-    }, [])
+    }, [reloadCategories])
 
     /* Tasks operations */
-    const addTask = () => {
-        api.insertTask({
+    const addTask = async () => {
+        await api.insertTask({
             done:false,
             doneDate:null,
             date:new Date(document.getElementById('select_task_date').value),
             label:document.getElementById('input_task_name').value,
             description:document.getElementById('input_task_description').value,
             categoryId:document.getElementById('select_category').value
+        }).then(res => {
+            setReloadTasks(!reloadTasks)
         })
-        window.location.reload()
     }
-    const editTask = (id) => {
-        api.updateTaskById(
+    const editTask = async (id) => {
+        await api.updateTaskById(
             id,
             {
                 date: new Date(document.getElementById('select_task_date').value),
@@ -65,57 +85,66 @@ export const App = () => {
                 description: document.getElementById('input_task_description').value,
                 categoryId: document.getElementById('select_category').value
             }
-        )
-        window.location.reload()
+        ).then(res => {
+            setReloadTasks(!reloadTasks)
+        })
     }
-    const deleteTask = (id) => {
-        api.deleteTaskById(id)
-        window.location.reload()
+    const deleteTask = async (id) => {
+        await api.deleteTaskById(id).then(res => {
+            window.location.reload()
+        }).then(res => {
+            setReloadTasks(!reloadTasks)
+        })
     }
-    const checkTask = (e) => {
-        api.updateTaskById(
+    const checkTask = async (e) => {
+        await api.updateTaskById(
             e.target.parentNode.id,
             {
                 done:true,
                 doneDate:new Date()
             }
-        )
-
+        ).then(res=>{
+            setReloadTasks(!reloadTasks)
+        })
     }
-    const uncheckTask = (e) => {
-        api.updateTaskById(
+    const uncheckTask = async (e) => {
+        await api.updateTaskById(
             e.target.parentNode.id,
             {
                 done:false,
                 doneDate:null
             }
-        )
-
+        ).then(res => {
+            setReloadTasks(!reloadTasks)
+        })
     }
 
     /* Category operations */
-    const addCategory = () => {
-        api.insertCategory(
+    const addCategory = async () => {
+        await api.insertCategory(
             {
                 color:document.getElementById('input_category_color').value,
                 label:document.getElementById('input_category_name').value
             }
-        )
-        window.location.reload()
+        ).then(res => {
+            setReloadCategories(!reloadCategories)
+        })
     }
-    const editCategory = (id) => {
-        api.updateCategoryById(
+    const editCategory = async (id) => {
+        await api.updateCategoryById(
             id,
             {
                 color: document.getElementById('input_category_color').value,
                 label: document.getElementById('input_category_name').value
             }
-        )
-        window.location.reload()
+        ).then(res => {
+            setReloadCategories(!reloadCategories)
+        })
     }
-    const deleteCategory = (id) => {
-        api.deleteCategoryById(id)
-        window.location.reload()
+    const deleteCategory = async (id) => {
+        await api.deleteCategoryById(id).then(res => {
+            setReloadCategories(!reloadCategories)
+        })
     }
 
     /* list number */
@@ -129,10 +158,10 @@ export const App = () => {
                 <Header />
                 <div id="content">
                     <div id="content_header">
-                        <Route exact path={['/','/task/all']}>
+                        <Route exact path='/task/all'>
                             <Title title='Toutes les tâches' number={number} type={['tâche','tâches']}/>
                         </Route>
-                        <Route exact path='/task/today'>
+                        <Route exact path={['/','/task/today']}>
                             <Title title={moment().format('ddd').charAt(0).toUpperCase() + moment().format('dddd D MMMM YYYY').slice(1)} number={number} type={['tâche','tâches']}/>
                         </Route>
                         <Route exact path='/category/all'>
@@ -141,7 +170,7 @@ export const App = () => {
                         <Links/>
                     </div>
                     <div id="content_main">
-                        <Route exact path={['/','/task/all']}>
+                        <Route exact path='/task/all'>
                             { 
                                 !tasks.isLoading
                                 ?
@@ -159,7 +188,7 @@ export const App = () => {
                                 :'Chargement de la liste des tâches...'
                             }
                         </Route>
-                        <Route exact path='/task/today'>
+                        <Route exact path={['/','/task/today']}>
                         { 
                                 !tasks.isLoading
                                 ?

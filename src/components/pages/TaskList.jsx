@@ -42,12 +42,12 @@ export const TaskList = (props) => {
 
     return (
         <div className="list">
-            <FormModal
+            {<FormModal
                 mode='ajouter'
                 label='tâche'
                 categories={props.categories.categories}
                 addHandler={props.addHandler}  
-            />
+            />}
             <section>
                 <div className='list_header'>
                     <span className='list_title'>Tâches</span>
