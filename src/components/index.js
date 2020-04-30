@@ -2,7 +2,8 @@
 import { Header } from './layout/Header'
 import { Footer } from './layout/Footer'
 import { Title } from './layout/Title'
-import { Links } from './layout/Links'
+import { Navigation } from './layout/Navigation'
+import { Content } from './layout/Content'
 
 /* Pages */
 import { TaskList } from './pages/TaskList'
@@ -23,7 +24,8 @@ export {
     Header,
     Footer,
     Title,
-    Links,
+    Navigation,
+    Content,
     DueTime,
     Category,
     CategoryColor,

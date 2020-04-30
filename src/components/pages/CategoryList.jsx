@@ -1,32 +1,62 @@
 import React from 'react'
+import { useCategoryApi } from '../../hooks/useCategoryApi'
 import { FaTrashAlt } from 'react-icons/fa'
 import { FormModal, CategoryColor, TaskNumber } from '../../components'
+import api from '../../api'
 
 import "./List.scss"
 import "./CategoryList.scss"
 
-export const CategoryList = (props) => {
+export const CategoryList = ({numberHandler}) => {
 
-    /* return the number of filtered items */
-    props.numberHandler(props.collection.filter(item=>{
-        if (item.hasOwnProperty('done'))
-        {
-            if (item.done){
-                return false
-            } else {
-                return true
+    /* Local state hook */
+    const [categories, reload] = useCategoryApi()
+
+    /* Category operations */
+    const insertCategory = async () => {
+        await api.insertCategory(
+            {
+                color:document.getElementById('input_category_color').value,
+                label:document.getElementById('input_category_name').value
             }
-        } else {
-            return true
-        }
-    }).length)
+        ).then(res => {
+            reload()
+        })
+    }
+    const updateCategory = async (id) => {
+        await api.updateCategoryById(
+            id,
+            {
+                color: document.getElementById('input_category_color').value,
+                label: document.getElementById('input_category_name').value
+            }
+        ).then(res => {
+            reload()
+        })
+    }
+    const deleteCategory = async (id) => {
+        await api.getTasksByCategoryId(id)
+        .then(res => {
+            console.log(res)
+            res.data.data.forEach(task => {
+                api.updateTaskById(task._id,{categoryId:categories.data[0]._id})
+            });
+        })
+        await api.deleteCategoryById(id)
+        .then(res => {
+            reload()
+        })
+    }
+
+    /* return the number of items */
+    if (!categories.isLoading) numberHandler(categories.data.length)
 
     return (
         <div className="list">
             <FormModal
                 mode='ajouter'
                 label='catégorie'
-                addHandler={props.addHandler}  
+                insertHandler={insertCategory}  
             />
             <section>
                 <div className='list_header'>
@@ -34,21 +64,23 @@ export const CategoryList = (props) => {
                 </div>
                 <ul>
                 {
-                    props.collection
+                    !categories.isLoading
+                    &&
+                    categories.data
                     .sort((a,b) => a.label > b.label)
-                    .map((item,index) => (
-                        <li key={index} id={item._id} style={{gridTemplateColumns: '30px 1fr 150px 30px 30px'}}>
-                            <CategoryColor color={item.color} />
-                            <span className='column'>{item.label}</span>
-                            <TaskNumber id={item._id} tasks={props.tasks}/>
+                    .map((category,index) => (
+                        <li key={index} id={category._id} style={{gridTemplateColumns: '30px 1fr 150px 30px 30px'}}>
+                            <CategoryColor color={category.color} />
+                            <span className='column'>{category.label}</span>
+                            <TaskNumber id={category._id} />
                             <FormModal 
                                 mode='modifier'
                                 label='catégorie'
-                                item={item}
-                                editHandler={props.editHandler}  
+                                item={category}
+                                updateHandler={updateCategory}  
                             />
                             {
-                                item._id === props.collection[0]._id
+                                category._id === categories.data[0]._id
                                 ?
                                     <span className='btn_disabled'>
                                         <FaTrashAlt className='delete_btn_disabled' />
@@ -57,8 +89,8 @@ export const CategoryList = (props) => {
                                     <FormModal
                                         mode='supprimer'
                                         label='catégorie'
-                                        item={item}
-                                        deleteHandler={props.deleteHandler}  
+                                        item={category}
+                                        deleteHandler={deleteCategory}  
                                     />
                             }
                             

@@ -9,7 +9,7 @@ export const getAllTasks = () => api.get(`/task/all`)
 export const updateTaskById = (id, payload) => api.put(`/task/${id}`, payload)
 export const deleteTaskById = id => api.delete(`/task/${id}`)
 export const getTaskById = id => api.get(`/task/${id}`)
-export const getTaskByCategoryId = id => api.get(`/task/category/${id}`)
+export const getTasksByCategoryId = id => api.get(`/task/category/${id}`)
 
 export const insertCategory = payload => api.post(`/category`, payload)
 export const getAllCategories = () => api.get(`/category/all`)
@@ -23,7 +23,7 @@ const apis = {
     updateTaskById,
     deleteTaskById,
     getTaskById,
-    getTaskByCategoryId,
+    getTasksByCategoryId,
 
     insertCategory,
     getAllCategories,

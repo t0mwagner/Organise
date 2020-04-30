@@ -52,8 +52,7 @@ export const FormModal = (props) => {
                 :(props.mode === 'modifier')
                 ?<FaEdit className='edit_btn' onClick={() => openModal('modifier')} />
                 :(props.mode === 'supprimer')
-                ?<FaTrashAlt className='delete_btn' onClick={()=> openModal('supprimer')} />
-                :''
+                &&<FaTrashAlt className='delete_btn' onClick={()=> openModal('supprimer')} />
             }
             <Modal 
                 isOpen={modalIsOpen}
@@ -91,7 +90,7 @@ export const FormModal = (props) => {
                         } 
                         else  if (checkRequired(e))
                         {
-                            (props.mode === 'ajouter')?props.addHandler():props.editHandler(props.item._id)
+                            (props.mode === 'ajouter')?props.insertHandler():props.updateHandler(props.item._id)
                             closeModal()
                         }
                     }}>

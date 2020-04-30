@@ -1,4 +1,5 @@
 import React from 'react'
+import { useCategoryApi } from '../../hooks/useCategoryApi'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import en from "date-fns/locale/en-GB"
 import { FaSquare } from 'react-icons/fa'
@@ -9,9 +10,9 @@ registerLocale("en", en)
 
 export const TaskForm = (props) => {
     
-    let categoryDisplay = false
+    const [categories,] = useCategoryApi()
+    let categoryDisplay = false  
 
-    
     return (
         <span className="fields">
             <label htmlFor="input_task_name">* Titre</label>
@@ -42,8 +43,9 @@ export const TaskForm = (props) => {
             <ul id='category_list'>
                 <li className='disabled'></li>
                 {
-                    props.categories.map((category,index)=>{
-
+                    categories.isLoading
+                    ? 'Chargement ...'
+                    : categories.data.map((category,index)=>{
                         return (
                             <li
                                 key={index}
@@ -83,13 +85,16 @@ export const TaskForm = (props) => {
                             >
                                 <FaSquare className='square' style={{color:category.color}}/> {category.label}
                             </li>
-                        )})
+                        )
+                    })
                 }
             </ul>
             <input type="text" id="select_category" defaultValue={
                 (props.item)
                 ? props.item.categoryId
-                : props.categories[0]._id
+                : categories.isLoading
+                ? 'Chargement...'
+                : categories.data[0]._id
             }/>
         </span>
     )

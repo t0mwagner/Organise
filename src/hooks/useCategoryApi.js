@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import api from '../../../api'
-import { FaSquare } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
+import api from '../api'
 
-export const Category = (props) => {
+export const useCategoryApi = () => {
 
+    /* state hook */
     const [categories, setCategories] = useState({isLoading:true, isError: false, data:[]})
+    const [reload, setReload] = useState(false)
 
     /* fetch categories */
     useEffect(() => {
@@ -15,7 +16,7 @@ export const Category = (props) => {
                     setCategories({
                         isLoading: false,
                         isError: false,
-                        data: categories.data.data
+                        data:categories.data.data
                     })
                 })
                 .catch(error => {
@@ -27,16 +28,11 @@ export const Category = (props) => {
                 })
         }
         fetchData()
-    }, [])
+    }, [reload])
 
-    if (categories.isLoading) {
-        return <span className='column'>Chargement ...</span>
-    } else {
-        const category = categories.data.find(category=>props.id===category._id)
-        return (
-            <span className='column'>
-                <FaSquare style={{color:category.color, marginRight:'5px'}}/> {category.label}
-            </span>
-        ) 
+    const reloadCategories = () => {
+        setReload(!reload)
     }
+
+    return [categories, reloadCategories]
 }

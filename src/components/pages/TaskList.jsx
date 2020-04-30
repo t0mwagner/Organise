@@ -1,90 +1,129 @@
 import React, { useState } from 'react'
 import { FormModal, Category, DueTime } from '../../components'
+import { useTaskApi } from '../../hooks/useTaskApi'
+import api from '../../api'
 
 import "./List.scss"
 import "./TaskList.scss"
 
-export const TaskList = (props) => {
+export const TaskList = ({filter, numberHandler}) => {
 
-    /* switch to display or hide done tasks */
-    const [displayAlt, setDisplayAlt] = useState(false)
-    let filteredCollection = ""
+    /* Local states hooks */
+    const [tasks, reload] = useTaskApi()
+    const [displayDone, setDisplayDone] = useState(false)
+    let filteredTasks = ""
+
+    /* Tasks operations */
+    const insertTask = async () => {
+        await api.insertTask({
+            done:false,
+            doneDate:null,
+            date:new Date(document.getElementById('select_task_date').value),
+            label:document.getElementById('input_task_name').value,
+            description:document.getElementById('input_task_description').value,
+            categoryId:document.getElementById('select_category').value
+        }).then(res => {
+            reload()
+        })
+    }
+    const updateTask = async (id, update) => {
+        const payload = update !== undefined
+                ? update
+                : {
+                    date: new Date(document.getElementById('select_task_date').value),
+                    label: document.getElementById('input_task_name').value,
+                    description: document.getElementById('input_task_description').value,
+                    categoryId: document.getElementById('select_category').value
+                }
+        await api.updateTaskById(id,payload)
+        .then(res => {
+            reload()
+        })
+    }
+    const deleteTask = async (id) => {
+        await api.deleteTaskById(id).then(res => {
+            window.location.reload()
+        }).then(res => {
+            reload()
+        })
+    }  
  
     /* Filter Handler */
-    if (props.filter){
-        filteredCollection = props.collection.filter(item=>{
-            let itemOk = true
-            for (let [key, value] of Object.entries(props.filter)) {
-                if (key === 'date'){
-                    if (new Date(item.date) > new Date(value)) itemOk = false
+    if (!tasks.isLoading)
+    {
+        if (filter){
+            filteredTasks = tasks.data.filter(task=>{
+                let taskOk = true
+                for (let [key, value] of Object.entries(filter)) {
+                    if (key === 'date'){
+                        if (new Date(task.date) > new Date(value)) taskOk = false
+                    }
+                    else if (task[key] !== value) taskOk = false
                 }
-                else if (item[key] !== value) itemOk = false
-            }
-            return itemOk
-        })
-    } else {
-        filteredCollection = props.collection
-    }
+                return taskOk
+            })
+        } else {
+            filteredTasks = tasks.data
+        }
 
-    /* Update the number of items displayed */
-    props.numberHandler(filteredCollection.filter(item=>{
-        if (item.hasOwnProperty('done'))
-        {
-            if (item.done){
-                return false
+        /* Update the number of items displayed */
+        numberHandler(filteredTasks.filter(task=>{
+            if (task.hasOwnProperty('done'))
+            {
+                if (task.done){
+                    return false
+                } else {
+                    return true
+                }
             } else {
                 return true
             }
-        } else {
-            return true
-        }
-    }).length)
+        }).length)
+    }
 
     return (
         <div className="list">
             {<FormModal
                 mode='ajouter'
                 label='tâche'
-                categories={props.categories.categories}
-                addHandler={props.addHandler}  
+                insertHandler={insertTask}  
             />}
             <section>
                 <div className='list_header'>
                     <span className='list_title'>Tâches</span>
-                    <span className='list_button' onClick={()=>setDisplayAlt(!displayAlt)}>{!displayAlt?'Afficher ':'Masquer '}les tâches terminées</span>
+                    <span className='list_button' onClick={()=>setDisplayDone(!displayDone)}>{!displayDone?'Afficher ':'Masquer '}les tâches terminées</span>
                 </div>
                 <ul>
                 {
-                    filteredCollection.length === 0
+                    filteredTasks.length === 0
                     ?
                         <p className='no_item'>Aucune tâche !</p>
                     :
-                        filteredCollection
+                        filteredTasks
                         .sort((a,b) => (new Date(a.date)<new Date(b.date)?-1:1))
-                        .map((item,index) => (
-                            (!item.done || displayAlt)
+                        .map((task,index) => (
+                            (!task.done || displayDone)
                             &&
-                            <li key={index} id={item._id} className={item.done?'alt_li':''} style={{gridTemplateColumns: '30px 1fr 130px 200px 30px 30px'}}>
+                            <li key={index} id={task._id} className={task.done?'alt_li':''} style={{gridTemplateColumns: '30px 1fr 130px 200px 30px 30px'}}>
                                 {
-                                    item.done
-                                    ? <i className="fas fa-check-square click_icon" onClick={props.uncheckHandler}></i>
-                                    : <i className="far fa-square click_icon" onClick={props.checkHandler}></i>
+                                    task.done
+                                    ? <i className="fas fa-check-square click_icon" onClick={()=>updateTask(task._id,{done:false,doneDate:null})}></i>
+                                    : <i className="far fa-square click_icon" onClick={()=>updateTask(task._id,{done:true,doneDate:new Date()})}></i>
                                 }
-                                <span className='column'>{item.label}</span>
-                                <Category id={item.categoryId} categories={props.categories} />
-                                <DueTime date={item.date} doneDate={item.doneDate} />
+                                <span className='column'>{task.label}</span>
+                                <Category id={task.categoryId} />
+                                <DueTime date={task.date} doneDate={task.doneDate} />
                                 <FormModal 
                                     mode='modifier'
                                     label='tâche'
-                                    categories={props.categories.categories}
-                                    item={item}
-                                    editHandler={props.editHandler}  
+                                    item={task}
+                                    updateHandler={updateTask}  
                                 />
                                 <FormModal
                                     mode='supprimer'
                                     label='tâche'
-                                    item={item}
-                                    deleteHandler={props.deleteHandler}  
+                                    item={task}
+                                    deleteHandler={deleteTask}  
                                 />
                             </li>
                         ))

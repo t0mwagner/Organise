@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from "react-router-dom"
-import "./Links.scss"
+import "./Navigation.scss"
 
-export const Links = () => (
+export const Navigation = () => (
     <div id="links">
         <NavLink to='/task/all' activeClassName='selected_link'>Toutes les tâches</NavLink>
         <NavLink to='/task/today' activeClassName='selected_link'>Aujourd'hui</NavLink>
