@@ -10,7 +10,7 @@ export const TaskList = ({filter, numberHandler}) => {
 
     /* Local states hooks */
     const [tasks, reload] = useTaskApi()
-    const [displayDone, setDisplayDone] = useState(false)
+    const [displayDone, setDisplayDone] = useState()
     let filteredTasks = ""
 
     /* Tasks operations */
