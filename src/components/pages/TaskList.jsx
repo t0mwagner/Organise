@@ -42,8 +42,6 @@ export const TaskList = ({filter, numberHandler}) => {
     }
     const deleteTask = async (id) => {
         await api.deleteTaskById(id).then(res => {
-            window.location.reload()
-        }).then(res => {
             reload()
         })
     }  
