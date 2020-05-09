@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "Pacifico";
+    src: url("/fonts/Pacifico.ttf") format('truetype')
+}
+:root {
+    --site-brand-color:#252526;
+    --site-title-color:white;
+    --main-bg-color:#F2F2F2;
+    --alt-bg-color:white;
+
+    --main-title-color:#F24C27;
+    --text-color:#252526;
+    --alt-text-color:#252526;
+
+    --link-color:#F24C27;
+    --link-hover-color:#252526;
+    --button-color:#F23827;
+    --button-hover-color:#252526;
+}
+body{
+    margin:0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color:var(--text-color)
+}
+*:focus{
+    outline: none;
+}
+.app{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    min-height: 100vh;
+    background-color:var(--main-bg-color);
+}
+#content_main{
+    display: flex;
+    flex-direction: column;
+}
+#content{
+    flex-grow:1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 700px;
+    padding:0px 30px;
+    background-color:var(--alt-bg-color);
+}
+#content_header{
+    display: flex;
+    justify-content: space-between;
+}

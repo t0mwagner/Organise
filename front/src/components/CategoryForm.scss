@@ -1,0 +1,40 @@
+#input_category_color{
+    width: 120px;
+    padding: 5px 0px 5px 5px;
+
+    option{
+        font-size:1em;
+    }
+}
+.label{
+    font-size:0.8em;
+    margin:10px 0px 0px 20px;
+}
+.color_list{
+    list-style: none;
+    padding: 0;
+    margin:3px 20px 0px 20px;
+
+    li{
+        display: inline-block;
+        margin: 3px;
+    }
+}
+.color{
+    height: 30px;
+    width: 30px;
+    border-radius: 10px;
+    background-color: attr(data-color);
+    transition: transform 0.3s;
+
+    &:not(.active):hover{
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+
+    &.active {
+        border: 4px solid #ddd;
+        width: 21px;
+        height: 21px;
+    }
+}

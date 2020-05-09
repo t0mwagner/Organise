@@ -1,0 +1,126 @@
+.list_buttons{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+.add_btn{
+    background-color: var(--button-color);
+    color:white;
+    border-radius: 5px;
+    border:none;
+    padding: 5px 10px;
+    opacity:1;
+    margin:0px 0px 20px 0px;
+}
+.add_btn, .edit_btn, .delete_btn{
+    &:hover{
+        cursor: pointer;
+    }
+}
+.add_btn:hover{
+    background-color: var(--button-hover-color);
+}
+.edit_btn, .delete_btn{
+    color:var(--button-color);
+
+    &:hover{
+        color:var(--button-hover-color)
+     }
+}
+.modal{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width:400px;
+    border-radius: 5px;
+
+    form{
+        display:flex;
+        flex-direction: column;
+    }
+}
+.modal_overlay{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(50, 50, 50, 0.5);
+}
+.modal_title{
+    background-color: var(--site-brand-color);
+    color:var(--site-title-color);
+    padding:15px;
+    border-bottom:1px solid var(--main-bg-color);
+    display:flex;
+    justify-content: space-between;
+    border-radius: 5px 5px 0px 0px;
+
+    h2{
+        margin:0;
+        font-weight: 100;
+        font-size: 1.2em;
+    }
+}
+.modal_close_icon{
+    opacity:0.8;
+
+    &:hover{
+        cursor: pointer;
+        opacity:1;
+    }
+}
+.fields{
+    display:flex;
+    flex-direction: column;
+
+    label{
+        font-size:0.8em;
+        margin:10px 0px 0px 20px;
+    }
+
+    input{
+        margin:3px 20px 0px 20px;
+        padding: 5px;
+        border: 0.5px solid darkgrey;
+        font-size: 0.9em;
+    }
+
+    select{
+        margin:3px 20px 0px 20px;
+        appearance: none;
+        background:white;
+        border: 0.5px solid darkgrey;
+    }
+    
+    textarea{
+        border: 0.5px solid darkgrey;
+    }
+}
+#submit_btn{
+    background-color: var(--button-color);
+    color:white;
+    border-radius: 5px;
+    border:none;
+    padding: 5px 10px;
+    margin:30px 20px 20px 20px;
+    opacity:1;
+    align-self: flex-end;
+    justify-self: flex-end;
+
+    &:hover{
+        cursor: pointer;
+        background-color: var(--button-hover-color);
+    }
+}
+.delete_alert{
+    margin:25px 0px 0px 0px;
+    font-size: 0.9em;
+    align-self: center;
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+.header{
+    background-color: var(--site-brand-color);
+    align-self: stretch;
+}
+.header_content{
+    display: flex;
+    justify-content: center;
+}
+.header img{
+    height: 25px;
+}
+.header nav{
+    width: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.app_title h1{
+    font-family: 'Pacifico', cursive;
+    color: var(--site-title-color);
+    font-weight:normal;
+    margin: 0px;
+}
+.login a{
+    text-decoration: none;
+}
+img{
+    filter: hue-rotate();
+}
+.logo, .login{
+    color:var(--site-title-color);
+    font-size:1.4em;
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+}
