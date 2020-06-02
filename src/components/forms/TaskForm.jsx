@@ -22,11 +22,9 @@ export const TaskForm = (props) => {
             }
             />
             <label htmlFor="input_task_description">Description</label>
-            <textarea id="input_task_description" name="input_task_description" rows="5" cols="20">
-            {
-                (props.item)&&props.item.description
-            }
-            </textarea>
+            <textarea id="input_task_description" name="input_task_description" rows="5" cols="20" defaultValue={
+                (props.item)?props.item.description:undefined
+            }/>
             <label htmlFor="select_task_date">* Date de fin</label>
             <DatePicker 
                 id="select_task_date"
@@ -52,10 +50,15 @@ export const TaskForm = (props) => {
                                 className={
                                     (props.item)
                                     ? (props.item.categoryId === category._id)
-                                        && 'display neutral'
+                                    ? 'display neutral'
+                                    : undefined
                                     : (index===0)
-                                        && 'display neutral'
+                                    ? 'display neutral'
+                                    : undefined
                                 }
+                                onChange={()=>{
+                                    document.getElementById('select_category').value=category._id
+                                }}
                                 onClick={(e)=>{
                                     if (!categoryDisplay)
                                     {
@@ -92,9 +95,7 @@ export const TaskForm = (props) => {
             <input type="text" id="select_category" defaultValue={
                 (props.item)
                 ? props.item.categoryId
-                : categories.isLoading
-                ? 'Chargement...'
-                : categories.data[0]._id
+                : undefined
             }/>
         </span>
     )

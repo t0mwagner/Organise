@@ -30,8 +30,8 @@ export const useTaskApi = () => {
         fetchData()
     },[reload])
 
-    const reloadTasks = () => {
-        setReload(!reload)
+    const reloadTasks = (data) => {
+        setTasks({isLoading: false, isError: false, data:data})
     }
 
     return [tasks, reloadTasks]

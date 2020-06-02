@@ -15,15 +15,19 @@ export const TaskList = ({filter, numberHandler}) => {
 
     /* Tasks operations */
     const insertTask = async () => {
-        await api.insertTask({
+        let update = {
             done:false,
             doneDate:null,
             date:new Date(document.getElementById('select_task_date').value),
             label:document.getElementById('input_task_name').value,
             description:document.getElementById('input_task_description').value,
             categoryId:document.getElementById('select_category').value
-        }).then(res => {
-            reload()
+        }
+        await api.insertTask(update).then(res => {
+            update._id = res.data.id
+            const updated = tasks.data
+            updated.push(update)
+            reload(updated)
         })
     }
     const updateTask = async (id, update) => {
@@ -37,12 +41,24 @@ export const TaskList = ({filter, numberHandler}) => {
                 }
         await api.updateTaskById(id,payload)
         .then(res => {
-            reload()
+            const tasksEdited = tasks.data.map((task)=>{
+                if (task._id === id)
+                {
+                    for (const taskProp  in task)
+                    {
+                        if (payload.hasOwnProperty(taskProp)){
+                            task[taskProp] = payload[taskProp]
+                        }
+                    }
+                }
+                return task
+            })
+            reload(tasksEdited)
         })
     }
     const deleteTask = async (id) => {
         await api.deleteTaskById(id).then(res => {
-            reload()
+            reload(tasks.data.filter(task=>task._id !== id))
         })
     }  
  
