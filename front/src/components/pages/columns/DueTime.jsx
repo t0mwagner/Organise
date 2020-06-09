@@ -1,8 +1,7 @@
 import React from 'react'
 import moment from 'moment'
-import 'moment/locale/fr';
+import 'moment/locale/fr'
 
-import { FaCalendarCheck, FaClock, FaExclamationCircle } from 'react-icons/fa'
 import "./DueTime.scss"
 
 export const DueTime = (props) => {
@@ -16,10 +15,10 @@ export const DueTime = (props) => {
         <span className='column due_time'>
             {
                 (props.doneDate)
-                ?<FaCalendarCheck className='date_icon' />
+                ?<i className="fas fa-calendar-check date_icon"></i>
                 :(date < now)
-                ?<FaExclamationCircle className='date_icon' />
-                :<FaClock className='date_icon' />
+                ?<i className="fas fa-exclamation-circle date_icon"></i>
+                :<i className="fas fa-clock date_icon"></i>
             }
             {
                 <span className={

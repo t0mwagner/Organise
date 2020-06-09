@@ -1,7 +1,10 @@
-#select_category{
+.fields{
+    padding: 0px 15px;
+}
+.noDisplay{
     display:none;
 }
-#category_list{
+.fields > ul{
     list-style-type: none;
     height: 25px;
     width: 190px;
@@ -48,7 +51,7 @@
         margin-right: 5px;
     }
 }
-#input_task_description{
+.input_task_description{
     resize: none;
     height: 100px;
     width: 347px;

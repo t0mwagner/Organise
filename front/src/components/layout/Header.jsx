@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaTasks, FaUserAlt } from 'react-icons/fa'
 import "./Header.scss"
 
 export const Header = () => (
@@ -7,13 +6,13 @@ export const Header = () => (
        <div className='header_content'>
             <nav>
                 <div className="logo">
-                    <FaTasks />
+                    <i className="fas fa-tasks"></i>
                 </div>
                 <div className="app_title">
                     <h1>Todo List</h1>
                 </div>
                 <div className="login">
-                    <FaUserAlt />
+                    <i className="fas fa-sign-in-alt"></i>
                 </div>
             </nav>
         </div>

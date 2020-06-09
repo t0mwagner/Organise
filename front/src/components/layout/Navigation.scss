@@ -1,0 +1,17 @@
+#links{
+    margin-top: 20px;
+    display:flex;
+}
+#links a:not(.selected_link){
+    margin-left: 10px;
+    font-size: 0.9em;
+    color:var(--link-color);
+    text-decoration: none;
+}
+.selected_link{
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 1em;
+    color:var(--button-color);
+    text-decoration: none;
+}
