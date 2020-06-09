@@ -1,6 +1,6 @@
 import React from 'react'
-import { TaskList, ProjectList } from '../../components'
-import { Route } from 'react-router-dom'
+import { TaskList, ProjectList, TasksByProject } from '../../components'
+import { Route, Switch } from 'react-router-dom'
 import moment from 'moment'
 
 import "./Content.scss"
@@ -19,10 +19,17 @@ export const Content = (props) => (
                 numberHandler={props.numberHandler}
             />
         </Route>
-        <Route exact path='/project/all'>
-            <ProjectList
-                numberHandler={props.numberHandler}
-            />
-        </Route>
+        <Switch>
+            <Route exact path='/project/all'>
+                <ProjectList
+                    numberHandler={props.numberHandler}
+                />
+            </Route>
+            <Route exact path='/project/:id'>
+                <TasksByProject
+                    numberHandler={props.numberHandler}
+                />
+            </Route>
+        </Switch>
     </div>
 )

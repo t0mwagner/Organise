@@ -1,5 +1,6 @@
 // React
 import React, { useState } from 'react'
+import { NavLink } from "react-router-dom"
 // Custom components
 import { ProjectColor, Modal, ProjectForm } from '../../components'
 // Apollo
@@ -139,7 +140,7 @@ export const ProjectList = ({ numberHandler }) => {
                         .map((project,index) => (
                             <li key={index} id={project.id} style={{gridTemplateColumns: '30px 1fr 1fr 30px 30px'}}>
                                 <ProjectColor color={project.color} />
-                                <span className='column'>{project.name}</span>
+                                <NavLink to={`/project/${project.id}`} className='column project_name'>{project.name}</NavLink>
                                 <TaskNumber id={project.id} />
                                 <i className="fas fa-edit edit_btn" onClick={()=>{ 
                                     selectProject(project)

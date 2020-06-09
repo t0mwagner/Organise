@@ -8,6 +8,7 @@ import { Content } from './layout/Content'
 /* Pages */
 import { TaskList } from './pages/TaskList'
 import { ProjectList } from './pages/ProjectList'
+import { TasksByProject } from './pages/TasksByProject'
 
 /* List columns */
 import { DueTime } from './pages/columns/DueTime'
@@ -19,9 +20,11 @@ import { TaskNumber } from './pages/columns/TaskNumber'
 import { TaskForm } from './pages/forms/TaskForm'
 import { ProjectForm } from './pages/forms/ProjectForm'
 
-
 /* Modal */
 import { Modal } from './pages/modal/Modal'
+
+/* Title */
+import { ProjectTitle } from './pages/title/ProjectTitle'
 
 export { 
     Header,
@@ -37,5 +40,7 @@ export {
     ProjectList,
     Modal,
     TaskForm,
-    ProjectForm  
+    ProjectForm,
+    TasksByProject,
+    ProjectTitle
 }

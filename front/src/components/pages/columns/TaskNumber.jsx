@@ -20,9 +20,8 @@ export const TaskNumber = ({id}) => {
     if (loading) return 'Loading...'
     if (error) return `error : ${error.message}`
 
-    if (!loading && !error){
-        taskNumber = data.feedTasks.filter(task=>(id===task.categoryId && !task.done)).length
-    }
+    taskNumber = data.feedTasks.filter(task=>(id===task.categoryId && !task.done)).length
+
     return (
         <span className='column'>
             {taskNumber} tâche{(taskNumber>1)?'s':''} active{(taskNumber>1)?'s':''}

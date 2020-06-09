@@ -1,3 +1,12 @@
 .delete_btn_disabled{
     color:var(--main-bg-color);
 }
+.project_name{
+    text-decoration: none;
+    color:var(--text-color);
+
+    &:hover{
+        cursor: pointer;
+        color: var(--link-color);
+    }
+}

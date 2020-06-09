@@ -5,6 +5,9 @@ const feedTasks = async (root, args, context) => {
 const feedProjects = async (root, args, context) => {
   return context.prisma.projects()
 }
+const feedTasksByProject = async (root, args, context) => {
+  return context.prisma.tasks({where :{categoryId: args.categoryId}})
+}
 const task = async (root, args, context) => {
   return context.prisma.task({id: args.id})
 }
@@ -16,6 +19,7 @@ module.exports = {
     info,
     feedTasks,
     feedProjects,
+    feedTasksByProject,
     task,
     project
 }
