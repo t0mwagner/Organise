@@ -20,7 +20,7 @@ const FEED_TASKS = gql`
         id
         name
         description
-        categoryId
+        projectId
         done
         doneDate
         dueDate
@@ -31,13 +31,13 @@ const ADD_TASK = gql`
 mutation addTask(
     $name:String!
     $description: String
-    $categoryId:ID!
+    $projectId:ID!
     $dueDate:DateTime!
 ){
     postTask(
         name:$name
         description:$description
-        categoryId:$categoryId
+        projectId:$projectId
         done:false
         doneDate:null
         dueDate:$dueDate
@@ -46,7 +46,7 @@ mutation addTask(
         id
         name
         description
-        categoryId
+        projectId
         done
         doneDate
         dueDate
@@ -91,7 +91,7 @@ mutation updateTask(
     $id:ID!
     $name:String
     $description: String
-    $categoryId:ID
+    $projectId:ID
     $done:Boolean
     $doneDate:DateTime
     $dueDate:DateTime
@@ -100,7 +100,7 @@ mutation updateTask(
         id:$id
         name:$name
         description:$description
-        categoryId:$categoryId
+        projectId:$projectId
         done:$done
         doneDate:$doneDate
         dueDate:$dueDate
@@ -109,7 +109,7 @@ mutation updateTask(
         id
         name
         description
-        categoryId
+        projectId
         done
         doneDate
         dueDate
@@ -239,14 +239,14 @@ export const TaskList = ({filter, numberHandler}) => {
                                 }
                                 <span className='column'>{task.name}</span>
                                 <DueTime date={task.dueDate} doneDate={task.doneDate} />
-                                <ProjectName id={task.categoryId} />
+                                <ProjectName id={task.projectId} />
                                 <i className="fas fa-edit edit_btn" onClick={()=>{ 
                                     selectTask(task)
                                     MicroModal.show('modal-update-task',{
                                         onShow: (modal) => {
                                             document.getElementById('U-input_task_name').value = task.name
                                             document.getElementById('U-input_task_description').value = task.description
-                                            document.getElementById('U-select_project').value = task.categoryId
+                                            document.getElementById('U-select_project').value = task.projectId
                                             document.getElementById('U-input_task_date').value = moment(task.dueDate).format('dddd Do MMMM YYYY HH:mm')
                                         }
                                     }) 

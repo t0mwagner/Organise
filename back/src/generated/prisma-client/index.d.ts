@@ -159,8 +159,8 @@ export type TaskOrderByInput =
   | "name_DESC"
   | "description_ASC"
   | "description_DESC"
-  | "categoryId_ASC"
-  | "categoryId_DESC"
+  | "projectId_ASC"
+  | "projectId_DESC"
   | "done_ASC"
   | "done_DESC"
   | "doneDate_ASC"
@@ -172,7 +172,7 @@ export interface TaskCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
   description?: Maybe<String>;
-  categoryId: ID_Input;
+  projectId: ID_Input;
   done: Boolean;
   doneDate?: Maybe<DateTimeInput>;
   dueDate: DateTimeInput;
@@ -293,20 +293,20 @@ export interface TaskWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
-  categoryId?: Maybe<ID_Input>;
-  categoryId_not?: Maybe<ID_Input>;
-  categoryId_in?: Maybe<ID_Input[] | ID_Input>;
-  categoryId_not_in?: Maybe<ID_Input[] | ID_Input>;
-  categoryId_lt?: Maybe<ID_Input>;
-  categoryId_lte?: Maybe<ID_Input>;
-  categoryId_gt?: Maybe<ID_Input>;
-  categoryId_gte?: Maybe<ID_Input>;
-  categoryId_contains?: Maybe<ID_Input>;
-  categoryId_not_contains?: Maybe<ID_Input>;
-  categoryId_starts_with?: Maybe<ID_Input>;
-  categoryId_not_starts_with?: Maybe<ID_Input>;
-  categoryId_ends_with?: Maybe<ID_Input>;
-  categoryId_not_ends_with?: Maybe<ID_Input>;
+  projectId?: Maybe<ID_Input>;
+  projectId_not?: Maybe<ID_Input>;
+  projectId_in?: Maybe<ID_Input[] | ID_Input>;
+  projectId_not_in?: Maybe<ID_Input[] | ID_Input>;
+  projectId_lt?: Maybe<ID_Input>;
+  projectId_lte?: Maybe<ID_Input>;
+  projectId_gt?: Maybe<ID_Input>;
+  projectId_gte?: Maybe<ID_Input>;
+  projectId_contains?: Maybe<ID_Input>;
+  projectId_not_contains?: Maybe<ID_Input>;
+  projectId_starts_with?: Maybe<ID_Input>;
+  projectId_not_starts_with?: Maybe<ID_Input>;
+  projectId_ends_with?: Maybe<ID_Input>;
+  projectId_not_ends_with?: Maybe<ID_Input>;
   done?: Maybe<Boolean>;
   done_not?: Maybe<Boolean>;
   doneDate?: Maybe<DateTimeInput>;
@@ -372,7 +372,7 @@ export interface TaskSubscriptionWhereInput {
 export interface TaskUpdateInput {
   name?: Maybe<String>;
   description?: Maybe<String>;
-  categoryId?: Maybe<ID_Input>;
+  projectId?: Maybe<ID_Input>;
   done?: Maybe<Boolean>;
   doneDate?: Maybe<DateTimeInput>;
   dueDate?: Maybe<DateTimeInput>;
@@ -381,7 +381,7 @@ export interface TaskUpdateInput {
 export interface TaskUpdateManyMutationInput {
   name?: Maybe<String>;
   description?: Maybe<String>;
-  categoryId?: Maybe<ID_Input>;
+  projectId?: Maybe<ID_Input>;
   done?: Maybe<Boolean>;
   doneDate?: Maybe<DateTimeInput>;
   dueDate?: Maybe<DateTimeInput>;
@@ -412,7 +412,7 @@ export interface TaskPreviousValues {
   id: ID_Output;
   name: String;
   description?: String;
-  categoryId: ID_Output;
+  projectId: ID_Output;
   done: Boolean;
   doneDate?: DateTimeOutput;
   dueDate: DateTimeOutput;
@@ -424,7 +424,7 @@ export interface TaskPreviousValuesPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  categoryId: () => Promise<ID_Output>;
+  projectId: () => Promise<ID_Output>;
   done: () => Promise<Boolean>;
   doneDate: () => Promise<DateTimeOutput>;
   dueDate: () => Promise<DateTimeOutput>;
@@ -436,7 +436,7 @@ export interface TaskPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
-  categoryId: () => Promise<AsyncIterator<ID_Output>>;
+  projectId: () => Promise<AsyncIterator<ID_Output>>;
   done: () => Promise<AsyncIterator<Boolean>>;
   doneDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   dueDate: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -527,7 +527,7 @@ export interface Task {
   id: ID_Output;
   name: String;
   description?: String;
-  categoryId: ID_Output;
+  projectId: ID_Output;
   done: Boolean;
   doneDate?: DateTimeOutput;
   dueDate: DateTimeOutput;
@@ -537,7 +537,7 @@ export interface TaskPromise extends Promise<Task>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  categoryId: () => Promise<ID_Output>;
+  projectId: () => Promise<ID_Output>;
   done: () => Promise<Boolean>;
   doneDate: () => Promise<DateTimeOutput>;
   dueDate: () => Promise<DateTimeOutput>;
@@ -549,7 +549,7 @@ export interface TaskSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
-  categoryId: () => Promise<AsyncIterator<ID_Output>>;
+  projectId: () => Promise<AsyncIterator<ID_Output>>;
   done: () => Promise<AsyncIterator<Boolean>>;
   doneDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   dueDate: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -561,7 +561,7 @@ export interface TaskNullablePromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  categoryId: () => Promise<ID_Output>;
+  projectId: () => Promise<ID_Output>;
   done: () => Promise<Boolean>;
   doneDate: () => Promise<DateTimeOutput>;
   dueDate: () => Promise<DateTimeOutput>;

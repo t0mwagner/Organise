@@ -209,7 +209,7 @@ type Task {
   id: ID!
   name: String!
   description: String
-  categoryId: ID!
+  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
@@ -225,7 +225,7 @@ input TaskCreateInput {
   id: ID
   name: String!
   description: String
-  categoryId: ID!
+  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
@@ -243,8 +243,8 @@ enum TaskOrderByInput {
   name_DESC
   description_ASC
   description_DESC
-  categoryId_ASC
-  categoryId_DESC
+  projectId_ASC
+  projectId_DESC
   done_ASC
   done_DESC
   doneDate_ASC
@@ -257,7 +257,7 @@ type TaskPreviousValues {
   id: ID!
   name: String!
   description: String
-  categoryId: ID!
+  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
@@ -284,7 +284,7 @@ input TaskSubscriptionWhereInput {
 input TaskUpdateInput {
   name: String
   description: String
-  categoryId: ID
+  projectId: ID
   done: Boolean
   doneDate: DateTime
   dueDate: DateTime
@@ -293,7 +293,7 @@ input TaskUpdateInput {
 input TaskUpdateManyMutationInput {
   name: String
   description: String
-  categoryId: ID
+  projectId: ID
   done: Boolean
   doneDate: DateTime
   dueDate: DateTime
@@ -342,20 +342,20 @@ input TaskWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  categoryId: ID
-  categoryId_not: ID
-  categoryId_in: [ID!]
-  categoryId_not_in: [ID!]
-  categoryId_lt: ID
-  categoryId_lte: ID
-  categoryId_gt: ID
-  categoryId_gte: ID
-  categoryId_contains: ID
-  categoryId_not_contains: ID
-  categoryId_starts_with: ID
-  categoryId_not_starts_with: ID
-  categoryId_ends_with: ID
-  categoryId_not_ends_with: ID
+  projectId: ID
+  projectId_not: ID
+  projectId_in: [ID!]
+  projectId_not_in: [ID!]
+  projectId_lt: ID
+  projectId_lte: ID
+  projectId_gt: ID
+  projectId_gte: ID
+  projectId_contains: ID
+  projectId_not_contains: ID
+  projectId_starts_with: ID
+  projectId_not_starts_with: ID
+  projectId_ends_with: ID
+  projectId_not_ends_with: ID
   done: Boolean
   done_not: Boolean
   doneDate: DateTime

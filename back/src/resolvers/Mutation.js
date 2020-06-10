@@ -2,7 +2,7 @@ const postTask = async(root, args, context) => {
     return context.prisma.createTask({
         name: args.name,
         description: args.description,
-        categoryId: args.categoryId,
+        projectId: args.projectId,
         done: args.done,
         doneDate: args.doneDate,
         dueDate: args.dueDate 
@@ -14,7 +14,7 @@ const updateTask = async(root, args, context) => {
         data : {
             name: args.name,
             description: args.description,
-            categoryId: args.categoryId,
+            projectId: args.projectId,
             done: args.done,
             doneDate: args.doneDate,
             dueDate: args.dueDate

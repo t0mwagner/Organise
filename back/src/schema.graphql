@@ -2,7 +2,7 @@ type Query {
   info: String!
   feedTasks: [Task!]!
   feedProjects: [Project!]!
-  feedTasksByProject(categoryId:ID!): [Task!]!
+  feedTasksByProject(projectId:ID!): [Task!]!
   task(id:ID!): Task
   project(id:ID!): Project
 }
@@ -11,7 +11,7 @@ type Mutation {
   postTask(
     name:String!
     description: String
-    categoryId:ID!
+    projectId:ID!
     done:Boolean!
     doneDate:DateTime
     dueDate:DateTime!
@@ -20,7 +20,7 @@ type Mutation {
     id:ID!
     name:String
     description:String
-    categoryId:ID
+    projectId:ID
     done:Boolean
     doneDate:DateTime
     dueDate:DateTime
@@ -44,7 +44,7 @@ type Task {
   id: ID!
   name: String!
   description: String
-  categoryId: ID!
+  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
