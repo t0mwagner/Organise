@@ -8,7 +8,10 @@ const FEED_TASKS = gql`
     feedTasks,
     {
         id
-        projectId
+        project
+        {
+            id
+        }
     }
 }
 `
@@ -20,7 +23,7 @@ export const TaskNumber = ({id}) => {
     if (loading) return 'Loading...'
     if (error) return `error : ${error.message}`
 
-    taskNumber = data.feedTasks.filter(task=>(id===task.projectId && !task.done)).length
+    taskNumber = data.feedTasks.filter(task=>(id===task.project.id && !task.done)).length
 
     return (
         <span className='column'>

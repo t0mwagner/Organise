@@ -16,16 +16,18 @@ import "./TaskList.scss"
 /* GQL Queries */
 const FEED_TASKS = gql`
 query feedTasksByProject(
-    $projectId: ID!
+    $project: ID!
 ){
     feedTasksByProject(
-        projectId: $projectId
+        project: $project
     ),
     {
         id
         name
         description
-        projectId
+        project{
+            id
+        }
         done
         doneDate
         dueDate
@@ -36,13 +38,13 @@ const ADD_TASK = gql`
 mutation addTask(
     $name:String!
     $description: String
-    $projectId:ID!
+    $project:ID!
     $dueDate:DateTime!
 ){
     postTask(
         name:$name
         description:$description
-        projectId:$projectId
+        project:$project
         done:false
         doneDate:null
         dueDate:$dueDate
@@ -51,7 +53,9 @@ mutation addTask(
         id
         name
         description
-        projectId
+        project{
+            id
+        }
         done
         doneDate
         dueDate
@@ -96,7 +100,7 @@ mutation updateTask(
     $id:ID!
     $name:String
     $description: String
-    $projectId:ID
+    $project:ID
     $done:Boolean
     $doneDate:DateTime
     $dueDate:DateTime
@@ -105,7 +109,7 @@ mutation updateTask(
         id:$id
         name:$name
         description:$description
-        projectId:$projectId
+        project:$project
         done:$done
         doneDate:$doneDate
         dueDate:$dueDate
@@ -114,7 +118,9 @@ mutation updateTask(
         id
         name
         description
-        projectId
+        project{
+            id
+        }
         done
         doneDate
         dueDate
@@ -138,7 +144,7 @@ export const TasksByProject = ({numberHandler}) => {
 
     /* hooks */
     const { id } = useParams()
-    const { loading, error, data } = useQuery(FEED_TASKS,{variables:{projectId:id}})
+    const { loading, error, data } = useQuery(FEED_TASKS,{variables:{project:id}})
     const [ checkTask ] = useMutation(CHECK_TASK)
     const [ uncheckTask ] = useMutation(UNCHECK_TASK)
     const [ updateTask ] = useMutation(UPDATE_TASK)
@@ -228,14 +234,14 @@ export const TasksByProject = ({numberHandler}) => {
                                 }
                                 <span className='column'>{task.name}</span>
                                 <DueTime date={task.dueDate} doneDate={task.doneDate} />
-                                <ProjectName id={task.projectId} />
+                                <ProjectName id={task.project.id} />
                                 <i className="fas fa-edit edit_btn" onClick={()=>{ 
                                     selectTask(task)
                                     MicroModal.show('modal-update-task',{
                                         onShow: (modal) => {
                                             document.getElementById('U-input_task_name').value = task.name
                                             document.getElementById('U-input_task_description').value = task.description
-                                            document.getElementById('U-select_project').value = task.projectId
+                                            document.getElementById('U-select_project').value = task.project.id
                                             document.getElementById('U-input_task_date').value = moment(task.dueDate).format('dddd Do MMMM YYYY HH:mm')
                                         }
                                     }) 
