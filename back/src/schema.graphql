@@ -2,59 +2,99 @@ type Query {
   info: String!
   feedTasks: [Task!]!
   feedProjects: [Project!]!
-  feedTasksByProject(projectId:ID!): [Task!]!
+  feedTasksByProject(project:ProjectInput!): [Task!]!
   task(id:ID!): Task
   project(id:ID!): Project
 }
 
 type Mutation {
+
   postTask(
     name:String!
-    description: String
-    projectId:ID!
+    description: String 
     done:Boolean!
     doneDate:DateTime
     dueDate:DateTime!
+    project:ProjectInput!
+    ownedBy:UserInput
   ): Task!
+
   updateTask(
     id:ID!
     name:String
     description:String
-    projectId:ID
     done:Boolean
     doneDate:DateTime
     dueDate:DateTime
+    project:ProjectInput
   ): Task
+
   deleteTask(id:ID!): Task
+
   postProject(
     name:String!
     description: String
     color: String!
+    ownedBy: UserInput
   ): Project!
+
   updateProject(
     id:ID!
     name:String
     description:String
     color: String
   ): Project
+
   deleteProject(id:ID!): Project
+
+  signup(
+    name: String!
+    email: String!
+    password: String!
+  ): AuthPayLoad
+
+  login(
+    email: String!
+    password: String!
+  ): AuthPayLoad
+  
 }
 
 type Task {
   id: ID!
   name: String!
   description: String
-  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
+  project: Project!
+  ownedBy: User
 }
-
 type Project {
   id: ID!
   name: String!
   description: String
   color: String!
+  ownedBy: User
+  tasks: [Task!]
+}
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  tasks: [Task!]
+  projects: [Project!]
+}
+type AuthPayLoad {
+  token: String
+  user: User
+}
+
+input ProjectInput {
+  id: ID!
+}
+input UserInput {
+  id: ID!
 }
 
 scalar DateTime

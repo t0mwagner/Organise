@@ -6,7 +6,7 @@ const feedProjects = async (root, args, context) => {
   return context.prisma.projects()
 }
 const feedTasksByProject = async (root, args, context) => {
-  return context.prisma.tasks({where :{projectId: args.projectId}})
+  return context.prisma.tasks({where :{project: args.project}})
 }
 const task = async (root, args, context) => {
   return context.prisma.task({id: args.id})

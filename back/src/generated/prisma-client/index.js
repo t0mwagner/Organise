@@ -11,11 +11,15 @@ var models = [
   {
     name: "Project",
     embedded: false
+  },
+  {
+    name: "User",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/warthas-307d03/back/dev`
+  endpoint: `https://eu1.prisma.sh/warthas-307d03/todolist/dev`
 });
 exports.prisma = new exports.Prisma();

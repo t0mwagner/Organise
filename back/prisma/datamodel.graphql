@@ -2,10 +2,11 @@ type Task {
   id: ID! @id
   name: String!
   description: String
-  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
+  project: Project!
+  ownedBy: User
 }
 
 type Project {
@@ -13,4 +14,15 @@ type Project {
   name: String!
   description: String
   color: String!
+  ownedBy: User
+  tasks: [Task!]
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  password: String!
+  email: String! @unique
+  tasks: [Task!]
+  projects: [Project!]
 }

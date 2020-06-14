@@ -11,6 +11,10 @@ type AggregateTask {
   count: Int!
 }
 
+type AggregateUser {
+  count: Int!
+}
+
 type BatchPayload {
   count: Long!
 }
@@ -32,6 +36,12 @@ type Mutation {
   upsertTask(where: TaskWhereUniqueInput!, create: TaskCreateInput!, update: TaskUpdateInput!): Task!
   deleteTask(where: TaskWhereUniqueInput!): Task
   deleteManyTasks(where: TaskWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -56,6 +66,8 @@ type Project {
   name: String!
   description: String
   color: String!
+  ownedBy: User
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
 }
 
 type ProjectConnection {
@@ -69,6 +81,34 @@ input ProjectCreateInput {
   name: String!
   description: String
   color: String!
+  ownedBy: UserCreateOneWithoutProjectsInput
+  tasks: TaskCreateManyWithoutProjectInput
+}
+
+input ProjectCreateManyWithoutOwnedByInput {
+  create: [ProjectCreateWithoutOwnedByInput!]
+  connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectCreateOneWithoutTasksInput {
+  create: ProjectCreateWithoutTasksInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutOwnedByInput {
+  id: ID
+  name: String!
+  description: String
+  color: String!
+  tasks: TaskCreateManyWithoutProjectInput
+}
+
+input ProjectCreateWithoutTasksInput {
+  id: ID
+  name: String!
+  description: String
+  color: String!
+  ownedBy: UserCreateOneWithoutProjectsInput
 }
 
 type ProjectEdge {
@@ -94,6 +134,68 @@ type ProjectPreviousValues {
   color: String!
 }
 
+input ProjectScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  color: String
+  color_not: String
+  color_in: [String!]
+  color_not_in: [String!]
+  color_lt: String
+  color_lte: String
+  color_gt: String
+  color_gte: String
+  color_contains: String
+  color_not_contains: String
+  color_starts_with: String
+  color_not_starts_with: String
+  color_ends_with: String
+  color_not_ends_with: String
+  AND: [ProjectScalarWhereInput!]
+  OR: [ProjectScalarWhereInput!]
+  NOT: [ProjectScalarWhereInput!]
+}
+
 type ProjectSubscriptionPayload {
   mutation: MutationType!
   node: Project
@@ -116,12 +218,74 @@ input ProjectUpdateInput {
   name: String
   description: String
   color: String
+  ownedBy: UserUpdateOneWithoutProjectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateManyDataInput {
+  name: String
+  description: String
+  color: String
 }
 
 input ProjectUpdateManyMutationInput {
   name: String
   description: String
   color: String
+}
+
+input ProjectUpdateManyWithoutOwnedByInput {
+  create: [ProjectCreateWithoutOwnedByInput!]
+  delete: [ProjectWhereUniqueInput!]
+  connect: [ProjectWhereUniqueInput!]
+  set: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutOwnedByInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutOwnedByInput!]
+  deleteMany: [ProjectScalarWhereInput!]
+  updateMany: [ProjectUpdateManyWithWhereNestedInput!]
+}
+
+input ProjectUpdateManyWithWhereNestedInput {
+  where: ProjectScalarWhereInput!
+  data: ProjectUpdateManyDataInput!
+}
+
+input ProjectUpdateOneRequiredWithoutTasksInput {
+  create: ProjectCreateWithoutTasksInput
+  update: ProjectUpdateWithoutTasksDataInput
+  upsert: ProjectUpsertWithoutTasksInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectUpdateWithoutOwnedByDataInput {
+  name: String
+  description: String
+  color: String
+  tasks: TaskUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateWithoutTasksDataInput {
+  name: String
+  description: String
+  color: String
+  ownedBy: UserUpdateOneWithoutProjectsInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutOwnedByInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutOwnedByDataInput!
+}
+
+input ProjectUpsertWithoutTasksInput {
+  update: ProjectUpdateWithoutTasksDataInput!
+  create: ProjectCreateWithoutTasksInput!
+}
+
+input ProjectUpsertWithWhereUniqueWithoutOwnedByInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutOwnedByDataInput!
+  create: ProjectCreateWithoutOwnedByInput!
 }
 
 input ProjectWhereInput {
@@ -181,6 +345,10 @@ input ProjectWhereInput {
   color_not_starts_with: String
   color_ends_with: String
   color_not_ends_with: String
+  ownedBy: UserWhereInput
+  tasks_every: TaskWhereInput
+  tasks_some: TaskWhereInput
+  tasks_none: TaskWhereInput
   AND: [ProjectWhereInput!]
   OR: [ProjectWhereInput!]
   NOT: [ProjectWhereInput!]
@@ -197,22 +365,27 @@ type Query {
   task(where: TaskWhereUniqueInput!): Task
   tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task]!
   tasksConnection(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaskConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   task(where: TaskSubscriptionWhereInput): TaskSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type Task {
   id: ID!
   name: String!
   description: String
-  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
+  project: Project!
+  ownedBy: User
 }
 
 type TaskConnection {
@@ -225,10 +398,41 @@ input TaskCreateInput {
   id: ID
   name: String!
   description: String
-  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
+  project: ProjectCreateOneWithoutTasksInput!
+  ownedBy: UserCreateOneWithoutTasksInput
+}
+
+input TaskCreateManyWithoutOwnedByInput {
+  create: [TaskCreateWithoutOwnedByInput!]
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateManyWithoutProjectInput {
+  create: [TaskCreateWithoutProjectInput!]
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateWithoutOwnedByInput {
+  id: ID
+  name: String!
+  description: String
+  done: Boolean!
+  doneDate: DateTime
+  dueDate: DateTime!
+  project: ProjectCreateOneWithoutTasksInput!
+}
+
+input TaskCreateWithoutProjectInput {
+  id: ID
+  name: String!
+  description: String
+  done: Boolean!
+  doneDate: DateTime
+  dueDate: DateTime!
+  ownedBy: UserCreateOneWithoutTasksInput
 }
 
 type TaskEdge {
@@ -243,8 +447,6 @@ enum TaskOrderByInput {
   name_DESC
   description_ASC
   description_DESC
-  projectId_ASC
-  projectId_DESC
   done_ASC
   done_DESC
   doneDate_ASC
@@ -257,10 +459,75 @@ type TaskPreviousValues {
   id: ID!
   name: String!
   description: String
-  projectId: ID!
   done: Boolean!
   doneDate: DateTime
   dueDate: DateTime!
+}
+
+input TaskScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  done: Boolean
+  done_not: Boolean
+  doneDate: DateTime
+  doneDate_not: DateTime
+  doneDate_in: [DateTime!]
+  doneDate_not_in: [DateTime!]
+  doneDate_lt: DateTime
+  doneDate_lte: DateTime
+  doneDate_gt: DateTime
+  doneDate_gte: DateTime
+  dueDate: DateTime
+  dueDate_not: DateTime
+  dueDate_in: [DateTime!]
+  dueDate_not_in: [DateTime!]
+  dueDate_lt: DateTime
+  dueDate_lte: DateTime
+  dueDate_gt: DateTime
+  dueDate_gte: DateTime
+  AND: [TaskScalarWhereInput!]
+  OR: [TaskScalarWhereInput!]
+  NOT: [TaskScalarWhereInput!]
 }
 
 type TaskSubscriptionPayload {
@@ -284,7 +551,16 @@ input TaskSubscriptionWhereInput {
 input TaskUpdateInput {
   name: String
   description: String
-  projectId: ID
+  done: Boolean
+  doneDate: DateTime
+  dueDate: DateTime
+  project: ProjectUpdateOneRequiredWithoutTasksInput
+  ownedBy: UserUpdateOneWithoutTasksInput
+}
+
+input TaskUpdateManyDataInput {
+  name: String
+  description: String
   done: Boolean
   doneDate: DateTime
   dueDate: DateTime
@@ -293,10 +569,78 @@ input TaskUpdateInput {
 input TaskUpdateManyMutationInput {
   name: String
   description: String
-  projectId: ID
   done: Boolean
   doneDate: DateTime
   dueDate: DateTime
+}
+
+input TaskUpdateManyWithoutOwnedByInput {
+  create: [TaskCreateWithoutOwnedByInput!]
+  delete: [TaskWhereUniqueInput!]
+  connect: [TaskWhereUniqueInput!]
+  set: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutOwnedByInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutOwnedByInput!]
+  deleteMany: [TaskScalarWhereInput!]
+  updateMany: [TaskUpdateManyWithWhereNestedInput!]
+}
+
+input TaskUpdateManyWithoutProjectInput {
+  create: [TaskCreateWithoutProjectInput!]
+  delete: [TaskWhereUniqueInput!]
+  connect: [TaskWhereUniqueInput!]
+  set: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutProjectInput!]
+  deleteMany: [TaskScalarWhereInput!]
+  updateMany: [TaskUpdateManyWithWhereNestedInput!]
+}
+
+input TaskUpdateManyWithWhereNestedInput {
+  where: TaskScalarWhereInput!
+  data: TaskUpdateManyDataInput!
+}
+
+input TaskUpdateWithoutOwnedByDataInput {
+  name: String
+  description: String
+  done: Boolean
+  doneDate: DateTime
+  dueDate: DateTime
+  project: ProjectUpdateOneRequiredWithoutTasksInput
+}
+
+input TaskUpdateWithoutProjectDataInput {
+  name: String
+  description: String
+  done: Boolean
+  doneDate: DateTime
+  dueDate: DateTime
+  ownedBy: UserUpdateOneWithoutTasksInput
+}
+
+input TaskUpdateWithWhereUniqueWithoutOwnedByInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutOwnedByDataInput!
+}
+
+input TaskUpdateWithWhereUniqueWithoutProjectInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutProjectDataInput!
+}
+
+input TaskUpsertWithWhereUniqueWithoutOwnedByInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutOwnedByDataInput!
+  create: TaskCreateWithoutOwnedByInput!
+}
+
+input TaskUpsertWithWhereUniqueWithoutProjectInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutProjectDataInput!
+  create: TaskCreateWithoutProjectInput!
 }
 
 input TaskWhereInput {
@@ -342,20 +686,6 @@ input TaskWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  projectId: ID
-  projectId_not: ID
-  projectId_in: [ID!]
-  projectId_not_in: [ID!]
-  projectId_lt: ID
-  projectId_lte: ID
-  projectId_gt: ID
-  projectId_gte: ID
-  projectId_contains: ID
-  projectId_not_contains: ID
-  projectId_starts_with: ID
-  projectId_not_starts_with: ID
-  projectId_ends_with: ID
-  projectId_not_ends_with: ID
   done: Boolean
   done_not: Boolean
   doneDate: DateTime
@@ -374,6 +704,8 @@ input TaskWhereInput {
   dueDate_lte: DateTime
   dueDate_gt: DateTime
   dueDate_gte: DateTime
+  project: ProjectWhereInput
+  ownedBy: UserWhereInput
   AND: [TaskWhereInput!]
   OR: [TaskWhereInput!]
   NOT: [TaskWhereInput!]
@@ -381,6 +713,226 @@ input TaskWhereInput {
 
 input TaskWhereUniqueInput {
   id: ID
+}
+
+type User {
+  id: ID!
+  name: String!
+  password: String!
+  email: String!
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  name: String!
+  password: String!
+  email: String!
+  tasks: TaskCreateManyWithoutOwnedByInput
+  projects: ProjectCreateManyWithoutOwnedByInput
+}
+
+input UserCreateOneWithoutProjectsInput {
+  create: UserCreateWithoutProjectsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutTasksInput {
+  create: UserCreateWithoutTasksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutProjectsInput {
+  id: ID
+  name: String!
+  password: String!
+  email: String!
+  tasks: TaskCreateManyWithoutOwnedByInput
+}
+
+input UserCreateWithoutTasksInput {
+  id: ID
+  name: String!
+  password: String!
+  email: String!
+  projects: ProjectCreateManyWithoutOwnedByInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  password_ASC
+  password_DESC
+  email_ASC
+  email_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  name: String!
+  password: String!
+  email: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateInput {
+  name: String
+  password: String
+  email: String
+  tasks: TaskUpdateManyWithoutOwnedByInput
+  projects: ProjectUpdateManyWithoutOwnedByInput
+}
+
+input UserUpdateManyMutationInput {
+  name: String
+  password: String
+  email: String
+}
+
+input UserUpdateOneWithoutProjectsInput {
+  create: UserCreateWithoutProjectsInput
+  update: UserUpdateWithoutProjectsDataInput
+  upsert: UserUpsertWithoutProjectsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutTasksInput {
+  create: UserCreateWithoutTasksInput
+  update: UserUpdateWithoutTasksDataInput
+  upsert: UserUpsertWithoutTasksInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutProjectsDataInput {
+  name: String
+  password: String
+  email: String
+  tasks: TaskUpdateManyWithoutOwnedByInput
+}
+
+input UserUpdateWithoutTasksDataInput {
+  name: String
+  password: String
+  email: String
+  projects: ProjectUpdateManyWithoutOwnedByInput
+}
+
+input UserUpsertWithoutProjectsInput {
+  update: UserUpdateWithoutProjectsDataInput!
+  create: UserCreateWithoutProjectsInput!
+}
+
+input UserUpsertWithoutTasksInput {
+  update: UserUpdateWithoutTasksDataInput!
+  create: UserCreateWithoutTasksInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  tasks_every: TaskWhereInput
+  tasks_some: TaskWhereInput
+  tasks_none: TaskWhereInput
+  projects_every: ProjectWhereInput
+  projects_some: ProjectWhereInput
+  projects_none: ProjectWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
 }
 `
       }
