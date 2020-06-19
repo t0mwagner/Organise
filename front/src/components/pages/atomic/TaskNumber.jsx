@@ -15,7 +15,7 @@ const FEED_TASKS = gql`
     }
 }
 `
-export const TaskNumber = ({id}) => {
+export const TaskNumber = ({id, display}) => {
 
     const { loading, error, data } = useQuery(FEED_TASKS)
     let taskNumber
@@ -25,10 +25,14 @@ export const TaskNumber = ({id}) => {
 
     taskNumber = data.feedTasks.filter(task=>(id===task.project.id && !task.done)).length
 
-    return (
-        <span className='column'>
-            {taskNumber} tâche{(taskNumber>1)?'s':''} active{(taskNumber>1)?'s':''}
-        </span>           
-    ) 
+    if (display === 'column')
+    {
+        return (
+            <span className='column'>
+                {taskNumber} tâche{(taskNumber>1)?'s':''} active{(taskNumber>1)?'s':''}
+            </span>           
+        )
+    }
+    return (taskNumber>1)?`${taskNumber} tasks`:`${taskNumber} task`    
     
 }

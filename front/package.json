@@ -9,6 +9,7 @@
     "@types/moment": "^2.13.0",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.0.0",
+    "history": "^5.0.0",
     "micromodal": "^0.4.6",
     "moment": "^2.26.0",
     "node-sass": "^4.13.1",

@@ -2,10 +2,21 @@
 import React from 'react'
 // Modal
 import MicroModal from 'micromodal'
+import { TaskNumber } from '../../../components'
 // Styles
 import './ProjectForm.scss'
 import './general.scss'
 
+
+const ProjectDeleteForm = ({project}) => {
+
+    return (
+        <span className='delete_alert'>
+            <span>Supprimer le projet <strong>{project.name}</strong> ?</span>
+            <span className='modal-indication'><TaskNumber id={project.id} display='line' /> will be reassigned to default project</span>
+        </span>
+    )
+}
 
 export const ProjectForm = (props) => {
 
@@ -15,7 +26,7 @@ export const ProjectForm = (props) => {
         <form>
             {
                 (props.action.code === 'D')
-                ?<span className='delete_alert'>Supprimer le projet <strong>{props.project.name}</strong> ?</span>
+                ?<ProjectDeleteForm project={props.project}/>
                 :
                 <span className="fields">
                     <label htmlFor={props.action.code+"-input_project_name"}>* Nom du projet</label>

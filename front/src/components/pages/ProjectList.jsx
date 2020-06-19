@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { NavLink } from "react-router-dom"
 // Custom components
-import { ProjectColor, Modal, ProjectForm } from '../../components'
+import { ProjectColor, Modal, ProjectForm, TaskNumber } from '../../components'
 // Apollo
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
@@ -11,7 +11,6 @@ import MicroModal from 'micromodal'
 
 import "./List.scss"
 import "./ProjectList.scss"
-import { TaskNumber } from './columns/TaskNumber'
 
 /* GQL Queries */
 const FEED_PROJECTS = gql`
@@ -72,6 +71,7 @@ mutation deleteProject(
   }
 `
 
+
 export const ProjectList = ({ numberHandler }) => {
 
     /* hooks */
@@ -101,6 +101,11 @@ export const ProjectList = ({ numberHandler }) => {
             }
         })
     const [ selectedProject, setSelectedProject ] = useState({})
+
+    const deleteProjectWithReassign = (query) => {
+        
+        deleteProject(query)
+    }
 
     /* Change task select handler */
     const selectProject = (project) => {
@@ -141,7 +146,7 @@ export const ProjectList = ({ numberHandler }) => {
                             <li key={index} id={project.id} style={{gridTemplateColumns: '30px 1fr 1fr 30px 30px'}}>
                                 <ProjectColor color={project.color} />
                                 <NavLink to={`/project/${project.id}`} className='column project_name'>{project.name}</NavLink>
-                                <TaskNumber id={project.id} />
+                                <TaskNumber id={project.id} display='column' />
                                 <i className="fas fa-edit edit_btn" onClick={()=>{ 
                                     selectProject(project)
                                     MicroModal.show('modal-update-project',{
@@ -150,9 +155,11 @@ export const ProjectList = ({ numberHandler }) => {
                                         }
                                     }) 
                                 }}></i>
-                                <i className="fas fa-trash delete_btn" onClick={()=>{
-                                    selectProject(project)
-                                    MicroModal.show('modal-delete-project')
+                                <i className={(index===0)?'fas fa-trash delete_btn_disabled':'fas fa-trash delete_btn'} onClick={()=>{
+                                    if (index!==0){
+                                        selectProject(project)
+                                        MicroModal.show('modal-delete-project')
+                                    }
                                 }}></i>
                             </li>
                         ))
@@ -166,7 +173,7 @@ export const ProjectList = ({ numberHandler }) => {
                 <ProjectForm project={selectedProject} action={{code:'U', name:"Mettre à jour", query:updateProject}}/>
             </Modal>
             <Modal title="Supprimer un projet" id="modal-delete-project">
-                <ProjectForm project={selectedProject} action={{code:'D', name:"Supprimer", query:deleteProject}}/>
+                <ProjectForm project={selectedProject} action={{code:'D', name:"Supprimer", query:deleteProjectWithReassign}} />
             </Modal>
         </div>
 

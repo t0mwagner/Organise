@@ -116,7 +116,7 @@ export const TaskForm = (props) => {
                             {
                                 name:document.getElementById(props.action.code+"-input_task_name").value,
                                 description:document.getElementById(props.action.code+"-input_task_description").value,
-                                project:document.getElementById(props.action.code+"-select_project").value,
+                                project:{id:document.getElementById(props.action.code+"-select_project").value},
                                 dueDate:new Date(document.getElementById(props.action.code+"-input_task_date").value)
                             }
                         }
@@ -129,7 +129,7 @@ export const TaskForm = (props) => {
                                 id:props.task.id,
                                 name:document.getElementById(props.action.code+"-input_task_name").value,
                                 description:document.getElementById(props.action.code+"-input_task_description").value,
-                                project:document.getElementById(props.action.code+"-select_project").value,
+                                project:{id:document.getElementById(props.action.code+"-select_project").value},
                                 dueDate:new Date(document.getElementById(props.action.code+"-input_task_date").value)
                             }
                         }

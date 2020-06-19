@@ -16,7 +16,7 @@ import "./TaskList.scss"
 /* GQL Queries */
 const FEED_TASKS = gql`
 query feedTasksByProject(
-    $project: ID!
+    $project: ProjectInput!
 ){
     feedTasksByProject(
         project: $project
@@ -38,7 +38,7 @@ const ADD_TASK = gql`
 mutation addTask(
     $name:String!
     $description: String
-    $project:ID!
+    $project:ProjectInput!
     $dueDate:DateTime!
 ){
     postTask(
@@ -100,7 +100,7 @@ mutation updateTask(
     $id:ID!
     $name:String
     $description: String
-    $project:ID
+    $project:ProjectInput
     $done:Boolean
     $doneDate:DateTime
     $dueDate:DateTime
@@ -144,7 +144,7 @@ export const TasksByProject = ({numberHandler}) => {
 
     /* hooks */
     const { id } = useParams()
-    const { loading, error, data } = useQuery(FEED_TASKS,{variables:{project:id}})
+    const { loading, error, data } = useQuery(FEED_TASKS,{variables:{project:{id:id}}})
     const [ checkTask ] = useMutation(CHECK_TASK)
     const [ uncheckTask ] = useMutation(UNCHECK_TASK)
     const [ updateTask ] = useMutation(UPDATE_TASK)

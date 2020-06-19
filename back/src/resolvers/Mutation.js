@@ -15,6 +15,7 @@ const postTask = async(root, args, context) => {
     })
 }
 const updateTask = async(root, args, context) => {
+    const userId = getUserId(context)
     return context.prisma.updateTask({
         data : {
             name: args.name,
@@ -30,6 +31,7 @@ const updateTask = async(root, args, context) => {
     })
 }
 const deleteTask = async(root, args, context) => {
+    const userId = getUserId(context)
     return context.prisma.deleteTask(
         {
             id: args.id
@@ -47,6 +49,7 @@ const postProject = async(root, args, context) => {
     })
 }
 const updateProject = async(root, args, context) => {
+    const userId = getUserId(context)
     return context.prisma.updateProject({
         data : {
             name: args.name,
@@ -59,6 +62,7 @@ const updateProject = async(root, args, context) => {
     })
 }
 const deleteProject = async(root, args, context) => {
+    const userId = getUserId(context)
     return context.prisma.deleteProject(
         {
             id: args.id

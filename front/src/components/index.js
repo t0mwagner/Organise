@@ -10,11 +10,14 @@ import { TaskList } from './pages/TaskList'
 import { ProjectList } from './pages/ProjectList'
 import { TasksByProject } from './pages/TasksByProject'
 
+/* Authentication */
+import { Login } from './pages/login/Login'
+
 /* List columns */
-import { DueTime } from './pages/columns/DueTime'
-import { ProjectName } from './pages/columns/ProjectName'
-import { ProjectColor } from './pages/columns/ProjectColor'
-import { TaskNumber } from './pages/columns/TaskNumber'
+import { DueTime } from './pages/atomic/DueTime'
+import { ProjectName } from './pages/atomic/ProjectName'
+import { ProjectColor } from './pages/atomic/ProjectColor'
+import { TaskNumber } from './pages/atomic/TaskNumber'
 
 /* Forms */
 import { TaskForm } from './pages/forms/TaskForm'
@@ -42,5 +45,6 @@ export {
     TaskForm,
     ProjectForm,
     TasksByProject,
-    ProjectTitle
+    ProjectTitle,
+    Login
 }

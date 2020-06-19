@@ -27,10 +27,62 @@
 img{
     filter: hue-rotate();
 }
-.logo, .login{
+.logo, .logout{
     color:var(--site-title-color);
     font-size:1.4em;
     font-weight: 100;
     display: flex;
     align-items: center;
+}
+
+.logout:hover{
+    cursor: pointer;
+}
+
+.clickable:hover{
+    cursor: pointer;
+}
+
+#modal-logout{
+
+    & .primary-btn{
+        border-radius: 5px;
+        border:none;
+        padding: 5px 10px;
+        opacity:1;
+        margin-left: 10px;
+        background-color: var(--button-color);
+        color:white;
+
+        &:hover{
+            cursor: pointer;
+            background-color: var(--button-hover-color);
+        }
+    }
+    & .secondary-btn{
+        border-radius: 5px;
+        border:1px solid var(--button-color);
+        padding: 5px 10px;
+        opacity:1;
+        background-color: var(--alt-bg-color);
+        color: var(--button-color);
+
+        &:hover{
+            cursor: pointer;
+            background-color: var(--main-bg-color);
+        }
+    }
+
+    #logout-content{
+        display:flex;
+        flex-direction: column;
+        padding: 0 30px;
+    }
+
+    #logout-buttons{
+        display:flex;
+        margin: 20px 0;
+        justify-content: flex-end;
+    }
+ 
 }

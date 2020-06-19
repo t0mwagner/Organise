@@ -33,7 +33,7 @@ const ADD_TASK = gql`
 mutation addTask(
     $name:String!
     $description: String
-    $project:ID!
+    $project:ProjectInput!
     $dueDate:DateTime!
 ){
     postTask(
@@ -95,7 +95,7 @@ mutation updateTask(
     $id:ID!
     $name:String
     $description: String
-    $project:ID
+    $project:ProjectInput
     $done:Boolean
     $doneDate:DateTime
     $dueDate:DateTime

@@ -18,6 +18,7 @@ yarn-error.log*
 /*/build
 
 # misc
+.vscode
 /*/.env
 /*/.env.local
 /*/.env.development.local

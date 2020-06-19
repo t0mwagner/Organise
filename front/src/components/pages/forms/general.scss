@@ -26,8 +26,16 @@
     }
 }
 .delete_alert{
+    display:flex;
+    flex-direction: column;
     margin:25px 50px;
     font-size: 0.9em;
     align-self: center;
     text-align: center;
+}
+
+.modal-indication{
+    font-size: 0.8em;
+    font-style: italic;
+    padding: 5px 0;
 }
