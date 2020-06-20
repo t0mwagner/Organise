@@ -14,6 +14,7 @@ type Project {
   name: String!
   description: String
   color: String!
+  default: Boolean!
   ownedBy: User
   tasks: [Task!]
 }

@@ -82,14 +82,7 @@ export const ProjectForm = (props) => {
                         }
                     }
                     // Delete query
-                    if (props.action.code === 'D')
-                    {
-                        query = {variables :
-                            {
-                                id:props.project.id
-                            }
-                        }
-                    }
+                    if (props.action.code === 'D') query = props.project
                     // Query call
                     if (props.action.code === 'D'){
                         props.action.query(query)

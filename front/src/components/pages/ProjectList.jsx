@@ -20,6 +20,10 @@ const FEED_PROJECTS = gql`
         id
         name
         color
+        default
+        tasks{
+            id
+        }
     }
 }
 `
@@ -31,11 +35,16 @@ mutation addTask(
     postProject(
         name:$name
         color:$color
+        default:false
     )
     {
         id
         name
         color
+        default
+        tasks{
+            id
+        }
     }
   }
 `
@@ -69,7 +78,23 @@ mutation deleteProject(
     }
   }
 `
-
+const CHANGE_PROJECT_TASK = gql`
+mutation changeProjectTask(
+    $id:ID!
+    $project:ProjectInput
+){
+    updateTask(
+        id:$id
+        project:$project
+    ),
+    {
+        id
+        project{
+            id
+        }
+    }
+}
+`
 
 export const ProjectList = ({ numberHandler }) => {
 
@@ -87,6 +112,7 @@ export const ProjectList = ({ numberHandler }) => {
                 })
             }
         })
+    const [ changeProjectTask ] = useMutation(CHANGE_PROJECT_TASK)
     const [ deleteProject ] = useMutation(
         DELETE_PROJECT,
         {
@@ -101,21 +127,26 @@ export const ProjectList = ({ numberHandler }) => {
         })
     const [ selectedProject, setSelectedProject ] = useState({})
 
-    const deleteProjectWithReassign = (query) => {
-        deleteProject(query)
-    }
-
-    /* Change task select handler */
+    /* Handlers */
     const selectProject = (project) => {
         setSelectedProject(project)
     }
-
+    const deleteProjectWithReassign = (project) => {
+        // get default project id
+        const defaultProjectId = data.feedProjects.filter(project=>project.default)[0].id
+        // Change each task's project
+        project.tasks.forEach(task => {
+            changeProjectTask({variables:{id:task.id,project:{id:defaultProjectId}}})
+        })
+        deleteProject({variables:{id:project.id}})
+    }
     if (!loading && !error)
     {
         /* Update the number of items displayed */
         numberHandler(data.feedProjects.length)
     }
 
+    /* On loading or error */
     if (loading) return 'Loading...'
     if (error) return `error : ${error.message}`
 
@@ -153,8 +184,8 @@ export const ProjectList = ({ numberHandler }) => {
                                         }
                                     }) 
                                 }}></i>
-                                <i className={(index===0)?'fas fa-trash delete_btn_disabled':'fas fa-trash delete_btn'} onClick={()=>{
-                                    if (index!==0){
+                                <i className={(project.default)?'fas fa-trash delete_btn_disabled':'fas fa-trash delete_btn'} onClick={()=>{
+                                    if (!project.default){
                                         selectProject(project)
                                         MicroModal.show('modal-delete-project')
                                     }

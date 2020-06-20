@@ -66,6 +66,7 @@ type Project {
   name: String!
   description: String
   color: String!
+  default: Boolean!
   ownedBy: User
   tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
 }
@@ -81,6 +82,7 @@ input ProjectCreateInput {
   name: String!
   description: String
   color: String!
+  default: Boolean!
   ownedBy: UserCreateOneWithoutProjectsInput
   tasks: TaskCreateManyWithoutProjectInput
 }
@@ -100,6 +102,7 @@ input ProjectCreateWithoutOwnedByInput {
   name: String!
   description: String
   color: String!
+  default: Boolean!
   tasks: TaskCreateManyWithoutProjectInput
 }
 
@@ -108,6 +111,7 @@ input ProjectCreateWithoutTasksInput {
   name: String!
   description: String
   color: String!
+  default: Boolean!
   ownedBy: UserCreateOneWithoutProjectsInput
 }
 
@@ -125,6 +129,8 @@ enum ProjectOrderByInput {
   description_DESC
   color_ASC
   color_DESC
+  default_ASC
+  default_DESC
 }
 
 type ProjectPreviousValues {
@@ -132,6 +138,7 @@ type ProjectPreviousValues {
   name: String!
   description: String
   color: String!
+  default: Boolean!
 }
 
 input ProjectScalarWhereInput {
@@ -191,6 +198,8 @@ input ProjectScalarWhereInput {
   color_not_starts_with: String
   color_ends_with: String
   color_not_ends_with: String
+  default: Boolean
+  default_not: Boolean
   AND: [ProjectScalarWhereInput!]
   OR: [ProjectScalarWhereInput!]
   NOT: [ProjectScalarWhereInput!]
@@ -218,6 +227,7 @@ input ProjectUpdateInput {
   name: String
   description: String
   color: String
+  default: Boolean
   ownedBy: UserUpdateOneWithoutProjectsInput
   tasks: TaskUpdateManyWithoutProjectInput
 }
@@ -226,12 +236,14 @@ input ProjectUpdateManyDataInput {
   name: String
   description: String
   color: String
+  default: Boolean
 }
 
 input ProjectUpdateManyMutationInput {
   name: String
   description: String
   color: String
+  default: Boolean
 }
 
 input ProjectUpdateManyWithoutOwnedByInput {
@@ -262,6 +274,7 @@ input ProjectUpdateWithoutOwnedByDataInput {
   name: String
   description: String
   color: String
+  default: Boolean
   tasks: TaskUpdateManyWithoutProjectInput
 }
 
@@ -269,6 +282,7 @@ input ProjectUpdateWithoutTasksDataInput {
   name: String
   description: String
   color: String
+  default: Boolean
   ownedBy: UserUpdateOneWithoutProjectsInput
 }
 
@@ -345,6 +359,8 @@ input ProjectWhereInput {
   color_not_starts_with: String
   color_ends_with: String
   color_not_ends_with: String
+  default: Boolean
+  default_not: Boolean
   ownedBy: UserWhereInput
   tasks_every: TaskWhereInput
   tasks_some: TaskWhereInput

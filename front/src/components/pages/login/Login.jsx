@@ -46,11 +46,13 @@ export const Login = ({logoutMessage}) => {
         postProject(
             name:$name
             color:$color
+            default:true
         )
         {
             id
             name
             color
+            default
         }
       }
     `

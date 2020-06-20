@@ -20,7 +20,7 @@ const updateTask = async(root, args, context) => {
         data : {
             name: args.name,
             description: args.description,
-            project: args.project,
+            project: {connect:{id:args.project.id}},
             done: args.done,
             doneDate: args.doneDate,
             dueDate: args.dueDate
@@ -44,6 +44,7 @@ const postProject = async(root, args, context) => {
     return context.prisma.createProject({
         name: args.name,
         description: args.description,
+        default: args.default,
         color: args.color,
         ownedBy:{connect:{id:userId}}
     })
