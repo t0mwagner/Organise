@@ -29,7 +29,7 @@ export const TaskForm = (props) => {
 
     /* hooks */
     const { loading, error, data } = useQuery(FEED_PROJECTS)
-    const [ date, setDate ] = useState(moment().format('dddd Do MMMM YYYY HH:mm'))
+    const [ date, setDate ] = useState(moment().endOf('day').format('YYYY-MM-DD HH:mm'))
     let categoryDisplay = false
 
     if (loading) return 'Loading...'
@@ -51,11 +51,17 @@ export const TaskForm = (props) => {
                         id={props.action.code+"-input_task_date"}
                         options={{
                             enableTime: true,
-                            dateFormat: "l j F Y H:i",
+                            altInput: true,
+                            altFormat: "F j, Y H:i",
+                            dateFormat: "Y-m-d H:i"
                         }}
-                        value={date}
+                        value={
+                            (props.task)
+                            ? moment(new Date(props.task.dueDate)).format('YYYY-MM-DD HH:mm')
+                            : date
+                        }
                         onChange={date => {
-                        setDate(moment(date).format('dddd Do MMMM YYYY HH:mm'));
+                        setDate(moment(date).format('YYYY-MM-DD HH:mm'));
                         }}
                     />
                     <label htmlFor="select_project">Projet</label>

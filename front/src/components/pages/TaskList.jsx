@@ -217,7 +217,7 @@ export const TaskList = ({filter, numberHandler}) => {
                     onShow: (modal) => {
                         document.getElementById('C-input_task_name').value = ''
                         document.getElementById('C-input_task_description').value = ''
-                        document.getElementById('C-input_task_date').defaultValue = moment().format('dddd Do MMMM YYYY HH:mm')
+                        document.getElementById('C-input_task_date').defaultValue = moment().endOf('day').format('YYYY-MM-DD HH:mm')
                     }
                 })
             }}>Nouvelle tâche</button>
@@ -253,7 +253,7 @@ export const TaskList = ({filter, numberHandler}) => {
                                             document.getElementById('U-input_task_name').value = task.name
                                             document.getElementById('U-input_task_description').value = task.description
                                             document.getElementById('U-select_project').value = task.project.id
-                                            document.getElementById('U-input_task_date').value = moment(task.dueDate).format('dddd Do MMMM YYYY HH:mm')
+                                            document.getElementById('U-input_task_date').value = moment(new Date(task.dueDate)).format('YYYY-MM-DD HH:mm')
                                         }
                                     }) 
                                 }}></i>

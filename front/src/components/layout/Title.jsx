@@ -2,11 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { ProjectTitle } from '../../components'
 import moment from 'moment'
-import 'moment/locale/fr'
 import "./Title.scss"
-
-moment.locale('fr')
-
 
 export const Title = (props) => (
     <div className='page_title'>
