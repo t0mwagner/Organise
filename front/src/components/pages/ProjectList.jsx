@@ -19,7 +19,6 @@ const FEED_PROJECTS = gql`
     {
         id
         name
-        description
         color
     }
 }
@@ -66,7 +65,7 @@ mutation deleteProject(
         id:$id
     )
     {
-      id
+        id
     }
   }
 `
@@ -96,14 +95,13 @@ export const ProjectList = ({ numberHandler }) => {
                 const cachedDataUpdated = cachedData.feedProjects.filter(project=>project.id!==data.deleteProject.id)
                 cache.writeQuery({
                 query: FEED_PROJECTS,
-                data: { feedTasks: cachedDataUpdated },
+                data: { feedProjects: cachedDataUpdated },
                 })
             }
         })
     const [ selectedProject, setSelectedProject ] = useState({})
 
     const deleteProjectWithReassign = (query) => {
-        
         deleteProject(query)
     }
 
