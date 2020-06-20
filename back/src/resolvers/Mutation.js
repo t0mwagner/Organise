@@ -20,10 +20,10 @@ const updateTask = async(root, args, context) => {
         data : {
             name: args.name,
             description: args.description,
-            project: {connect:{id:args.project.id}},
             done: args.done,
             doneDate: args.doneDate,
-            dueDate: args.dueDate
+            dueDate: args.dueDate,
+            project: (args.project)?{connect:{id:args.project.id}}:undefined
         },
         where : {
             id: args.id
