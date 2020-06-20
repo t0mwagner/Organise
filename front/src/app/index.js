@@ -9,11 +9,15 @@ export const App = () => {
 
     /* Hooks */
     const [number, setNumber] = useState(0)
+    const [logoutMessage, setLogoutMessage] = useState('')
 
     /* Handler */
     const numberHandler = (number) => {
         setNumber(number)
     }
+    const logoutMessageHandler = (message => {
+        setLogoutMessage(message)
+    })
 
     /* Authentication */
     const authToken = localStorage.getItem(AUTH_TOKEN)
@@ -26,13 +30,17 @@ export const App = () => {
                         {
                             !authToken
                             ?
-                            <Fragment>
-                                <Route exact path='/login' component={Login} />
-                                <Redirect to='/login'/>
-                            </Fragment>
+                            <Switch>
+                                <Route exact path='/login'>
+                                    <Login logoutMessage={logoutMessage} />
+                                </Route>
+                                <Route path='/'>
+                                    <Redirect to='/login'/>
+                                </Route>
+                            </Switch>
                             :
                             <Fragment>
-                                <Header />
+                                <Header logoutMessageHandler={logoutMessageHandler}/>
                                     <div id="content">
                                         <div id="content_header">
                                             <Title number={number} />

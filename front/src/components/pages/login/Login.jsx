@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { AUTH_TOKEN } from '../../../constants'
 import { useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { createBrowserHistory } from 'history'
+import { useHistory } from 'react-router-dom'
 
 import "./Login.scss"
 
-let history = createBrowserHistory()
+export const Login = ({logoutMessage}) => {
 
-export const Login = (props) => {
+    const history = useHistory()
 
     const SIGNUP_MUTATION = gql`
     mutation SignupMutation(
@@ -55,9 +55,13 @@ export const Login = (props) => {
       }
     `
 
-    const [loginState, setState] = useState({login:true})
+    const [loginState, setLoginState] = useState({login:true})
     const [error, setError] = useState({isError:false})
     const {login, email, password, name} = loginState
+
+    const handleLoginState = (state) =>{
+        setLoginState(state)
+    }
 
     const [ addFirstProject ] = useMutation(CREATE_FIRST_PROJECT)
     const [ addUser ] = useMutation(
@@ -94,14 +98,16 @@ export const Login = (props) => {
         _saveUserData(token)
     }
 
-
     return(
         <div id='login-page'>
             <h1>Todo List</h1>
             <h2>{login?'Login':'Signup'}</h2>
             {
                 error.isError
-                && <h3>{error.message}</h3>              
+                ? <p className='login-message'>{error.message}</p>
+                : logoutMessage
+                ? <p className='login-message'>{logoutMessage}</p>
+                : ''     
             }
             <form id='login-form' onSubmit={e=>{
                 e.preventDefault()
@@ -114,19 +120,19 @@ export const Login = (props) => {
                 {!login &&
                 <input 
                     value={name}
-                    onChange={e=>setState({...loginState, name:e.target.value})}
+                    onChange={e=>handleLoginState({...loginState, name:e.target.value})}
                     type="text"
                     placeholder="Your name"
                 />}
                 <input 
                     value={email}
-                    onChange={e=>setState({...loginState, email:e.target.value})}
+                    onChange={e=>handleLoginState({...loginState, email:e.target.value})}
                     type="text"
                     placeholder="Your email address"
                 />
                 <input 
                     value={password}
-                    onChange={e=>setState({...loginState, password:e.target.value})}
+                    onChange={e=>handleLoginState({...loginState, password:e.target.value})}
                     type="password"
                     placeholder={login?'Enter your password':'Chose a safe password'}
                 />
@@ -136,7 +142,7 @@ export const Login = (props) => {
                 />
                 <div id='sign-switch' onClick={e=>{
                         setError({isError:false})
-                        setState({...loginState, login:!login})
+                        handleLoginState({...loginState, login:!login})
                     }}>
                     {login?'No account? Signup':'Already have an account'}
                 </div>
