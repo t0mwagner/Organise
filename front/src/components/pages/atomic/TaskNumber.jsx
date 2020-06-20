@@ -8,6 +8,7 @@ const FEED_TASKS = gql`
     feedTasks,
     {
         id
+        done
         project
         {
             id
@@ -29,7 +30,7 @@ export const TaskNumber = ({id, display}) => {
     {
         return (
             <span className='column'>
-                {taskNumber} tâche{(taskNumber>1)?'s':''} active{(taskNumber>1)?'s':''}
+                {taskNumber} active task{(taskNumber>1)?'s':''}
             </span>           
         )
     }
