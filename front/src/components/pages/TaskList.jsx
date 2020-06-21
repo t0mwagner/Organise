@@ -170,7 +170,7 @@ export const TaskList = ({filter, numberHandler}) => {
 
     let filteredTasks = ""
  
-    /* Change task select handler */
+    /* Handlers */
     const selectTask = (task) => {
         setSelectedTask(task)
     }
@@ -217,6 +217,14 @@ export const TaskList = ({filter, numberHandler}) => {
                     onShow: (modal) => {
                         document.getElementById('C-input_task_name').value = ''
                         document.getElementById('C-input_task_description').value = ''
+                        document.getElementById('C-project_list').childNodes.forEach((li,index)=>{
+                            if (index === 1){
+                                li.classList.add('display')
+                            } else {
+                                li.classList.remove('display')
+                                li.classList.remove('selected')
+                            }
+                        })
                         document.getElementById('C-input_task_date').defaultValue = moment().endOf('day').format('YYYY-MM-DD HH:mm')
                     }
                 })
@@ -252,7 +260,14 @@ export const TaskList = ({filter, numberHandler}) => {
                                         onShow: (modal) => {
                                             document.getElementById('U-input_task_name').value = task.name
                                             document.getElementById('U-input_task_description').value = task.description
-                                            document.getElementById('U-select_project').value = task.project.id
+                                            document.getElementById('U-project_list').childNodes.forEach((li)=>{
+                                                if (li.id === 'U-'+task.project.id){
+                                                    li.classList.add('display')
+                                                } else {
+                                                    li.classList.remove('display')
+                                                    li.classList.remove('selected')
+                                                }
+                                            })
                                             document.getElementById('U-input_task_date').value = moment(new Date(task.dueDate)).format('YYYY-MM-DD HH:mm')
                                         }
                                     }) 
@@ -269,7 +284,7 @@ export const TaskList = ({filter, numberHandler}) => {
             <Modal title="Créer une tâche" id="modal-add-task">
                 <TaskForm action={{code:'C', name:"Créer", query:addTask}}/>
             </Modal>
-            <Modal title="Mettre à jour une tâche" id="modal-update-task">
+            <Modal title="Mettre à jour une tâche" id="modal-update-task" project=''>
                 <TaskForm task={selectedTask} action={{code:'U', name:"Mettre à jour", query:updateTask}}/>
             </Modal>
             <Modal title="Supprimer une tâche" id="modal-delete-task">

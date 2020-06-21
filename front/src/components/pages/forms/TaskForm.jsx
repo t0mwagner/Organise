@@ -30,7 +30,7 @@ export const TaskForm = (props) => {
     /* hooks */
     const { loading, error, data } = useQuery(FEED_PROJECTS)
     const [ date, setDate ] = useState(moment().endOf('day').format('YYYY-MM-DD HH:mm'))
-    let categoryDisplay = false
+    let projectDisplay = false
 
     if (loading) return 'Loading...'
     if (error) return `error : ${error.message}`
@@ -65,18 +65,18 @@ export const TaskForm = (props) => {
                         }}
                     />
                     <label htmlFor="select_project">Projet</label>
-                    <ul className='project_list'>
+                    <ul className='project_list' id={props.action.code+'-project_list'}>
                         <li className='disabled'></li>
                         {
-                            data.feedProjects.map((project,index)=>
+                            data.feedProjects.map((project,index)=> (
                                 <li
+                                    id={props.action.code+'-'+project.id}
                                     key={index}
                                     onChange={()=>{
                                         document.getElementById(props.action.code+"-select_project").value=project.id
                                     }}
-                                    className={(index===0)?'display':''}
                                     onClick={(e)=>{
-                                        if (!categoryDisplay)
+                                        if (!projectDisplay)
                                         {
                                             for (let node of e.target.parentNode.childNodes)
                                             {
@@ -84,7 +84,7 @@ export const TaskForm = (props) => {
                                                 && node.classList.toggle('display')
                                                 node.classList.remove('neutral')
                                             }
-                                            categoryDisplay = !categoryDisplay
+                                            projectDisplay = !projectDisplay
                                         } else {
                                             for (let node of e.target.parentNode.childNodes)
                                             {
@@ -97,17 +97,17 @@ export const TaskForm = (props) => {
                                                     node.classList.add('neutral')
                                                 }
                                             }
-                                            categoryDisplay = !categoryDisplay
+                                            projectDisplay = !projectDisplay
                                         }
                                         document.getElementById(props.action.code+"-select_project").value=project.id
                                     }}
                                 >
                                     <i className="fas fa-square square" style={{color:project.color}}/> {project.name}
                                 </li>
-                            )
+                            ))
                         }
                     </ul>
-                    <input type="text" id={props.action.code+"-select_project"} className="noDisplay" defaultValue={data.feedProjects[0].id}/>
+                    <input type="text" id={props.action.code+"-select_project"} className="noDisplay" defaultValue={data.feedProjects[0].id} />
                 </span>
             }
             <footer className="modal__footer">
