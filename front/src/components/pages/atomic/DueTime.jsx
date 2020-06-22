@@ -1,6 +1,5 @@
 import React from 'react'
 import moment from 'moment'
-import 'moment/locale/fr'
 
 import "./DueTime.scss"
 
@@ -8,7 +7,6 @@ export const DueTime = (props) => {
  
     const now = new Date()
     const date = (props.doneDate)?new Date (props.doneDate):new Date(props.date)
-    moment.locale('fr')
     const result = moment(date).calendar()
 
     return (

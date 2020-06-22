@@ -39,14 +39,14 @@ export const TaskForm = (props) => {
         <form>
             {
                 (props.action.code === 'D')
-                ?<span className='delete_alert'>Supprimer la tâche <strong>{props.task.name}</strong> ?</span>
+                ?<span className='delete_alert'>Delete task <strong>{props.task.name}</strong> ?</span>
                 :
                 <span className="fields">
-                    <label htmlFor={props.action.code+"-input_task_name"}>* Nom de la tâche</label>
+                    <label htmlFor={props.action.code+"-input_task_name"}>* Task name</label>
                     <input type="text" id={props.action.code+"-input_task_name"} maxLength='50' required />
                     <label htmlFor={props.action.code+"-input_task_description"}>Description</label>
                     <textarea id={props.action.code+"-input_task_description"} className="input_task_description" name="input_task_description" rows="5" cols="20"/>
-                    <label htmlFor={props.action.code+"-input_task_date"}>* Date de fin</label>
+                    <label htmlFor={props.action.code+"-input_task_date"}>* Due date</label>
                     <Flatpickr
                         id={props.action.code+"-input_task_date"}
                         options={{
@@ -64,7 +64,7 @@ export const TaskForm = (props) => {
                         setDate(moment(date).format('YYYY-MM-DD HH:mm'));
                         }}
                     />
-                    <label htmlFor="select_project">Projet</label>
+                    <label htmlFor="select_project">Project</label>
                     <ul className='project_list' id={props.action.code+'-project_list'}>
                         <li className='disabled'></li>
                         {

@@ -7,12 +7,12 @@ import "./Title.scss"
 export const Title = (props) => (
     <div className='page_title'>
         <Route exact path='/task/all'>
-            <h1>Toutes les tâches</h1>
+            <h1>All tasks</h1>
             <p>
                 {
                     (props.number > 1)
-                    ? props.number + ' tâches actives'
-                    : props.number + ' tâche active'
+                    ? props.number + ' active tasks'
+                    : props.number + ' active task'
                 }
             </p>
         </Route>
@@ -21,19 +21,19 @@ export const Title = (props) => (
             <p>
                 {
                     (props.number > 1)
-                    ? props.number + ' tâches actives'
-                    : props.number + ' tâche active'
+                    ? props.number + ' active tasks'
+                    : props.number + ' active task'
                 }
             </p>
         </Route>
         <Switch>
             <Route exact path='/project/all'>
-                <h1>Tous les projets</h1>
+                <h1>All projects</h1>
                 <p>
                     {
                         (props.number > 1)
-                        ? props.number + ' projets'
-                        : props.number + ' projet'
+                        ? props.number + ' projects'
+                        : props.number + ' project'
                     }
                 </p>
             </Route>
@@ -42,8 +42,8 @@ export const Title = (props) => (
                 <p>
                     {
                         (props.number > 1)
-                        ? props.number + ' tâches actives'
-                        : props.number + ' tâche active'
+                        ? props.number + ' active tasks'
+                        : props.number + ' active task'
                     }
                 </p>
             </Route>

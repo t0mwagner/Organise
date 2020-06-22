@@ -209,17 +209,17 @@ export const TasksByProject = ({numberHandler}) => {
                         document.getElementById('C-input_task_date').defaultValue = moment().format('dddd Do MMMM YYYY HH:mm')
                     }
                 })
-            }}>Nouvelle tâche</button>
+            }}>New task</button>
             <section>
                 <div className='list_header'>
-                    <span className='list_title'>Tâches</span>
-                    <span className='list_button' onClick={()=>setDisplayDone(!displayDone)}>{!displayDone?'Afficher ':'Masquer '}les tâches terminées</span>
+                    <span className='list_title'>Tasks</span>
+                    <span className='list_button' onClick={()=>setDisplayDone(!displayDone)}>{!displayDone?'Display ':'Hide '}done tasks</span>
                 </div>
                 <ul>
                 {
                     data.feedTasksByProject.length === 0
                     ?
-                        <p className='no_item'>Aucune tâche !</p>
+                        <p className='no_item'>No task here !</p>
                     :
                         data.feedTasksByProject
                         .sort((a,b) => (new Date(a.dueDate)<new Date(b.dueDate)?-1:1))
@@ -255,14 +255,14 @@ export const TasksByProject = ({numberHandler}) => {
                 }
                 </ul>
             </section>
-            <Modal title="Créer une tâche" id="modal-add-task">
-                <TaskForm action={{code:'C', name:"Créer", query:addTask}}/>
+            <Modal title="New task" id="modal-add-task">
+                <TaskForm action={{code:'C', name:"Create", query:addTask}}/>
             </Modal>
-            <Modal title="Mettre à jour une tâche" id="modal-update-task">
-                <TaskForm task={selectedTask} action={{code:'U', name:"Mettre à jour", query:updateTask}}/>
+            <Modal title="Update task" id="modal-update-task">
+                <TaskForm task={selectedTask} action={{code:'U', name:"Update", query:updateTask}}/>
             </Modal>
-            <Modal title="Supprimer une tâche" id="modal-delete-task">
-                <TaskForm task={selectedTask} action={{code:'D', name:"Supprimer", query:deleteTask}}/>
+            <Modal title="Delete task" id="modal-delete-task">
+                <TaskForm task={selectedTask} action={{code:'D', name:"Delete", query:deleteTask}}/>
             </Modal>
         </div>
 

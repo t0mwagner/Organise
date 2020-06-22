@@ -27,6 +27,18 @@ const FEED_PROJECTS = gql`
     }
 }
 `
+const FEED_TASKS_BY_PROJECT = gql`
+query feedTasksByProject(
+    $project: ProjectInput!
+){
+    feedTasksByProject(
+        project: $project
+    ),
+    {
+        id
+    }
+}
+`
 const ADD_PROJECT = gql`
 mutation addTask(
     $name:String!
@@ -89,17 +101,24 @@ mutation changeProjectTask(
     ),
     {
         id
+        name
+        description
         project{
             id
         }
+        done
+        doneDate
+        dueDate
     }
-}
+  }
 `
 
 export const ProjectList = ({ numberHandler }) => {
 
     /* hooks */
+    const [ selectedProject, setSelectedProject ] = useState({})
     const { loading, error, data } = useQuery(FEED_PROJECTS)
+    const { loadingTasks, errorTasks, dataTasks } = useQuery(FEED_TASKS_BY_PROJECT,{variables:{project:{id:selectedProject.id}}})
     const [ updateProject ] = useMutation(UPDATE_PROJECT)
     const [ addProject ] = useMutation(
         ADD_PROJECT,
@@ -125,28 +144,24 @@ export const ProjectList = ({ numberHandler }) => {
                 })
             }
         })
-    const [ selectedProject, setSelectedProject ] = useState({})
 
     /* Handlers */
     const selectProject = (project) => {
         setSelectedProject(project)
     }
+
     const deleteProjectWithReassign = (project) => {
-        // get default project id
         const defaultProjectId = data.feedProjects.filter(project=>project.default)[0].id
-        // Change each task's project
-        project.tasks.forEach(task => {
-            changeProjectTask({variables:{id:task.id,project:{id:defaultProjectId}}})
-        })
-        deleteProject({variables:{id:project.id}})
-    }
-    if (!loading && !error)
-    {
-        /* Update the number of items displayed */
-        numberHandler(data.feedProjects.length)
+        if (dataTasks){
+            dataTasks.feedTasksByProject.forEach(async (task) => {
+                await changeProjectTask({variables:{id:task.id,project:{id:defaultProjectId}}})
+            })
+            deleteProject({variables:{id:project.id}})
+        }
     }
 
-    /* On loading or error */
+    if (!loading && !error) numberHandler(data.feedProjects.length)
+
     if (loading) return 'Loading...'
     if (error) return `error : ${error.message}`
 
@@ -158,51 +173,47 @@ export const ProjectList = ({ numberHandler }) => {
                         document.getElementById('C-input_project_name').value = ''
                     }
                 })
-            }}>Nouveau projet</button>
+            }}>New Project</button>
             <section>
                 <div className='list_header'>
-                    <span className='list_title'>Projets</span>
+                    <span className='list_title'>Projects</span>
                 </div>
                 <ul>
                 {
-                    data.feedProjects.length === 0
-                    ?
-                        <p className='no_item'>Aucun projet !</p>
-                    :
-                        data.feedProjects
-                        .sort((a,b) => (a.name<b.name)?-1:1)
-                        .map((project,index) => (
-                            <li key={index} id={project.id} style={{gridTemplateColumns: '30px 1fr 1fr 30px 30px'}}>
-                                <ProjectColor color={project.color} />
-                                <NavLink to={`/project/${project.id}`} className='column project_name'>{project.name}</NavLink>
-                                <TaskNumber id={project.id} display='column' />
-                                <i className="fas fa-edit edit_btn" onClick={()=>{ 
-                                    selectProject(project)
-                                    MicroModal.show('modal-update-project',{
-                                        onShow: (modal) => {
-                                            document.getElementById('U-input_project_name').value = project.name
-                                        }
-                                    }) 
-                                }}></i>
-                                <i className={(project.default)?'fas fa-trash delete_btn_disabled':'fas fa-trash delete_btn'} onClick={()=>{
-                                    if (!project.default){
-                                        selectProject(project)
-                                        MicroModal.show('modal-delete-project')
+                    data.feedProjects
+                    .sort((a,b) => (a.name<b.name)?-1:1)
+                    .map((project,index) => (
+                        <li key={index} id={project.id} style={{gridTemplateColumns: '30px 1fr 1fr 30px 30px'}}>
+                            <ProjectColor color={project.color} />
+                            <NavLink to={`/project/${project.id}`} className='column project_name'>{project.name}</NavLink>
+                            <TaskNumber id={project.id} display='column' />
+                            <i className="fas fa-edit edit_btn" onClick={()=>{ 
+                                selectProject(project)
+                                MicroModal.show('modal-update-project',{
+                                    onShow: (modal) => {
+                                        document.getElementById('U-input_project_name').value = project.name
                                     }
-                                }}></i>
-                            </li>
-                        ))
+                                }) 
+                            }}></i>
+                            <i className={(project.default)?'fas fa-trash delete_btn_disabled':'fas fa-trash delete_btn'} onClick={()=>{
+                                if (!project.default){
+                                    selectProject(project)
+                                    MicroModal.show('modal-delete-project')
+                                }
+                            }}></i>
+                        </li>
+                    ))
                 }
                 </ul>
             </section>
-            <Modal title="Créer un projet" id="modal-add-project">
-                <ProjectForm action={{code:'C', name:"Créer", query:addProject}}/>
+            <Modal title="New project" id="modal-add-project">
+                <ProjectForm action={{code:'C', name:"Create", query:addProject}}/>
             </Modal>
-            <Modal title="Mettre à jour un projet" id="modal-update-project">
-                <ProjectForm project={selectedProject} action={{code:'U', name:"Mettre à jour", query:updateProject}}/>
+            <Modal title="Update project" id="modal-update-project">
+                <ProjectForm project={selectedProject} action={{code:'U', name:"Update", query:updateProject}}/>
             </Modal>
-            <Modal title="Supprimer un projet" id="modal-delete-project">
-                <ProjectForm project={selectedProject} action={{code:'D', name:"Supprimer", query:deleteProjectWithReassign}} />
+            <Modal title="Delete project" id="modal-delete-project">
+                <ProjectForm project={selectedProject} action={{code:'D', name:"Delete", query:deleteProjectWithReassign}} />
             </Modal>
         </div>
 

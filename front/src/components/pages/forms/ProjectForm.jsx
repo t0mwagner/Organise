@@ -12,7 +12,7 @@ const ProjectDeleteForm = ({project}) => {
 
     return (
         <span className='delete_alert'>
-            <span>Supprimer le projet <strong>{project.name}</strong> ?</span>
+            <span>Delete project <strong>{project.name}</strong> ?</span>
             <span className='modal-indication'><TaskNumber id={project.id} display='line' /> will be reassigned to default project</span>
         </span>
     )
@@ -29,9 +29,9 @@ export const ProjectForm = (props) => {
                 ?<ProjectDeleteForm project={props.project}/>
                 :
                 <span className="fields">
-                    <label htmlFor={props.action.code+"-input_project_name"}>* Nom du projet</label>
+                    <label htmlFor={props.action.code+"-input_project_name"}>* Project name</label>
                     <input type="text" id={props.action.code+"-input_project_name"} maxLength='50' required />
-                    <p className='label'>* Sélectionnez une couleur</p>
+                    <p className='label'>* Pick a color</p>
                     <ul id="color_list">
                         {
                             colors.map((color,index)=>(
