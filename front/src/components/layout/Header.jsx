@@ -2,12 +2,13 @@ import React from 'react'
 import "./Header.scss"
 import { Modal } from '../../components'
 import MicroModal from 'micromodal'
-import { AUTH_TOKEN } from '../../constants'
+import { AUTH_TOKEN, USER_NAME } from '../../constants'
 import { useHistory } from 'react-router-dom'
 
 export const Header = ({logoutMessageHandler}) => {
     
     const history = useHistory()
+    const userName = localStorage.getItem(USER_NAME)
 
     return (
         <header className="header">
@@ -23,9 +24,11 @@ export const Header = ({logoutMessageHandler}) => {
                         <h1>Todo List</h1>
                     </div>
                     <div className="logout">
+                        <span className='username'>{userName}</span>
+                        <span className='logout-btn'>
                         <i className="fas fa-sign-out-alt" onClick={()=>{
                             MicroModal.show('modal-logout')
-                        }}></i>
+                        }}></i></span>
                     </div>
                 </nav>
             </div>
@@ -38,6 +41,7 @@ export const Header = ({logoutMessageHandler}) => {
                         }}>Cancel</button>
                         <button className='primary-btn' onClick={e=>{
                             localStorage.removeItem(AUTH_TOKEN)
+                            localStorage.removeItem(USER_NAME)
                             logoutMessageHandler('You have been disconnected')
                             MicroModal.close('modal-logout')
                             history.push('/login')

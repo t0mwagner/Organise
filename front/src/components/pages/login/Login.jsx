@@ -1,6 +1,6 @@
 // React
 import React, { useState } from 'react'
-import { AUTH_TOKEN } from '../../../constants'
+import { AUTH_TOKEN, USER_NAME } from '../../../constants'
 import { useMutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { useHistory } from 'react-router-dom'
@@ -22,7 +22,7 @@ export const Login = ({logoutMessage}) => {
             password:$password
             name:$name
         )
-        { token }
+        { token, user { name } }
     }
     `
     const LOGIN_MUTATION = gql`
@@ -35,7 +35,7 @@ export const Login = ({logoutMessage}) => {
             email:$email
             password:$password
         )
-        { token }
+        { token, user { name } }
     }
     `
     const CREATE_FIRST_PROJECT = gql`
@@ -91,13 +91,14 @@ export const Login = ({logoutMessage}) => {
         })
 
     // To change for better
-    const _saveUserData = token => {
+    const _saveUserData = (token,user) => {
         localStorage.setItem(AUTH_TOKEN, token)
+        localStorage.setItem(USER_NAME, user.name)
     }
 
     const _confirm = async (data) => {
-        const { token } = login? data.login : data.signup
-        _saveUserData(token)
+        const { token, user } = login ? data.login : data.signup
+        _saveUserData(token, user)
     }
 
     return(

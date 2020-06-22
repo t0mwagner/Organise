@@ -19,7 +19,7 @@
     font-family: 'Pacifico', cursive;
     color: var(--site-title-color);
     font-weight:normal;
-    margin: 0px;
+    margin: 0 0 0 10px;
 }
 .login a{
     text-decoration: none;
@@ -27,16 +27,26 @@
 img{
     filter: hue-rotate();
 }
-.logo, .logout{
+.logo{
     color:var(--site-title-color);
     font-size:1.4em;
     font-weight: 100;
     display: flex;
     align-items: center;
 }
+.logout{
+    display: flex;
+    align-items: center;
+    color:var(--site-title-color);
+}
+.logout-btn{
+    font-size:1.4em;
+    font-weight: 100;
+    margin-left: 10px;
 
-.logout:hover{
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
 .clickable:hover{

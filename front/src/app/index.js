@@ -40,7 +40,7 @@ export const App = () => {
                             </Switch>
                             :
                             <Fragment>
-                                <Header logoutMessageHandler={logoutMessageHandler}/>
+                                <Header logoutMessageHandler={logoutMessageHandler} />
                                     <div id="content">
                                         <div id="content_header">
                                             <Title number={number} />
