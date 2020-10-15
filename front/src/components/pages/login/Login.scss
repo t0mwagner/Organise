@@ -1,21 +1,28 @@
-#login-page{
+.login{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 70vh;
 
-    & h1{
+    &__title{
         font-family: 'Pacifico', cursive;
         color: var(--site-brand-color);
         font-weight:normal;
     }
 
-    & h2{
+    &__subtitle{
         font-size: medium;
     }
+
+    &__message{
+        font-size: 0.7em;
+        margin-top:0px;
+        color: var(--main-title-color);
+        font-style: italic;
+    }
 }
-#login-form{
+.login-form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +33,7 @@
     box-shadow: 2px 8px 10px rgba(166, 179, 179, 0.5);
     height: 200px;
 
-    & input{
+    &__input{
         margin-bottom: 15px;
 
         &[type='submit']{
@@ -45,21 +52,16 @@
             }
         }
     }
-}
-#sign-switch{
-    text-decoration: underline;
-    margin-top: auto;
-    font-size: small;
-    color: var(--link-color);
-    
-    &:hover{
-        cursor:pointer;
-        color:var(--link-hover-color)
+
+    &__sign-switch{
+        text-decoration: underline;
+        margin-top: auto;
+        font-size: small;
+        color: var(--link-color);
+        
+        &:hover{
+            cursor:pointer;
+            color:var(--link-hover-color)
+        }
     }
-}
-.login-message{
-    font-size: 0.7em;
-    margin-top:0px;
-    color: var(--main-title-color);
-    font-style: italic;
 }

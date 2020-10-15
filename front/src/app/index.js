@@ -41,12 +41,12 @@ export const App = () => {
                             :
                             <Fragment>
                                 <Header logoutMessageHandler={logoutMessageHandler} />
-                                    <div id="content">
-                                        <div id="content_header">
+                                    <div className="content">
+                                        <div className="content__header">
                                             <Title number={number} />
                                             <Navigation />
                                         </div>
-                                        <div id='content_main'>
+                                        <div className='content__main'>
                                             <Content numberHandler={numberHandler} />
                                         </div>
                                     </div>

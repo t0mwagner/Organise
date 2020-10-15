@@ -10,7 +10,6 @@ import gql from 'graphql-tag'
 import MicroModal from 'micromodal'
 
 import "./List.scss"
-import "./ProjectList.scss"
 
 /* GQL Queries */
 const FEED_PROJECTS = gql`
@@ -167,7 +166,7 @@ export const ProjectList = ({ numberHandler }) => {
 
     return (
         <div className="list">
-            <button className="add_btn" onClick={()=>{
+            <button className="list__button list__button--add" onClick={()=>{
                 MicroModal.show('modal-add-project',{
                     onShow: (modal) => {
                         document.getElementById('C-input_project_name').value = ''
@@ -175,19 +174,19 @@ export const ProjectList = ({ numberHandler }) => {
                 })
             }}>New Project</button>
             <section>
-                <div className='list_header'>
-                    <span className='list_title'>Projects</span>
+                <div className='list__header'>
+                    <span className='list__title'>Projects</span>
                 </div>
-                <ul>
+                <ul className='list__list'>
                 {
                     data.feedProjects
-                    .sort((a,b) => (a.name<b.name)?-1:1)
+                    .sort((a,b) => (b.tasks.length<a.tasks.length)?-1:1)
                     .map((project,index) => (
-                        <li key={index} id={project.id} style={{gridTemplateColumns: '30px 1fr 1fr 30px 30px'}}>
+                        <li className='list__item' key={index} id={project.id} style={{gridTemplateColumns: '30px 1fr 1fr 30px 30px'}}>
                             <ProjectColor color={project.color} />
-                            <NavLink to={`/project/${project.id}`} className='column project_name'>{project.name}</NavLink>
+                            <NavLink to={`/project/${project.id}`} className='list__column list__column--clickable'>{project.name}</NavLink>
                             <TaskNumber id={project.id} display='column' />
-                            <i className="fas fa-edit edit_btn" onClick={()=>{ 
+                            <i className="fas fa-edit list__icon" onClick={()=>{ 
                                 selectProject(project)
                                 MicroModal.show('modal-update-project',{
                                     onShow: (modal) => {
@@ -195,7 +194,7 @@ export const ProjectList = ({ numberHandler }) => {
                                     }
                                 }) 
                             }}></i>
-                            <i className={(project.default)?'fas fa-trash delete_btn_disabled':'fas fa-trash delete_btn'} onClick={()=>{
+                            <i className={(project.default)?'fas fa-trash list__icon list__icon--disabled':'fas fa-trash list__icon'} onClick={()=>{
                                 if (!project.default){
                                     selectProject(project)
                                     MicroModal.show('modal-delete-project')

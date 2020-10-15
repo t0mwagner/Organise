@@ -5,10 +5,10 @@ import moment from 'moment'
 import "./Title.scss"
 
 export const Title = (props) => (
-    <div className='page_title'>
+    <div className='page-title'>
         <Route exact path='/task/all'>
-            <h1>All tasks</h1>
-            <p>
+            <h1 className="page-title__title">All tasks</h1>
+            <p className="page-title__subtitle">
                 {
                     (props.number > 1)
                     ? props.number + ' active tasks'
@@ -17,8 +17,8 @@ export const Title = (props) => (
             </p>
         </Route>
         <Route exact path={['/','/task/today']}>
-            <h1>{moment().format('ddd').charAt(0).toUpperCase() + moment().format('dddd D MMMM YYYY').slice(1)}</h1>
-            <p>
+            <h1 className="page-title__title">{moment().format('ddd').charAt(0).toUpperCase() + moment().format('dddd D MMMM YYYY').slice(1)}</h1>
+            <p className="page-title__subtitle">
                 {
                     (props.number > 1)
                     ? props.number + ' active tasks'
@@ -28,8 +28,8 @@ export const Title = (props) => (
         </Route>
         <Switch>
             <Route exact path='/project/all'>
-                <h1>All projects</h1>
-                <p>
+                <h1 className="page-title__title">All projects</h1>
+                <p className="page-title__subtitle">
                     {
                         (props.number > 1)
                         ? props.number + ' projects'
@@ -39,7 +39,7 @@ export const Title = (props) => (
             </Route>
             <Route exact path='/project/:id'>
                 <ProjectTitle />
-                <p>
+                <p className="page-title__subtitle">
                     {
                         (props.number > 1)
                         ? props.number + ' active tasks'

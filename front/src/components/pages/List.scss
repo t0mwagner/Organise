@@ -1,57 +1,98 @@
 .list{
     margin-top:20px;
 
-    ul{
+    &__header{
+        display:flex;
+        justify-content: space-between;
+        margin: 10px 0px 0px 0px;
+        padding-bottom:5px;
+        color:var(--main-title-color);
+        border-bottom: 1px solid var(--site-brand-color);
+    }
+
+    &__title{
+        font-size:0.9em;
+        font-weight: 600;
+    }
+
+    &__list{
         list-style-type: none;
         padding:0px;
         margin: 0px 0px 40px 0px;
     }
 
-    li{
+    &__no-item{
+        color: var(--alt-text-color);
+        margin:30px 0px;
+        text-align: center;
+    }
+
+    &__item{
         display:grid;
         border-bottom: 1px solid var(--main-bg-color);
         padding:8px 5px;
         justify-items: start;
         align-items: center;
+
+        &--alt{
+            background-color: var(--main-bg-color);
+            border-bottom: 1px solid white;
+        }
     }
 
-    .column{
+    &__button{
+        border-radius: 5px;
+        padding: 5px 10px;
+        opacity:1;
+        margin:0px 0px 20px 0px;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        &--text-only{
+            margin:0;
+            padding:0;
+            font-size: 0.9em;
+        }
+        &--add{
+            background-color: var(--button-color);
+            color:white;
+            border:none;
+
+            &:hover{
+                background-color: var(--button-hover-color);
+            }
+        }
+    }
+
+    &__icon{
+        color:var(--button-color);
+
+        &:hover{
+            cursor: pointer;
+            color:var(--button-hover-color);
+        }
+
+        &--disabled{
+            color:var(--main-bg-color);
+            pointer-events: none;
+        }
+    }
+
+    &__column{
         display:flex;
         align-items: center;
         font-size: 0.9em;
-    }
-}
-.list_button{
-    font-size:0.8em;
-    color:var(--link-color);
 
-    &:hover{
-        cursor: pointer;
-        color:var(--link-hover-color);
-    }
-}
-.list_header{
-    display:flex;
-    justify-content: space-between;
-    margin: 10px 0px 0px 0px;
-    padding-bottom:5px;
-    color:var(--main-title-color);
-    border-bottom: 1px solid var(--site-brand-color);
-}
-.list_title{
-    font-size:0.9em;
-    font-weight: 600;
-}
-.icon, .click_icon{
-    color:var(--button-color);
+        &--clickable{
+            text-decoration: none;
+            color:var(--text-color);
 
-    &:hover{
-        cursor: pointer;
-        color:var(--button-hover-color);
+            &:hover{
+                cursor: pointer;
+                color: var(--link-color);
+            }
+        }
     }
-}
-.btn_disabled{
-    display: flex;
-    justify-self: center;
-    align-items: center;
 }

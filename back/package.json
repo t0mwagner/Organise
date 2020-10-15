@@ -1,5 +1,5 @@
 {
-  "name": "back",
+  "name": "todolist-back",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

@@ -12,34 +12,32 @@ export const Header = ({logoutMessageHandler}) => {
 
     return (
         <header className="header">
-        <div className='header_content'>
-                <nav>
-                    <div className="logo">
-                        <i className="fas fa-tasks clickable" onClick={(e)=>{
-                            history.push('/')
-                            history.go(0)
-                        }}></i>
-                    </div>
-                    <div className="app_title">
-                        <h1>Todo List</h1>
-                    </div>
-                    <div className="logout">
-                        <span className='username'>{userName}</span>
-                        <span className='logout-btn'>
-                        <i className="fas fa-sign-out-alt" onClick={()=>{
-                            MicroModal.show('modal-logout')
-                        }}></i></span>
-                    </div>
-                </nav>
+        <div className='header__frame'>
+            <div className='header__content'>
+                <div className="header__logo header__logo--clickable" onClick={(e)=>{
+                        history.push('/')
+                        history.go(0)
+                    }}>
+                    <i className="fas fa-tasks"></i>
+                </div>
+                <h1 className="header__title">Todo List</h1>
+                <div className="logout">
+                    <span className='logout__username'>{userName}</span>
+                    <span className='logout__button'>
+                    <i className="fas fa-sign-out-alt" onClick={()=>{
+                        MicroModal.show('modal-logout')
+                    }}></i></span>
+                </div>
             </div>
-            <Modal title="Logout" id="modal-logout">
-                <div id='logout-content'>
+            </div>
+            <Modal title="Logout" id="modal-logout" className="modal-logout">
+                <div id='logout-content' className="modal-logout__content">
                     <p>You are about to logout</p>
-                    <div id='logout-buttons'>
-                        <button className='secondary-btn' onClick={e=>{
+                    <div className='logout-buttons' className="modal-logout__buttons">
+                        <button className='modal-logout__button modal-logout__button--secondary' onClick={e=>{
                             MicroModal.close('modal-logout')
                         }}>Cancel</button>
-                        <button className='primary-btn' onClick={e=>{
+                        <button className='modal-logout__button modal-logout__button--primary' onClick={e=>{
                             localStorage.removeItem(AUTH_TOKEN)
                             localStorage.removeItem(USER_NAME)
                             logoutMessageHandler('You have been disconnected')

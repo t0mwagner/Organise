@@ -10,8 +10,7 @@ import gql from 'graphql-tag'
 // Modal
 import MicroModal from 'micromodal'
 // Styles
-import './TaskForm.scss'
-import './general.scss'
+import './form.scss'
 
 /* GQL Queries */
 const FEED_PROJECTS = gql`
@@ -39,16 +38,17 @@ export const TaskForm = (props) => {
         <form>
             {
                 (props.action.code === 'D')
-                ?<span className='delete_alert'>Delete task <strong>{props.task.name}</strong> ?</span>
+                ?<span className='delete-alert'>Delete task <strong>{props.task.name}</strong> ?</span>
                 :
                 <span className="fields">
-                    <label htmlFor={props.action.code+"-input_task_name"}>* Task name</label>
-                    <input type="text" id={props.action.code+"-input_task_name"} maxLength='50' required />
-                    <label htmlFor={props.action.code+"-input_task_description"}>Description</label>
-                    <textarea id={props.action.code+"-input_task_description"} className="input_task_description" name="input_task_description" rows="5" cols="20"/>
-                    <label htmlFor={props.action.code+"-input_task_date"}>* Due date</label>
+                    <label className="fields__label" htmlFor={props.action.code+"-input_task_name"}>* Task name</label>
+                    <input className="fields__input" type="text" id={props.action.code+"-input_task_name"} maxLength='50' required />
+                    <label className="fields__label" htmlFor={props.action.code+"-input_task_description"}>Description</label>
+                    <textarea id={props.action.code+"-input_task_description"} className="fields__input" name="input_task_description" rows="5" cols="20"/>
+                    <label className="fields__label" htmlFor={props.action.code+"-input_task_date"}>* Due date</label>
                     <Flatpickr
                         id={props.action.code+"-input_task_date"}
+                        className="fields__input"
                         options={{
                             enableTime: true,
                             altInput: true,
@@ -64,12 +64,13 @@ export const TaskForm = (props) => {
                         setDate(moment(date).format('YYYY-MM-DD HH:mm'));
                         }}
                     />
-                    <label htmlFor="select_project">Project</label>
-                    <ul className='project_list' id={props.action.code+'-project_list'}>
-                        <li className='disabled'></li>
+                    <label className="fields__label" htmlFor="select_project">Project</label>
+                    <ul className='project-list' id={props.action.code+'-project_list'}>
+                        <li className='project-list__item project-list__item--disabled'></li>
                         {
                             data.feedProjects.map((project,index)=> (
                                 <li
+                                    className='project-list__item'
                                     id={props.action.code+'-'+project.id}
                                     key={index}
                                     onChange={()=>{
@@ -102,12 +103,12 @@ export const TaskForm = (props) => {
                                         document.getElementById(props.action.code+"-select_project").value=project.id
                                     }}
                                 >
-                                    <i className="fas fa-square square" style={{color:project.color}}/> {project.name}
+                                    <i className="fas fa-square project-list__color-square" style={{color:project.color}}/> {project.name}
                                 </li>
                             ))
                         }
                     </ul>
-                    <input type="text" id={props.action.code+"-select_project"} className="noDisplay" defaultValue={data.feedProjects[0].id} />
+                    <input type="text" id={props.action.code+"-select_project"} style={{display:'none'}} defaultValue={data.feedProjects[0].id} />
                 </span>
             }
             <footer className="modal__footer">

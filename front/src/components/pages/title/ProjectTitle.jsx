@@ -27,7 +27,7 @@ export const ProjectTitle = (props) => {
     if (error) return `error : ${error.message}`
 
     return (
-        <h1>
+        <h1 className="page-title__title">
         <i className="fas fa-square" style={{color:data.project.color, marginRight:'10px'}}></i>
         {
             data.project.name

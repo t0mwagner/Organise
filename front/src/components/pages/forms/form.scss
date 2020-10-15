@@ -1,0 +1,129 @@
+.fields{
+    display:flex;
+    flex-direction: column;
+
+    &__label{
+        font-size:0.8em;
+        margin:10px 0px 0px 20px;
+    }
+
+    &__input{
+        margin:3px 20px 0px 20px;
+        padding: 5px;
+        border: 0.5px solid darkgrey;
+        font-size: 0.9em;
+    }
+
+    &__color-list{
+        list-style-type: none;
+        padding: 0;
+        border:none;
+        min-width:250px;
+        margin:3px 20px 20px 20px;
+    }
+
+    &__color-item{
+        display: inline-block;
+        margin: 3px;
+        border:none;
+        padding:0px;
+        height: 30px;
+        width: 30px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    
+        &:not(.fields__color-item--active):hover{
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+    
+        &--active {
+            border: 4px solid #ddd;
+            width: 27px;
+            height: 27px;
+        }
+    }
+}
+.delete-alert{
+    display:flex;
+    flex-direction: column;
+    margin:25px 50px;
+    font-size: 0.9em;
+    align-self: center;
+    text-align: center;
+
+    &__modal-indication{
+        font-size: 0.8em;
+        font-style: italic;
+        padding: 5px 0;
+    }
+}
+.project-list{
+    list-style-type: none;
+    height: 24px;
+    width: 191px;
+    margin:5px 0px 0px 20px;
+    padding:0px;
+    font-size: 0.9em;
+    border-top:0.5px solid darkgray;
+    border-bottom:0.5px solid darkgray;
+    z-index: 2;
+
+    &__item{
+        width: 169px;
+        height: 14px;
+        display:flex;
+        padding: 5px 10px;
+        align-items: center;
+        background-color: white;
+        border-left:0.5px solid darkgray;
+        border-right:0.5px solid darkgray;
+
+        &--disabled{
+            height: 14px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        &:nth-last-child(1):not(.neutral){
+            border-bottom: 0.5px darkgrey solid;
+        }
+        &:not(.display){ 
+            display: none;
+        }
+        &.selected:not(.neutral){
+            background-color: var(--main-bg-color);
+        }
+        &.display:not(.project-list__item--disabled){
+            cursor: pointer;
+        }
+        &.display:not(.project-list__item--disabled):not(.neutral):hover{
+            background-color: var(--link-color);
+            color:white;
+        }
+    }
+
+    &__color-square{
+        font-size: 1em;
+        margin-right: 5px;
+    }
+}
+
+#input_project_color{
+    width: 120px;
+    padding: 5px 0px 5px 5px;
+
+    option{
+        font-size:1em;
+    }
+}
+
+select{
+    margin:3px 20px 0px 20px;
+    appearance: none;
+    background:white;
+    border: 0.5px solid darkgrey;
+}
+
+textarea{
+    border: 0.5px solid darkgrey;
+}

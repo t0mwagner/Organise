@@ -102,17 +102,17 @@ export const Login = ({logoutMessage}) => {
     }
 
     return(
-        <div id='login-page'>
-            <h1>Todo List</h1>
-            <h2>{login?'Login':'Signup'}</h2>
+        <div className='login'>
+            <h1 className='login__title'>Todo List</h1>
+            <h2 className='login__subtitle'>{login?'Login':'Signup'}</h2>
             {
                 error.isError
-                ? <p className='login-message'>{error.message}</p>
+                ? <p className='login__message'>{error.message}</p>
                 : logoutMessage
-                ? <p className='login-message'>{logoutMessage}</p>
+                ? <p className='login__message'>{logoutMessage}</p>
                 : ''     
             }
-            <form id='login-form' onSubmit={e=>{
+            <form className='login-form' onSubmit={e=>{
                 e.preventDefault()
                 if (login) {
                     loginUser({ variables: { email: email, password: password }})
@@ -122,28 +122,32 @@ export const Login = ({logoutMessage}) => {
             }}>
                 {!login &&
                 <input 
+                    className='login-form__input'
                     value={name}
                     onChange={e=>handleLoginState({...loginState, name:e.target.value})}
                     type="text"
                     placeholder="Your name"
                 />}
                 <input 
+                    className='login-form__input'
                     value={email}
                     onChange={e=>handleLoginState({...loginState, email:e.target.value})}
                     type="text"
                     placeholder="Your email address"
                 />
                 <input 
+                    className='login-form__input'
                     value={password}
                     onChange={e=>handleLoginState({...loginState, password:e.target.value})}
                     type="password"
                     placeholder={login?'Enter your password':'Chose a safe password'}
                 />
                 <input
+                    className='login-form__input'
                     value={login?'Login':'Create account'}
                     type='submit'
                 />
-                <div id='sign-switch' onClick={e=>{
+                <div className='login-form__sign-switch' onClick={e=>{
                         setError({isError:false})
                         handleLoginState({...loginState, login:!login})
                     }}>

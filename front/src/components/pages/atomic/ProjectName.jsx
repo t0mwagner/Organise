@@ -23,7 +23,7 @@ export const ProjectName = (props) => {
 
     const project = data.feedProjects.find(project=>props.id===project.id)
     return (
-        <span className='column'>
+        <span className='list__column'>
                 <i className="fas fa-square" style={{color:project.color, marginRight:'5px'}}></i> {project.name}
         </span>
     ) 

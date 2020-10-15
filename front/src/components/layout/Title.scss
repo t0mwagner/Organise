@@ -1,12 +1,14 @@
-.page_title{
+.page-title{
     margin-bottom:50px;
-}
-.page_title h1{
-    color:var(--main-title-color);
-    margin: 20px 0px 0px 0px;
-}
-.page_title p{
-    margin: 0px;
-    font-size: 0.8em;
-    color:var(--alt-text-color);
+
+    &__title{
+        color:var(--main-title-color);
+        margin: 20px 0px 0px 0px;
+    }
+
+    &__subtitle{
+        margin: 0px;
+        font-size: 0.8em;
+        color:var(--alt-text-color);
+    }
 }

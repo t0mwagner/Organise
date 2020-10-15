@@ -1,11 +1,17 @@
-.date_icon{
-    color: var(--link-color);
-    font-size: 1em;
-    margin-right: 5px;
-}
-.done_crossed{
-    text-decoration: line-through;
-}
-.late_task{
-    color: var(--link-color);
+.due-time{
+    &__date-icon{
+        color: var(--link-color);
+        font-size: 1em;
+        margin-right: 5px;
+    }
+
+    &__done-date{
+        &--done-crossed{
+            text-decoration: line-through;
+        }
+    
+        &--late-task{
+            color: var(--link-color);
+        }
+    }
 }

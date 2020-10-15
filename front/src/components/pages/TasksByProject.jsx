@@ -11,7 +11,6 @@ import MicroModal from 'micromodal'
 import moment from 'moment'
 
 import "./List.scss"
-import "./TaskList.scss"
 
 /* GQL Queries */
 const FEED_TASKS = gql`

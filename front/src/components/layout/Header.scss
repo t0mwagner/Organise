@@ -1,98 +1,93 @@
 .header{
     background-color: var(--site-brand-color);
     align-self: stretch;
-}
-.header_content{
-    display: flex;
-    justify-content: center;
-}
-.header img{
-    height: 25px;
-}
-.header nav{
-    width: 750px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.app_title h1{
-    font-family: 'Pacifico', cursive;
-    color: var(--site-title-color);
-    font-weight:normal;
-    margin: 0 0 0 10px;
-}
-.login a{
-    text-decoration: none;
-}
-img{
-    filter: hue-rotate();
-}
-.logo{
-    color:var(--site-title-color);
-    font-size:1.4em;
-    font-weight: 100;
-    display: flex;
-    align-items: center;
+
+    &__frame{
+        display: flex;
+        justify-content: center;
+    }
+
+    &__content{
+        width: 750px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__logo{
+        display: block;
+        color:var(--site-title-color);
+        font-size:1.4em;
+        font-weight: 100;
+        display: flex;
+        align-items: center;
+
+        &--clickable:hover{
+            cursor: pointer;
+        }
+    }
+
+    &__title{
+        font-family: 'Pacifico', cursive;
+        color: var(--site-title-color);
+        font-weight:normal;
+        margin: 0px 0px 0px 10px;
+    }
 }
 .logout{
     display: flex;
     align-items: center;
     color:var(--site-title-color);
-}
-.logout-btn{
-    font-size:1.4em;
-    font-weight: 100;
-    margin-left: 10px;
 
-    &:hover{
-        cursor: pointer;
-    }
-}
-
-.clickable:hover{
-    cursor: pointer;
-}
-
-#modal-logout{
-
-    & .primary-btn{
-        border-radius: 5px;
-        border:none;
-        padding: 5px 10px;
-        opacity:1;
+    &__button{
+        font-size:1.4em;
+        font-weight: 100;
         margin-left: 10px;
-        background-color: var(--button-color);
-        color:white;
-
+    
         &:hover{
             cursor: pointer;
-            background-color: var(--button-hover-color);
         }
     }
-    & .secondary-btn{
-        border-radius: 5px;
-        border:1px solid var(--button-color);
-        padding: 5px 10px;
-        opacity:1;
-        background-color: var(--alt-bg-color);
-        color: var(--button-color);
-
-        &:hover{
-            cursor: pointer;
-            background-color: var(--main-bg-color);
-        }
-    }
-
-    #logout-content{
+}
+.modal-logout{
+    &__content{
         display:flex;
         flex-direction: column;
         padding: 0 30px;
     }
 
-    #logout-buttons{
+    &__buttons{
         display:flex;
         margin: 20px 0;
         justify-content: flex-end;
     }
- 
+
+    &__button{
+        border-radius: 5px;
+        opacity:1;
+        padding: 5px 10px;
+
+        &--primary{
+            border:none;       
+            margin-left: 10px;
+            background-color: var(--button-color);
+            color:white;
+
+            &:hover{
+                cursor: pointer;
+                background-color: var(--button-hover-color);
+            }
+        }
+
+        &--secondary{
+            border:1px solid var(--button-color);
+            background-color: var(--alt-bg-color);
+            color: var(--button-color);
+    
+            &:hover{
+                cursor: pointer;
+                background-color: var(--main-bg-color);
+            }
+        }
+    }
 }

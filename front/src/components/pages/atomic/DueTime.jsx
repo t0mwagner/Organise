@@ -10,20 +10,20 @@ export const DueTime = (props) => {
     const result = moment(date).calendar()
 
     return (
-        <span className='column due_time'>
+        <span className='list__column due-time'>
             {
                 (props.doneDate)
-                ?<i className="fas fa-calendar-check date_icon"></i>
+                ?<i className="fas fa-calendar-check due-time__date-icon"></i>
                 :(date < now)
-                ?<i className="fas fa-exclamation-circle date_icon"></i>
-                :<i className="fas fa-clock date_icon"></i>
+                ?<i className="fas fa-exclamation-circle due-time__date-icon"></i>
+                :<i className="fas fa-clock due-time__date-icon"></i>
             }
             {
                 <span className={
                     (props.doneDate)
-                    ?'done_crossed'
+                    ?'due-time__done-date--done-crossed'
                     :(date < now)
-                    ?'late_task'
+                    ?'due-time__done-date--late-task'
                     :''
                 }>
                     {' ' + result}

@@ -4,16 +4,15 @@ import React from 'react'
 import MicroModal from 'micromodal'
 import { TaskNumber } from '../../../components'
 // Styles
-import './ProjectForm.scss'
-import './general.scss'
+import './form.scss'
 
 
 const ProjectDeleteForm = ({project}) => {
 
     return (
-        <span className='delete_alert'>
-            <span>Delete project <strong>{project.name}</strong> ?</span>
-            <span className='modal-indication'><TaskNumber id={project.id} display='line' /> will be reassigned to default project</span>
+        <span className='delete-alert'>
+            <span className='delete-alert__text'>Delete project <strong>{project.name}</strong> ?</span>
+            <span className='delete-alert__modal-indication'><TaskNumber id={project.id} display='line' /> will be reassigned to default project</span>
         </span>
     )
 }
@@ -29,22 +28,22 @@ export const ProjectForm = (props) => {
                 ?<ProjectDeleteForm project={props.project}/>
                 :
                 <span className="fields">
-                    <label htmlFor={props.action.code+"-input_project_name"}>* Project name</label>
-                    <input type="text" id={props.action.code+"-input_project_name"} maxLength='50' required />
-                    <p className='label'>* Pick a color</p>
-                    <ul id="color_list">
+                    <label className="fields__label" htmlFor={props.action.code+"-input_project_name"}>* Project name</label>
+                    <input className="fields__input" type="text" id={props.action.code+"-input_project_name"} maxLength='50' required />
+                    <p className="fields__label">* Pick a color</p>
+                    <ul className="fields__color-list">
                         {
                             colors.map((color,index)=>(
                                 <li 
                                     key={index}
                                     style={{backgroundColor:color}}
-                                    className={(props.project)?(props.project.color===color)?'active color':'color':(index===0)?'active color':'color'}
+                                    className={(props.project)?(props.project.color===color)?'fields__color-item fields__color-item--active':'fields__color-item':(index===0)?'fields__color-item fields__color-item--active':'fields__color-item'}
                                     onClick={(e)=>{
                                         for (let node of e.target.parentNode.childNodes)
                                         {
-                                            node.classList.remove('active')
+                                            node.classList.remove('fields__color-item--active')
                                         }
-                                        e.target.classList.add('active')
+                                        e.target.classList.add('fields__color-item--active')
                                         document.getElementById(props.action.code+"-input_project_color").value=color
                                     }}
                                 >

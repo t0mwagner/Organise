@@ -29,7 +29,7 @@ export const TaskNumber = ({id, display}) => {
     if (display === 'column')
     {
         return (
-            <span className='column'>
+            <span className='list__column'>
                 {taskNumber} active task{(taskNumber>1)?'s':''}
             </span>           
         )

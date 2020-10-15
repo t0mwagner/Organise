@@ -10,7 +10,6 @@ import MicroModal from 'micromodal'
 import moment from 'moment'
 
 import "./List.scss"
-import "./TaskList.scss"
 
 /* GQL Queries */
 const FEED_TASKS = gql`
@@ -212,7 +211,7 @@ export const TaskList = ({filter, numberHandler}) => {
 
     return (
         <div className="list">
-            <button className="add_btn" onClick={()=>{
+            <button className="list__button list__button--add" onClick={()=>{
                 MicroModal.show('modal-add-task',{
                     onShow: (modal) => {
                         document.getElementById('C-input_task_name').value = ''
@@ -230,31 +229,31 @@ export const TaskList = ({filter, numberHandler}) => {
                 })
             }}>New task</button>
             <section>
-                <div className='list_header'>
-                    <span className='list_title'>Tasks</span>
-                    <span className='list_button' onClick={()=>setDisplayDone(!displayDone)}>{!displayDone?'Display ':'Hide '}done tasks</span>
+                <div className='list__header'>
+                    <span className='list__title'>Tasks</span>
+                    <span className='list__button list__button--text-only' onClick={()=>setDisplayDone(!displayDone)}>{!displayDone?'Display ':'Hide '}done tasks</span>
                 </div>
-                <ul>
+                <ul className='list__list'>
                 {
                     filteredTasks.length === 0
                     ?
-                        <p className='no_item'>No task here !</p>
+                        <p className='list__no-item'>No task here !</p>
                     :
                         filteredTasks
                         .sort((a,b) => (new Date(a.dueDate)<new Date(b.dueDate)?-1:1))
                         .map((task,index) => (
                             (!task.done || displayDone)
                             &&
-                            <li key={index} id={task.id} className={task.done?'alt_li':''} style={{gridTemplateColumns: '30px 1fr 180px 150px 30px 30px'}}>
+                            <li key={index} id={task.id} className={task.done?'list__item list__item--alt':'list__item'} style={{gridTemplateColumns: '30px 1fr 180px 150px 30px 30px'}}>
                                 {
                                     task.done
-                                    ? <i className="fas fa-check-square click_icon" onClick={()=>uncheckTask({ variables: { id: task.id }})}></i>
-                                    : <i className="far fa-square click_icon" onClick={()=>checkTask({ variables: { id: task.id, doneDate:new Date() }})}></i>
+                                    ? <i className="fas fa-check-square list__icon" onClick={()=>uncheckTask({ variables: { id: task.id }})}></i>
+                                    : <i className="far fa-square list__icon" onClick={()=>checkTask({ variables: { id: task.id, doneDate:new Date() }})}></i>
                                 }
-                                <span className='column'>{task.name}</span>
+                                <span className='list__column'>{task.name}</span>
                                 <DueTime date={task.dueDate} doneDate={task.doneDate} />
                                 <ProjectName id={task.project.id} />
-                                <i className="fas fa-edit edit_btn" onClick={()=>{ 
+                                <i className="fas fa-edit list__icon" onClick={()=>{ 
                                     selectTask(task)
                                     MicroModal.show('modal-update-task',{
                                         onShow: (modal) => {
@@ -272,7 +271,7 @@ export const TaskList = ({filter, numberHandler}) => {
                                         }
                                     }) 
                                 }}></i>
-                                <i className="fas fa-trash delete_btn" onClick={()=>{
+                                <i className="fas fa-trash list__icon" onClick={()=>{
                                     selectTask(task)
                                     MicroModal.show('modal-delete-task')
                                 }}></i>

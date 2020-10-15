@@ -4,8 +4,9 @@
     display: flex;
     justify-content: center;
     align-self: stretch;
-}
-.footer p{
-    margin: 5px 0px;
-    font-size: 0.8em;
+
+    &__text{
+        margin: 5px 0px;
+        font-size: 0.8em;
+    }
 }
