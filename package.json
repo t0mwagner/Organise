@@ -2,12 +2,13 @@
   "name": "todolist",
   "version": "0.1.0",
   "dependencies": {
-    "apollo-link-context": "^1.0.20"
+    "apollo-link-context": "^1.0.20",
+    "concurrently": "^5.3.0",
+    "node": "^14.13.1"
   },
   "scripts": {
-    "start": "PORT=8000 ./front/react-scripts start & node ./back/src/index.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"yarn front\" \"yarn back\"",
+    "front": "cd front && PORT=8000 yarn start",
+    "back": "cd back && node ./src/index.js",
   }
 }
