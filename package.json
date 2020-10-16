@@ -9,6 +9,6 @@
   "scripts": {
     "start": "concurrently \"yarn front\" \"yarn back\"",
     "front": "cd front && PORT=8000 yarn start",
-    "back": "cd back && node ./src/index.js",
+    "back": "cd back && node ./src/index.js"
   }
 }
