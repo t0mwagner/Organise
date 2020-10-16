@@ -1,5 +1,13 @@
 {
+  "name": "todolist",
+  "version": "0.1.0",
   "dependencies": {
     "apollo-link-context": "^1.0.20"
+  },
+  "scripts": {
+    "start": "PORT=8000 ./front/react-scripts start & node ./back/src/index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
 }
